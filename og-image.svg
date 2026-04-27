@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5F0E6"/>
+      <stop offset="100%" stop-color="#E8DFC9"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Decorative circles (subtle, off to the side) -->
+  <circle cx="970" cy="180" r="200" fill="#D4836F" opacity="0.10"/>
+  <circle cx="1080" cy="490" r="140" fill="#6E8B5E" opacity="0.08"/>
+  <circle cx="850" cy="540" r="80" fill="#C4A57B" opacity="0.10"/>
+
+  <!-- Top mark -->
+  <text x="100" y="100" font-family="Inter, sans-serif" font-size="20" letter-spacing="6" fill="#8B6F47" font-weight="600">— OOLONG HAI · BRAND HUB —</text>
+
+  <!-- Brand name -->
+  <text x="100" y="280" font-family="Noto Serif TC, serif" font-size="100" fill="#2C3345" font-weight="700">台灣第一家烏龍嗨</text>
+
+  <!-- English -->
+  <text x="100" y="340" font-family="Inter, sans-serif" font-size="32" letter-spacing="8" fill="#8B6F47" font-weight="500">THE OOLONG HAI</text>
+
+  <!-- Divider line -->
+  <line x1="100" y1="380" x2="200" y2="380" stroke="#D4836F" stroke-width="2"/>
+
+  <!-- Tagline -->
+  <text x="100" y="450" font-family="Noto Serif TC, serif" font-size="34" fill="#5C5247" font-style="italic">日常但不一般的燒酎下午酒場</text>
+  <text x="100" y="500" font-family="Noto Serif TC, serif" font-size="26" fill="#8B6F47">帶著 90 年代喫茶店的氣味，現在喝得到。</text>
+
+  <!-- Bottom right detail -->
+  <text x="100" y="580" font-family="Inter, sans-serif" font-size="14" letter-spacing="4" fill="#8B6F47" opacity="0.5">2026 BRAND HUB v1</text>
+</svg>

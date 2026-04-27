@@ -4,6 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>5 圈系統詳解 · 台灣第一家烏龍嗨</title>
+<meta name="description" content="酒單設計系統的完整教學。每圈含 what / why / 範例 / 陷阱 / 8 步 SOP。給員工與產品開發夥伴。">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="5 圈系統詳解 · 台灣第一家烏龍嗨">
+<meta property="og:description" content="酒單設計系統的完整教學。每圈含 what / why / 範例 / 陷阱 / 8 步 SOP。">
+<meta property="og:image" content="https://1st-oolong-hai.vercel.app/og-image.svg">
+<meta property="og:url" content="https://1st-oolong-hai.vercel.app/system.html">
+<meta property="og:site_name" content="台灣第一家烏龍嗨">
+<meta property="og:locale" content="zh_TW">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="5 圈系統詳解 · 台灣第一家烏龍嗨">
+<meta name="twitter:description" content="酒單設計系統的完整教學。每圈含 what / why / 範例 / 陷阱 / 8 步 SOP。">
+<meta name="twitter:image" content="https://1st-oolong-hai.vercel.app/og-image.svg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -719,12 +739,100 @@
     letter-spacing: 0.2em;
   }
 
+  /* === Responsive · 手機版優化 === */
   @media (max-width: 768px) {
+    .container { padding: 0 20px; }
+
+    /* Hero */
+    .hero { padding: 56px 0 40px; }
+    .brand-mark { font-size: 12px; letter-spacing: 0.3em; }
     .brand-title { font-size: 36px; }
+    .brand-tagline { font-size: 16px; line-height: 1.7; }
+
+    /* Hero overview row - stack */
+    .hero-overview-row { grid-template-columns: 1fr !important; gap: 32px; max-width: 100%; }
+    .overview { width: 100%; max-width: 460px; margin: 0 auto; }
+
+    /* Ring overview list */
+    .rol-item { grid-template-columns: 70px 1fr; gap: 14px; padding: 14px 16px; }
+    .rol-num { font-size: 10px; padding: 5px 6px; letter-spacing: 0.2em; }
+    .rol-name { font-size: 16px; }
+    .rol-desc { font-size: 13.5px; line-height: 1.55; }
+
+    /* Top nav */
+    .top-nav { font-size: 10px; padding: 12px 16px; letter-spacing: 0.2em; }
+
+    /* Ring sections */
+    .ring-section { padding: 56px 0; }
     .ring-header { grid-template-columns: 1fr; gap: 24px; }
-    .ring-circle-vis { margin: 0 auto; }
-    .examples-grid, .twist-cats, .scenarios { grid-template-columns: 1fr; }
-    .texture-grid { grid-template-columns: 1fr 1fr; }
+    .ring-circle-vis { margin: 0 auto; width: 140px; height: 140px; }
+    .ring-name { font-size: 28px; }
+    .ring-en { font-size: 12px; }
+    .ring-essence { font-size: 16px; padding: 16px 20px; }
+
+    /* Content blocks */
+    .block-label { font-size: 11px; padding: 4px 10px; }
+    .why-text { font-size: 16px; padding: 18px; }
+    .decision-list { padding: 18px; }
+    .decision-list h4 { font-size: 17px; }
+    .decision-list li { font-size: 14px; padding: 6px 0; }
+
+    /* Examples grid - 1 col */
+    .examples-grid { grid-template-columns: 1fr; gap: 12px; }
+    .example-card { padding: 18px; }
+    .ex-name { font-size: 19px; }
+    .ex-desc { font-size: 13.5px; }
+
+    /* Texture grid - 4 col → 2 col */
+    .texture-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .texture-cell { padding: 14px 10px; }
+    .tex-name { font-size: 15px; }
+    .tex-desc { font-size: 12px; }
+
+    /* Twist cats - 4 col → 2 col */
+    .twist-cats { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .twist-cat { padding: 16px 12px; }
+    .twist-name { font-size: 16px; }
+    .twist-items { font-size: 12px; }
+
+    /* Scenarios - 5 col → 1 col */
+    .scenarios { grid-template-columns: 1fr; gap: 10px; }
+    .scenario { padding: 14px; }
+    .scen-name { font-size: 17px; }
+
+    /* Trap block */
+    .trap-block { padding: 18px 20px; }
+    .trap-list li { font-size: 13.5px; line-height: 1.65; }
+
+    /* Connector - 過渡塊 */
+    .connector {
+      margin: 40px 0 -32px;
+      padding: 22px 24px;
+      font-size: 16px;
+      letter-spacing: 0.02em;
+    }
+    .connector::before { width: 28px; height: 28px; line-height: 28px; font-size: 14px; top: -14px; }
+
+    /* SOP timeline */
+    .sop-step { grid-template-columns: 44px 1fr; gap: 14px; padding: 16px 0; }
+    .sop-num { width: 40px; height: 40px; font-size: 14px; }
+    .sop-content h4 { font-size: 18px; }
+    .sop-content p { font-size: 14px; }
+
+    /* Related */
+    .related { padding: 56px 0; }
+    .related-h { font-size: 22px; }
+    .related-grid { grid-template-columns: 1fr; gap: 12px; }
+    .related-card { padding: 22px 24px; }
+
+    footer { padding: 32px 16px; line-height: 1.6; }
+  }
+
+  @media (max-width: 480px) {
+    .brand-title { font-size: 30px; }
+    .ring-name { font-size: 24px; }
+    .twist-cats { grid-template-columns: 1fr; }
+    .texture-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -1459,7 +1567,7 @@
         <div class="related-title">🍶 品牌介紹</div>
         <div class="related-desc">完整品牌定位、4 張力、賣什麼、不賣什麼。看「我們是誰」的全貌。</div>
       </a>
-      <a href="燒酎宇宙地圖.html" class="related-card">
+      <a href="universe.html" class="related-card">
         <div class="related-tag">VISION MAP · 願景地圖</div>
         <div class="related-title">🌌 燒酎宇宙地圖</div>
         <div class="related-desc">10 張互動式風味地圖。看「我們的世界有多大、未來能往哪走」。</div>
@@ -1471,7 +1579,7 @@
 <!-- =========== FOOTER =========== -->
 <footer>
   <div class="container">
-    <a href="index.html" style="color: var(--tea-brown); text-decoration: none; letter-spacing: 0.25em;">← THE OOLONG HIGH · 回到品牌中心</a>
+    <a href="index.html" style="color: var(--tea-brown); text-decoration: none; letter-spacing: 0.25em;">← THE OOLONG HAI · 回到品牌中心</a>
     <div style="margin-top: 12px; opacity: 0.6;">5-CIRCLE SYSTEM DEEP-DIVE v1</div>
   </div>
 </footer>

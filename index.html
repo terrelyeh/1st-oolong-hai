@@ -4,6 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>台灣第一家烏龍嗨 · 品牌介紹</title>
+<meta name="description" content="日常但不一般的燒酎下午酒場。帶著 90 年代喫茶店的氣味，現在喝得到。台灣第一家烏龍嗨——朋友來我家分享有趣的東西。">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="台灣第一家烏龍嗨 · The Oolong Hai">
+<meta property="og:description" content="日常但不一般的燒酎下午酒場。帶著 90 年代喫茶店的氣味，現在喝得到。">
+<meta property="og:image" content="https://1st-oolong-hai.vercel.app/og-image.svg">
+<meta property="og:url" content="https://1st-oolong-hai.vercel.app/">
+<meta property="og:site_name" content="台灣第一家烏龍嗨">
+<meta property="og:locale" content="zh_TW">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="台灣第一家烏龍嗨 · The Oolong Hai">
+<meta name="twitter:description" content="日常但不一般的燒酎下午酒場。帶著 90 年代喫茶店的氣味，現在喝得到。">
+<meta name="twitter:image" content="https://1st-oolong-hai.vercel.app/og-image.svg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -189,7 +209,7 @@
 
   .culture-coords {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 6fr 4fr;
     gap: 32px;
     margin-top: 48px;
   }
@@ -1063,14 +1083,100 @@
     letter-spacing: 0.2em;
   }
 
-  /* Responsive */
+  /* === Responsive · 手機版優化 === */
   @media (max-width: 768px) {
-    .brand-title { font-size: 40px; }
-    .dna-grid { grid-template-columns: repeat(3, 1fr); }
-    .chapters { grid-template-columns: repeat(2, 1fr); }
-    .examples { grid-template-columns: 1fr; }
-    .culture-coords { grid-template-columns: 1fr; }
-    .donts { grid-template-columns: 1fr; }
+    .container { padding: 0 20px; }
+
+    /* Hero */
+    .hero { padding: 56px 0 40px; }
+    .brand-mark { font-size: 12px; letter-spacing: 0.3em; }
+    .brand-title { font-size: 38px; }
+    .brand-en { font-size: 14.5px; letter-spacing: 0.2em; margin-bottom: 28px; }
+    .brand-tagline { font-size: 17px; line-height: 1.7; }
+    .north-star { padding: 24px 24px; max-width: 100%; }
+    .north-star-text { font-size: 17px; }
+
+    /* Sections */
+    section { padding: 56px 0; }
+    .section-num { font-size: 12px; letter-spacing: 0.3em; }
+    .section-title { font-size: 28px; }
+    .section-subtitle { font-size: 16px; margin-bottom: 36px; }
+
+    /* Tensions */
+    .tensions-section { padding: 64px 0; }
+    .tensions-title { font-size: 28px; }
+    .tensions-subtitle { font-size: 16px; margin-bottom: 40px; line-height: 1.7; }
+    .tensions-grid { padding: 8px 20px; }
+    .tension-row { grid-template-columns: 1fr; gap: 6px; padding: 18px 0; }
+    .tension-left, .tension-right { text-align: center; font-size: 26px; }
+    .tension-divider { padding: 4px 0; }
+
+    /* DNA pills */
+    .dna-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .dna-pill { padding: 18px 8px; }
+    .dna-word { font-size: 18px; }
+    .dna-en { font-size: 10px; }
+
+    /* Culture coords - stack */
+    .culture-coords { grid-template-columns: 1fr; gap: 16px; }
+    .culture-block { padding: 20px; }
+    .culture-list li { font-size: 16px; }
+
+    /* Equation */
+    .equation { padding: 24px 0; }
+    .eq-row { gap: 16px; flex-wrap: nowrap; }
+    .eq-term { font-size: 40px; }
+    .eq-op { font-size: 28px; margin-top: -6px; }
+    .eq-result { font-size: 16px; }
+
+    /* Chapters - 2 col */
+    .chapters { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .chapter-card { padding: 18px 14px; }
+    .chapter-name { font-size: 17px; }
+    .chapter-desc { font-size: 14px; }
+
+    /* Matrix - horizontal scroll */
+    .matrix-wrap { overflow-x: auto; padding: 16px; }
+    .matrix-table { min-width: 720px; font-size: 13px; }
+
+    /* 5 圈 system - stack circles + text */
+    section > .container > div[style*="display: flex"] {
+      flex-direction: column !important;
+      gap: 32px !important;
+    }
+    .circles-wrap { width: 100%; display: flex; justify-content: center; }
+    .circles-side { width: 100%; }
+
+    /* Examples - 1 col */
+    .examples { grid-template-columns: 1fr; gap: 14px; }
+    .example-card { padding: 22px 20px; }
+    .example-card[style*="grid-column"] { grid-column: span 1 !important; }
+    .example-name { font-size: 19px; }
+    .example-body { font-size: 15px; line-height: 1.8; }
+
+    /* Donts - 1 col */
+    .donts { grid-template-columns: 1fr; gap: 12px; }
+    .dont-card { padding: 16px 20px 16px 48px; }
+    .dont-card::before { left: 16px; top: 14px; font-size: 18px; }
+    .dont-text { font-size: 14px; line-height: 1.7; }
+
+    /* Related */
+    .related { padding: 56px 0; }
+    .related-h { font-size: 24px; }
+    .related-grid { grid-template-columns: 1fr; gap: 14px; }
+    .related-card { padding: 22px 24px; }
+
+    /* Footer */
+    footer { padding: 28px 16px; line-height: 1.6; }
+  }
+
+  @media (max-width: 480px) {
+    .brand-title { font-size: 32px; }
+    .section-title { font-size: 24px; }
+    .tensions-title { font-size: 24px; }
+    .eq-term { font-size: 32px; }
+    .dna-grid { grid-template-columns: repeat(2, 1fr); }
+    .chapters { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -1079,9 +1185,9 @@
 <!-- =========== HERO =========== -->
 <header class="hero">
   <div class="container">
-    <div class="brand-mark">— OOLONG HIGH · BRAND HUB —</div>
+    <div class="brand-mark">— OOLONG HAI · BRAND HUB —</div>
     <h1 class="brand-title">台灣第一家烏龍嗨</h1>
-    <div class="brand-en">The Oolong High</div>
+    <div class="brand-en">The Oolong Hai</div>
     <p class="brand-tagline">日常但不一般的燒酎下午酒場<br>帶著 90 年代喫茶店的氣味，現在喝得到。</p>
 
     <div class="north-star">
@@ -1304,7 +1410,7 @@
       4 個茶軸（橫排）× 7 種燒酎家族（直排）= 28 個可能組合。每個格子的星等決定它要不要進菜單、進哪一章。
       ⭐⭐ 是品牌的「旗艦」（招牌酒），⭐ 是「常駐」（菜單核心），△ 是「季節限定」可考慮，✗ 不做（風味會打架，除非有特殊 twist 解決）。
       <br><br>
-      想看每個格子的<a href="5圈系統詳解.html#" class="deep-link">細部範例與選酒邏輯</a>，或<a href="燒酎宇宙地圖.html" class="deep-link">完整 5 張風味地圖</a>？
+      想看每個格子的<a href="system.html#" class="deep-link">細部範例與選酒邏輯</a>，或<a href="universe.html" class="deep-link">完整 5 張風味地圖</a>？
     </p>
   </div>
 </section>
@@ -1339,7 +1445,7 @@
         <p style="font-size: 16px; line-height: 1.8; color: var(--ink-soft);">
           每一圈都有自己的角色：圓心定義「我們做什麼」，第一圈是產品矩陣，第二圈是質地工程，第三圈是客製化點綴，第四圈是場景對應。圈外還有「衛星系列」（本格職人 / 在地涼茶 / 客座 Highball）。
         </p>
-        <a href="5圈系統詳解.html" style="display: inline-block; margin-top: 24px; padding: 12px 24px; background: var(--bg-paper); color: var(--hojicha); text-decoration: none; border: 1.5px dashed var(--hojicha); border-radius: 4px; font-size: 16px; font-weight: 500; transition: all 0.2s;" onmouseover="this.style.background='var(--highlight)'" onmouseout="this.style.background='var(--bg-paper)'">
+        <a href="system.html" style="display: inline-block; margin-top: 24px; padding: 12px 24px; background: var(--bg-paper); color: var(--hojicha); text-decoration: none; border: 1.5px dashed var(--hojicha); border-radius: 4px; font-size: 16px; font-weight: 500; transition: all 0.2s;" onmouseover="this.style.background='var(--highlight)'" onmouseout="this.style.background='var(--bg-paper)'">
           想看每圈的決策、陷阱、8 步 SOP？前往 5 圈系統詳解 ↗
         </a>
       </div>
@@ -1450,12 +1556,12 @@
     <h2 class="related-h">想再往下走？</h2>
     <p class="related-sub">看完品牌介紹，這兩份文件帶你進入更深的層次</p>
     <div class="related-grid">
-      <a href="燒酎宇宙地圖.html" class="related-card">
+      <a href="universe.html" class="related-card">
         <div class="related-tag">VISION MAP · 願景地圖</div>
         <div class="related-title">🌌 燒酎宇宙地圖</div>
         <div class="related-desc">10 張互動式風味地圖。看「我們的世界有多大、未來能往哪走」。給團隊與夥伴看的願景全景。</div>
       </a>
-      <a href="5圈系統詳解.html" class="related-card">
+      <a href="system.html" class="related-card">
         <div class="related-tag">SYSTEM · 系統詳解</div>
         <div class="related-title">⚙️ 5 圈系統詳解</div>
         <div class="related-desc">酒單設計系統的完整教學。每圈含 what / why / 範例 / 陷阱 / 8 步 SOP。給員工與產品開發夥伴。</div>
@@ -1467,7 +1573,7 @@
 <!-- =========== FOOTER =========== -->
 <footer>
   <div class="container">
-    <span style="color: var(--tea-brown); letter-spacing: 0.25em;">THE OOLONG HIGH · 台灣第一家烏龍嗨</span>
+    <span style="color: var(--tea-brown); letter-spacing: 0.25em;">THE OOLONG HAI · 台灣第一家烏龍嗨</span>
     <div style="margin-top: 12px; opacity: 0.6;">2026 BRAND HUB v1</div>
   </div>
 </footer>

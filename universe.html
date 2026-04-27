@@ -4,6 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>燒酎宇宙地圖 · 台灣第一家烏龍嗨</title>
+<meta name="description" content="10 張互動式風味地圖。看「我們的世界有多大、未來能往哪走」。給團隊與夥伴看的願景全景。">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="燒酎宇宙地圖 · 台灣第一家烏龍嗨">
+<meta property="og:description" content="10 張互動式風味地圖。看「我們的世界有多大、未來能往哪走」。">
+<meta property="og:image" content="https://1st-oolong-hai.vercel.app/og-image.svg">
+<meta property="og:url" content="https://1st-oolong-hai.vercel.app/universe.html">
+<meta property="og:site_name" content="台灣第一家烏龍嗨">
+<meta property="og:locale" content="zh_TW">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="燒酎宇宙地圖 · 台灣第一家烏龍嗨">
+<meta name="twitter:description" content="10 張互動式風味地圖。看「我們的世界有多大、未來能往哪走」。">
+<meta name="twitter:image" content="https://1st-oolong-hai.vercel.app/og-image.svg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -1091,15 +1111,134 @@
   /* Footer */
   footer { text-align: center; padding: 60px 0; color: var(--ink-soft); font-family: "Inter", sans-serif; font-size: 13px; letter-spacing: 0.2em; }
 
+  /* === Responsive · 手機版優化 === */
   @media (max-width: 768px) {
+    .container, .container-tight { padding: 0 20px; }
+
+    /* Hero */
+    .hero { padding: 56px 0 40px; }
+    .brand-mark { font-size: 12px; letter-spacing: 0.3em; }
     .brand-title { font-size: 36px; }
-    .read-block, .twist-quadrants, .planets { grid-template-columns: 1fr; }
-    .future-grid { grid-template-columns: 1fr; }
-    .core-axioms { grid-template-columns: 1fr; }
-    .texture-matrix { grid-template-columns: 1fr; }
-    .journey-stops { grid-template-columns: 1fr; }
+    .brand-en { font-size: 14.5px; letter-spacing: 0.2em; margin-bottom: 24px; }
+    .brand-tagline { font-size: 16px; line-height: 1.7; }
+
+    /* Top nav */
+    .top-nav { font-size: 10px; padding: 12px 16px; letter-spacing: 0.2em; }
+
+    /* Part divider (黑色塊) */
+    .part-divider { padding: 56px 0 40px; }
+    .part-num { font-size: 11px; letter-spacing: 0.4em; }
+    .part-title { font-size: 26px; }
+    .part-desc { font-size: 15px; line-height: 1.7; }
+
+    /* Map sections */
+    .map-section { padding: 56px 0; }
+    .section-num { font-size: 11px; letter-spacing: 0.3em; }
+    .section-title { font-size: 24px; }
+    .section-subtitle { font-size: 15px; margin-bottom: 28px; }
+
+    /* Chart cards */
+    .chart-card { padding: 16px; }
+
+    /* Read block - stack */
+    .read-block { grid-template-columns: 1fr; gap: 12px; }
+    .read-card { padding: 18px 20px; }
+    .read-text { font-size: 14px; }
+
+    /* Equation */
+    .eq-display { padding: 32px 0; }
+    .eq-row { gap: 20px; }
+    .eq-term { font-size: 56px; }
+    .eq-op { font-size: 40px; margin-top: -8px; }
+
+    /* Core axioms - 1 col */
+    .core-axioms { grid-template-columns: 1fr; gap: 12px; }
+    .axiom-card { padding: 18px; }
+
+    /* Texture matrix - 橫向滾動 */
+    .texture-matrix {
+      grid-template-columns: 100px repeat(4, minmax(120px, 1fr)) !important;
+      overflow-x: auto;
+      display: grid !important;
+    }
+    .tex-header, .tex-rowhead { font-size: 16px; padding: 14px 10px; }
+    .tex-cell { padding: 14px 10px; }
+    .tex-name { font-size: 13px; }
+    .tex-example { font-size: 11px; }
+
+    /* Twist quadrants - 4 col → 2 col */
+    .twist-quadrants { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .twist-q { padding: 18px 14px; }
+    .twist-icon { font-size: 24px; }
+    .twist-name { font-size: 17px; }
+    .twist-items li { font-size: 13px; padding: 4px 0; }
+
+    /* Invitation grid - 3 col → 1 col */
+    .invitation-grid { grid-template-columns: 1fr !important; }
+    .invitation-card { padding: 16px 20px; }
+    .inv-quote { font-size: 14px; }
+
+    /* Journey - stack */
     .journey-line { display: none; }
-    .closing-text { font-size: 18px; }
+    .journey-stops { grid-template-columns: 1fr; gap: 16px; }
+    .stop-chapter { font-size: 13px; padding: 12px; }
+
+    /* Journey typical story */
+    .journey-typical { padding: 18px 22px; }
+    .typical-story { font-size: 14px; line-height: 1.85; }
+
+    /* Planets - stack */
+    .planets { grid-template-columns: 1fr; gap: 14px; }
+    .planet { padding: 22px 20px; }
+    .planet-name { font-size: 19px; }
+
+    /* Seasonal year-round banner */
+    .year-round-banner { padding: 18px 22px; gap: 16px; }
+    .year-round-icon { font-size: 28px; }
+    .year-round-text { font-size: 14.5px; }
+
+    /* Seasons grid - 4 col → 2 col */
+    .seasons-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .season-card { padding: 18px 14px; }
+    .season-name { font-size: 18px; }
+    .season-drink { font-size: 13px; }
+
+    /* Events strip - stack */
+    .events-strip { grid-template-columns: 1fr; gap: 14px; padding: 18px 22px; }
+    .event-tag { font-size: 11px; padding: 5px 10px; }
+
+    /* Future grid - 3 col → 1 col */
+    .future-grid { grid-template-columns: 1fr; gap: 12px; }
+    .future-card { padding: 18px 20px; }
+    .future-title { font-size: 17px; }
+
+    /* Closing */
+    .closing { padding: 40px 24px; margin: 40px 0 0; }
+    .closing-text { font-size: 17px; }
+
+    /* SOP flow - stack vertically */
+    .sop-flow { flex-direction: column; gap: 8px; }
+    .sop-flow-arrow { transform: rotate(90deg); padding: 4px 0; }
+    .sop-flow-step { width: 100%; }
+
+    /* Deep link bar */
+    .deep-link-bar { padding: 14px 20px; font-size: 13px; }
+
+    /* Related */
+    .related { padding: 56px 0; }
+    .related-h { font-size: 22px; }
+    .related-grid { grid-template-columns: 1fr; gap: 12px; }
+    .related-card { padding: 22px 24px; }
+
+    footer { padding: 32px 16px; line-height: 1.6; }
+  }
+
+  @media (max-width: 480px) {
+    .brand-title { font-size: 30px; }
+    .section-title { font-size: 22px; }
+    .part-title { font-size: 22px; }
+    .eq-term { font-size: 44px; }
+    .twist-quadrants, .seasons-grid { grid-template-columns: 1fr !important; }
   }
 </style>
 </head>
@@ -1174,7 +1313,7 @@
     </div>
 
     <div class="deep-link-bar">
-      💡 想看圓心的「常見陷阱」與「破例規則」？<a href="5圈系統詳解.html">前往 5 圈系統詳解 · 圓心</a>
+      💡 想看圓心的「常見陷阱」與「破例規則」？<a href="system.html">前往 5 圈系統詳解 · 圓心</a>
     </div>
   </div>
 </section>
@@ -1233,7 +1372,7 @@
     </div>
 
     <div class="deep-link-bar">
-      💡 想看第一圈的「決策內容」與「常見陷阱」？<a href="5圈系統詳解.html">前往 5 圈系統詳解 · 第一圈</a>
+      💡 想看第一圈的「決策內容」與「常見陷阱」？<a href="system.html">前往 5 圈系統詳解 · 第一圈</a>
     </div>
   </div>
 </section>
@@ -1356,7 +1495,7 @@
     </div>
 
     <div class="deep-link-bar">
-      💡 想看 Texture 的「綁定邏輯」與「常見陷阱」？<a href="5圈系統詳解.html">前往 5 圈系統詳解 · 第二圈</a>
+      💡 想看 Texture 的「綁定邏輯」與「常見陷阱」？<a href="system.html">前往 5 圈系統詳解 · 第二圈</a>
     </div>
   </div>
 </section>
@@ -1461,7 +1600,7 @@
     </div>
 
     <div class="deep-link-bar">
-      💡 想看 Twist 的「邀請話術」與「常見陷阱」？<a href="5圈系統詳解.html">前往 5 圈系統詳解 · 第三圈</a>
+      💡 想看 Twist 的「邀請話術」與「常見陷阱」？<a href="system.html">前往 5 圈系統詳解 · 第三圈</a>
     </div>
   </div>
 </section>
@@ -1545,7 +1684,7 @@
     </div>
 
     <div class="deep-link-bar">
-      💡 想看場景對應的「菜單動線設計」與「常見陷阱」？<a href="5圈系統詳解.html">前往 5 圈系統詳解 · 第四圈</a>
+      💡 想看場景對應的「菜單動線設計」與「常見陷阱」？<a href="system.html">前往 5 圈系統詳解 · 第四圈</a>
     </div>
   </div>
 </section>
@@ -1627,7 +1766,7 @@
     </div>
 
     <div class="deep-link-bar">
-      💡 想看衛星系列的「選酒鐵則」與「常見陷阱」？<a href="5圈系統詳解.html">前往 5 圈系統詳解 · 衛星系列</a>
+      💡 想看衛星系列的「選酒鐵則」與「常見陷阱」？<a href="system.html">前往 5 圈系統詳解 · 衛星系列</a>
     </div>
   </div>
 </section>
@@ -2008,7 +2147,7 @@
         <div class="related-title">🍶 品牌介紹</div>
         <div class="related-desc">完整品牌定位、賣什麼、不賣什麼。5 分鐘掃完一家店的全貌。</div>
       </a>
-      <a href="5圈系統詳解.html" class="related-card">
+      <a href="system.html" class="related-card">
         <div class="related-tag">DOOR 03 · SYSTEM</div>
         <div class="related-title">⚙️ 5 圈系統詳解</div>
         <div class="related-desc">每一圈的決策內容、常見陷阱、8 步 SOP。深度教學版。</div>
@@ -2020,7 +2159,7 @@
 <!-- =========== FOOTER =========== -->
 <footer>
   <div class="container">
-    <a href="index.html" style="color: var(--tea-brown); text-decoration: none; letter-spacing: 0.25em;">← THE OOLONG HIGH · 回到品牌中心</a>
+    <a href="index.html" style="color: var(--tea-brown); text-decoration: none; letter-spacing: 0.25em;">← THE OOLONG HAI · 回到品牌中心</a>
     <div style="margin-top: 12px; opacity: 0.6;">UNIVERSE ATLAS v2 · 10 MAPS</div>
   </div>
 </footer>
