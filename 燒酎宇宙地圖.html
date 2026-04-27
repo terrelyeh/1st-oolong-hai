@@ -1,0 +1,2450 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>燒酎宇宙地圖 · 台灣第一家烏龍嗨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+  :root {
+    --bg-paper: #F5F0E6;
+    --bg-paper-2: #EDE5D3;
+    --bg-paper-3: #E8DFC9;
+    --bg-dark: #2C2520;
+    --ink: #2C3345;
+    --ink-soft: #5C5247;
+    --ink-faint: #8A8073;
+    --ink-light: #E8DFC9;
+    --tea-brown: #8B6F47;
+    --barley: #C4A57B;
+    --hojicha: #D4836F;
+    --green: #6E8B5E;
+    --black-sugar: #4A3A2A;
+    --line: #D9CFB8;
+    --highlight: #E8D9B5;
+    --gold: #B8956A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-paper);
+    color: var(--ink);
+    font-family: "Noto Sans TC", "Inter", system-ui, sans-serif;
+    line-height: 1.7;
+    font-size: 18px;
+    font-feature-settings: "tnum" on;
+  }
+
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 32px; }
+  .container-tight { max-width: 880px; margin: 0 auto; padding: 0 32px; }
+
+  /* === Top nav === */
+  .top-nav {
+    padding: 16px 32px;
+    background: var(--bg-paper-2);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+  .top-nav a { color: var(--tea-brown); text-decoration: none; transition: color 0.2s; }
+  .top-nav a:hover { color: var(--ink); }
+
+  /* === Hero === */
+  .hero {
+    padding: 96px 0 80px;
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, var(--bg-paper-2) 0%, var(--bg-paper) 100%);
+  }
+  .brand-mark { font-family: "Noto Serif TC", serif; font-weight: 600; font-size: 14.5px; letter-spacing: 0.4em; color: var(--tea-brown); margin-bottom: 24px; text-transform: uppercase; }
+  .brand-title { font-family: "Noto Serif TC", serif; font-weight: 700; font-size: 56px; letter-spacing: 0.04em; line-height: 1.2; color: var(--ink); margin-bottom: 16px; }
+  .brand-en { font-family: "Inter", sans-serif; font-weight: 500; font-size: 18px; letter-spacing: 0.3em; color: var(--tea-brown); margin-bottom: 32px; text-transform: uppercase; }
+  .brand-tagline { font-family: "Noto Serif TC", serif; font-size: 21px; color: var(--ink-soft); max-width: 680px; margin: 0 auto; line-height: 1.8; }
+
+  /* === Part divider === */
+  .part-divider {
+    padding: 80px 0 60px;
+    background: var(--bg-dark);
+    color: var(--ink-light);
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .part-num {
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.5em;
+    color: var(--hojicha);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .part-title {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    color: var(--bg-paper);
+  }
+
+  .part-desc {
+    font-size: 18px;
+    color: var(--barley);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* === Section base === */
+  section.map-section { padding: 80px 0; border-bottom: 1px solid var(--line); }
+  section.map-section:nth-of-type(even) { background: var(--bg-paper-2); }
+
+  .section-num { font-family: "Inter", sans-serif; font-size: 13px; letter-spacing: 0.4em; color: var(--hojicha); margin-bottom: 16px; }
+  .section-title { font-family: "Noto Serif TC", serif; font-weight: 600; font-size: 32px; line-height: 1.3; margin-bottom: 12px; }
+  .section-subtitle { font-size: 18px; color: var(--ink-soft); max-width: 720px; margin-bottom: 32px; line-height: 1.8; }
+
+  /* Chart wrapper */
+  .chart-card {
+    margin-top: 24px;
+    padding: 32px;
+    background: var(--bg-paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+  }
+
+  section.map-section:nth-of-type(even) .chart-card {
+    background: var(--bg-paper);
+  }
+
+  .chart-container { width: 100%; min-height: 480px; }
+
+  /* === Equation visual (圓心) === */
+  .equation-display {
+    text-align: center;
+    padding: 60px 0;
+  }
+
+  .eq-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(24px, 5vw, 56px);
+    flex-wrap: wrap;
+    margin: 32px 0;
+  }
+
+  .eq-block { text-align: center; }
+  .eq-term {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: clamp(56px, 9vw, 88px);
+    color: var(--ink);
+    line-height: 1;
+  }
+  .eq-sub {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    margin-top: 12px;
+  }
+  .eq-op {
+    font-family: "Noto Serif TC", serif;
+    font-size: clamp(48px, 7vw, 64px);
+    color: var(--hojicha);
+    font-weight: 300;
+    margin-top: -12px;
+  }
+  .eq-result {
+    margin-top: 20px;
+    font-family: "Noto Serif TC", serif;
+    font-size: 19px;
+    color: var(--ink-soft);
+    letter-spacing: 0.05em;
+    font-style: italic;
+  }
+
+  .core-axioms {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 48px;
+  }
+
+  .axiom-card {
+    padding: 24px;
+    background: var(--bg-paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    border-top: 3px solid var(--hojicha);
+  }
+
+  section.map-section:nth-of-type(even) .axiom-card { background: var(--bg-paper); }
+
+  .axiom-num {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--hojicha);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .axiom-text {
+    font-family: "Noto Serif TC", serif;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  /* === Texture grid (第二圈) === */
+  .texture-matrix {
+    display: grid;
+    grid-template-columns: 130px repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .tex-header, .tex-rowhead {
+    padding: 16px 12px;
+    text-align: center;
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 19px;
+    background: var(--tea-brown);
+    color: #FBF7EC;
+    border-radius: 6px;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    box-shadow: 0 2px 6px rgba(139, 111, 71, 0.2);
+  }
+
+  .tex-rowhead {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* English caption inside headers */
+  .tex-header,
+  .tex-rowhead {
+    position: relative;
+  }
+
+  .tex-header > small,
+  .tex-rowhead > small,
+  .tex-header span:not(:first-child),
+  .tex-rowhead span:not(:first-child) {
+    display: block;
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(251, 247, 236, 0.7);
+    margin-top: 4px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .tex-cell {
+    padding: 16px 12px;
+    background: var(--bg-paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  section.map-section:nth-of-type(even) .tex-cell { background: var(--bg-paper); }
+
+  .tex-cell:hover { background: var(--highlight); transform: scale(1.02); }
+
+  .tex-cell.featured {
+    background: rgba(212,131,111,0.15);
+    border-color: var(--hojicha);
+  }
+
+  .tex-name {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 600;
+    font-size: 14.5px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .tex-example {
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  /* === Twist quadrants (第三圈) === */
+  .twist-quadrants {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .twist-q {
+    padding: 22px 18px;
+    background: var(--bg-paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    border-top: 4px solid var(--green);
+  }
+
+  section.map-section:nth-of-type(even) .twist-q { background: var(--bg-paper); }
+
+  .twist-q.cat-fruit { border-top-color: var(--hojicha); }
+  .twist-q.cat-spice { border-top-color: var(--barley); }
+  .twist-q.cat-local { border-top-color: var(--tea-brown); }
+
+  .twist-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .twist-name {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 600;
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+
+  .twist-en {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .twist-items {
+    list-style: none;
+    margin-bottom: 16px;
+  }
+
+  .twist-items li {
+    padding: 6px 0;
+    font-size: 16px;
+    color: var(--ink);
+    border-bottom: 1px dashed var(--line);
+  }
+
+  .twist-items li:last-child { border-bottom: none; }
+
+  .twist-pair {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 2px solid var(--line);
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+  }
+
+  /* === Journey (第四圈) === */
+  .journey {
+    margin-top: 32px;
+    position: relative;
+    padding: 24px 0;
+  }
+
+  .journey-line {
+    position: absolute;
+    top: 70px;
+    left: 5%;
+    right: 5%;
+    height: 2px;
+    background: linear-gradient(to right, var(--green), var(--barley), var(--hojicha), var(--tea-brown));
+    z-index: 0;
+  }
+
+  .journey-stops {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .stop {
+    text-align: center;
+  }
+
+  .stop-time {
+    font-family: "Inter", sans-serif;
+    font-size: 11.5px;
+    letter-spacing: 0.2em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .stop-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--bg-paper);
+    border: 3px solid var(--hojicha);
+    margin: 0 auto 12px;
+  }
+
+  .stop-name {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .stop-chapter {
+    padding: 12px;
+    background: var(--bg-paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  section.map-section:nth-of-type(even) .stop-chapter { background: var(--bg-paper); }
+
+  /* === Satellites (planetary) === */
+  .planets {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 24px;
+  }
+
+  .planet {
+    padding: 32px 24px;
+    background: var(--bg-paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  section.map-section:nth-of-type(even) .planet { background: var(--bg-paper); }
+
+  .planet::before {
+    content: "";
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,165,123,0.15) 0%, transparent 70%);
+  }
+
+  .planet-orbit {
+    font-family: "Inter", sans-serif;
+    font-size: 11.5px;
+    letter-spacing: 0.3em;
+    color: var(--hojicha);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .planet-name {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 600;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+
+  .planet-en {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .planet-purpose {
+    font-size: 16px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .planet-rule {
+    display: inline-block;
+    padding: 7px 16px;
+    background: var(--bg-paper-3);
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    color: var(--tea-brown);
+    letter-spacing: 0.05em;
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  /* === Read-explain blocks === */
+  .read-block {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .read-card {
+    padding: 20px 24px;
+    background: var(--bg-paper-2);
+    border-radius: 4px;
+    border-left: 3px solid var(--barley);
+  }
+
+  section.map-section:nth-of-type(even) .read-card { background: var(--bg-paper-3); }
+
+  .read-card.inspire { border-left-color: var(--hojicha); }
+
+  .read-label {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .read-text {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--ink);
+  }
+
+  /* === Deep-dive link === */
+  .deep-link-bar {
+    margin-top: 24px;
+    padding: 16px 24px;
+    background: var(--bg-paper-3);
+    border-radius: 4px;
+    border-left: 3px solid var(--hojicha);
+    font-size: 16px;
+    color: var(--ink);
+  }
+
+  .deep-link-bar a {
+    color: var(--hojicha);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--hojicha);
+    font-weight: 500;
+    margin-left: 8px;
+  }
+
+  .deep-link-bar a:hover { color: var(--ink); border-bottom-style: solid; }
+
+  /* === Matrix cell hover animation === */
+  .matrix-cell {
+    transition: transform 0.25s ease-out, filter 0.25s ease-out;
+    cursor: pointer;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  .matrix-cell:hover {
+    transform: translateY(-4px);
+    filter: drop-shadow(0 8px 14px rgba(139, 111, 71, 0.25));
+  }
+  .matrix-cell-subtle:hover {
+    transform: translateY(-2px);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.08));
+  }
+
+  /* === Spectrum point hover === */
+  .spectrum-point {
+    cursor: pointer;
+  }
+  .spectrum-point circle {
+    transition: r 0.2s, fill-opacity 0.2s, stroke-width 0.2s;
+  }
+  .spectrum-point text {
+    transition: font-weight 0.2s, font-size 0.2s;
+  }
+  .spectrum-point:hover circle {
+    fill-opacity: 0.95 !important;
+    stroke-width: 2.5 !important;
+  }
+  .spectrum-point:hover text {
+    font-weight: 700 !important;
+    font-size: 14px !important;
+  }
+
+  /* === Generic enhancement: SOP timeline === */
+  .sop-timeline-block {
+    margin-top: 32px;
+    padding: 24px 32px;
+    background: var(--bg-paper-2);
+    border-radius: 4px;
+    border-left: 3px solid var(--hojicha);
+  }
+
+  section.map-section:nth-of-type(even) .sop-timeline-block { background: var(--bg-paper-3); }
+
+  .sop-block-label {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--hojicha);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .sop-flow {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+    flex-wrap: nowrap;
+  }
+
+  .sop-flow-step {
+    flex: 1;
+    text-align: center;
+    padding: 18px 12px;
+    background: var(--bg-paper);
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .sop-flow-arrow {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  section.map-section:nth-of-type(even) .sop-flow-step { background: var(--bg-paper); }
+
+  .sop-flow-num {
+    font-family: "Inter", sans-serif;
+    font-size: 11.5px;
+    letter-spacing: 0.25em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .sop-flow-action {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--ink);
+  }
+
+  /* (color/size handled in flex-rule above) */
+  .sop-flow > .sop-flow-arrow {
+    color: var(--hojicha);
+    font-size: 24px;
+    font-weight: 300;
+  }
+
+  .sop-stat {
+    margin-top: 16px;
+    text-align: center;
+    font-family: "Noto Serif TC", serif;
+    font-size: 16px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  .sop-stat strong {
+    color: var(--hojicha);
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  /* === Twist invitation cards === */
+  .invitation-block {
+    margin-top: 32px;
+  }
+
+  .invitation-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .invitation-card {
+    padding: 20px 24px;
+    background: var(--bg-paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    border-left: 3px solid var(--barley);
+  }
+
+  section.map-section:nth-of-type(even) .invitation-card { background: var(--bg-paper); }
+
+  .inv-context {
+    font-family: "Inter", sans-serif;
+    font-size: 11.5px;
+    letter-spacing: 0.2em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .inv-quote {
+    font-family: "Noto Serif TC", serif;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .inv-quote::before { content: "「"; color: var(--hojicha); }
+  .inv-quote::after { content: "」"; color: var(--hojicha); }
+
+  /* === Journey timeline enhancement === */
+  .journey-typical {
+    margin-top: 32px;
+    padding: 24px 32px;
+    background: var(--bg-paper-3);
+    border-radius: 4px;
+    border-left: 3px solid var(--green);
+  }
+
+  .typical-label {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--green);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .typical-story {
+    font-family: "Noto Serif TC", serif;
+    font-size: 17px;
+    line-height: 1.9;
+    color: var(--ink);
+  }
+
+  .typical-story strong {
+    background: rgba(212, 131, 111, 0.15);
+    padding: 1px 6px;
+    border-radius: 3px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .stop-time {
+    font-family: "Inter", sans-serif;
+    font-size: 11.5px;
+    letter-spacing: 0.2em;
+    color: var(--hojicha);
+    text-transform: uppercase;
+    margin-top: 4px;
+    font-weight: 600;
+  }
+
+  .stop-spend {
+    margin-top: 8px;
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 0.05em;
+  }
+
+  /* === Satellite drinks === */
+  .planet-drinks {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--line);
+    text-align: left;
+  }
+
+  .planet-drinks-label {
+    font-family: "Inter", sans-serif;
+    font-size: 11.5px;
+    letter-spacing: 0.25em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .planet-drink-item {
+    font-family: "Noto Serif TC", serif;
+    font-size: 14.5px;
+    color: var(--ink);
+    padding: 4px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+
+  .planet-drink-item:last-child { border-bottom: none; }
+
+  /* === Seasonal detail === */
+  .seasons-detail {
+    margin-top: 32px;
+  }
+
+  .year-round-banner {
+    padding: 24px 32px;
+    background: var(--bg-paper-3);
+    border-radius: 4px;
+    border-left: 4px solid var(--hojicha);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  .year-round-icon {
+    font-size: 36px;
+    line-height: 1;
+  }
+
+  .year-round-content {
+    flex: 1;
+  }
+
+  .year-round-label {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--hojicha);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .year-round-text {
+    font-family: "Noto Serif TC", serif;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .year-round-text strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .seasons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .season-card {
+    padding: 28px 24px;
+    background: var(--bg-paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    border-top: 4px solid var(--green);
+    display: flex;
+    flex-direction: column;
+  }
+
+  section.map-section:nth-of-type(even) .season-card { background: var(--bg-paper); }
+
+  .season-card.summer { border-top-color: var(--barley); }
+  .season-card.autumn { border-top-color: var(--hojicha); }
+  .season-card.winter { border-top-color: var(--tea-brown); }
+
+  .season-header {
+    margin-bottom: 16px;
+  }
+
+  .season-icon {
+    font-size: 28px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .season-name {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .season-en {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .season-months {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--tea-brown);
+    margin-top: 8px;
+  }
+
+  .season-axis {
+    padding: 8px 12px;
+    background: var(--bg-paper-2);
+    border-radius: 12px;
+    font-size: 13px;
+    color: var(--ink);
+    margin-bottom: 16px;
+    display: inline-block;
+    align-self: flex-start;
+  }
+
+  section.map-section:nth-of-type(even) .season-axis { background: var(--bg-paper-3); }
+
+  .season-section {
+    margin-bottom: 16px;
+  }
+
+  .season-label {
+    font-family: "Inter", sans-serif;
+    font-size: 11.5px;
+    letter-spacing: 0.2em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .season-drinks {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .season-drink {
+    font-family: "Noto Serif TC", serif;
+    font-size: 16px;
+    color: var(--ink);
+    padding: 4px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+
+  .season-drink:last-child { border-bottom: none; }
+
+  .season-twist {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+
+  .season-twist strong {
+    color: var(--tea-brown);
+    font-weight: 500;
+  }
+
+  .events-strip {
+    margin-top: 24px;
+    padding: 24px 32px;
+    background: var(--bg-paper-2);
+    border-radius: 4px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 24px;
+    align-items: center;
+  }
+
+  section.map-section:nth-of-type(even) .events-strip { background: var(--bg-paper-3); }
+
+  .events-label {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+  }
+
+  .events-label small {
+    display: block;
+    font-family: "Inter", sans-serif;
+    font-size: 11.5px;
+    letter-spacing: 0.25em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    margin-top: 4px;
+    font-weight: normal;
+  }
+
+  .events-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .event-tag {
+    padding: 6px 12px;
+    background: var(--bg-paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    font-size: 13px;
+    color: var(--ink);
+  }
+
+  /* === Future cards === */
+  .future-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .future-card {
+    padding: 24px;
+    background: var(--bg-paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  section.map-section:nth-of-type(even) .future-card { background: var(--bg-paper); }
+
+  .future-card:hover { background: var(--highlight); transform: translateY(-2px); }
+
+  .future-cat {
+    font-family: "Inter", sans-serif;
+    font-size: 11.5px;
+    letter-spacing: 0.25em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .future-title {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+
+  .future-desc {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+
+  .future-tag {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 3px 10px;
+    background: var(--bg-paper-2);
+    border-radius: 12px;
+    font-family: "Inter", sans-serif;
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+
+  /* === Closing message === */
+  .closing {
+    margin: 60px 0 0;
+    padding: 60px 40px;
+    text-align: center;
+    background: var(--bg-paper-3);
+    border-radius: 4px;
+  }
+
+  .closing-text {
+    font-family: "Noto Serif TC", serif;
+    font-size: 22px;
+    line-height: 1.7;
+    color: var(--ink);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* === Related === */
+  .related { padding: 80px 0; background: var(--bg-paper-2); border-bottom: 1px solid var(--line); }
+  .related-h { font-family: "Noto Serif TC", serif; font-weight: 600; font-size: 28px; text-align: center; margin-bottom: 8px; }
+  .related-sub { text-align: center; color: var(--ink-soft); margin-bottom: 40px; }
+  .related-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .related-card { padding: 28px; background: var(--bg-paper); border: 1px solid var(--line); border-radius: 4px; text-decoration: none; color: var(--ink); transition: all 0.25s; display: block; position: relative; }
+  .related-card:hover { background: var(--highlight); transform: translateY(-2px); border-color: var(--barley); }
+  .related-card::after { content: "→"; position: absolute; top: 28px; right: 24px; color: var(--hojicha); font-family: "Inter", sans-serif; font-size: 18px; transition: transform 0.25s; }
+  .related-card:hover::after { transform: translateX(4px); }
+  .related-tag { font-family: "Inter", sans-serif; font-size: 11.5px; letter-spacing: 0.3em; color: var(--hojicha); text-transform: uppercase; margin-bottom: 8px; }
+  .related-title { font-family: "Noto Serif TC", serif; font-weight: 600; font-size: 21px; margin-bottom: 6px; padding-right: 32px; }
+  .related-desc { font-size: 14.5px; color: var(--ink-soft); line-height: 1.7; }
+
+  /* Footer */
+  footer { text-align: center; padding: 60px 0; color: var(--ink-soft); font-family: "Inter", sans-serif; font-size: 13px; letter-spacing: 0.2em; }
+
+  @media (max-width: 768px) {
+    .brand-title { font-size: 36px; }
+    .read-block, .twist-quadrants, .planets { grid-template-columns: 1fr; }
+    .future-grid { grid-template-columns: 1fr; }
+    .core-axioms { grid-template-columns: 1fr; }
+    .texture-matrix { grid-template-columns: 1fr; }
+    .journey-stops { grid-template-columns: 1fr; }
+    .journey-line { display: none; }
+    .closing-text { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =========== TOP NAV =========== -->
+<nav class="top-nav">
+  <a href="index.html">← 回品牌中心</a>
+  <span style="color: var(--ink-soft);">VISION MAP · 燒酎宇宙地圖</span>
+</nav>
+
+<!-- =========== HERO =========== -->
+<header class="hero">
+  <div class="container">
+    <div class="brand-mark">— Universe Atlas —</div>
+    <h1 class="brand-title">我們的燒酎宇宙</h1>
+    <div class="brand-en">The Shochu Universe</div>
+    <p class="brand-tagline">
+      這份地圖系統性涵蓋燒酎宇宙的<strong>所有面向</strong>。<br>
+      Part 1 是 5 圈核心結構，Part 2 是其他維度的視角。<br>
+      想看任何一層的<strong>細節決策與陷阱</strong>？跳到 5 圈系統詳解。
+    </p>
+  </div>
+</header>
+
+<!-- =========== PART 1 DIVIDER =========== -->
+<div class="part-divider">
+  <div class="container">
+    <div class="part-num">PART 01 — 核心結構</div>
+    <h2 class="part-title">5 圈系統 · 視覺化全景</h2>
+    <p class="part-desc">每一圈一張地圖，從圓心一路擴散到衛星系列。</p>
+  </div>
+</div>
+
+<!-- =========== MAP 01 · 圓心 =========== -->
+<section class="map-section">
+  <div class="container">
+    <div class="section-num">MAP 01 / CORE · 圓心</div>
+    <h2 class="section-title">燒酎 × 茶 · 核心方程式</h2>
+    <p class="section-subtitle">所有產品的不可動搖核心。任何 idea 必須能跟燒酎或茶建立關係，才能進入這個系統。</p>
+
+    <div class="chart-card">
+      <div class="equation-display">
+        <div class="eq-row">
+          <div class="eq-block">
+            <div class="eq-term">燒酎</div>
+            <div class="eq-sub">Spirit · Backbone</div>
+          </div>
+          <div class="eq-op">×</div>
+          <div class="eq-block">
+            <div class="eq-term">茶</div>
+            <div class="eq-sub">Tea · Soul</div>
+          </div>
+        </div>
+        <div class="eq-result">= 我們的靈魂</div>
+      </div>
+
+      <div class="core-axioms">
+        <div class="axiom-card">
+          <div class="axiom-num">公理 01</div>
+          <div class="axiom-text">燒酎是基酒主軸：80% 的常駐品項以燒酎為基酒</div>
+        </div>
+        <div class="axiom-card">
+          <div class="axiom-num">公理 02</div>
+          <div class="axiom-text">茶是個性靈魂：每杯酒的「人格」由茶決定</div>
+        </div>
+        <div class="axiom-card">
+          <div class="axiom-num">公理 03</div>
+          <div class="axiom-text">Highball / 茶割是表現形式：所有酒都是 Highball / 茶割變體</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="deep-link-bar">
+      💡 想看圓心的「常見陷阱」與「破例規則」？<a href="5圈系統詳解.html">前往 5 圈系統詳解 · 圓心</a>
+    </div>
+  </div>
+</section>
+
+<!-- =========== MAP 02 · 第一圈：矩陣 =========== -->
+<section class="map-section">
+  <div class="container">
+    <div class="section-num">MAP 02 / RING 01 · 第一圈</div>
+    <h2 class="section-title">茶軸 × 燒酎家族 · 產品矩陣</h2>
+    <p class="section-subtitle">4 茶軸 × 7 燒酎家族 = 28 個可能組合。⭐⭐ 是旗艦，⭐ 是常駐，△ 是季節限定，✗ 不做。</p>
+
+    <div class="chart-card">
+      <div id="matrix-chart" style="padding: 16px 0;"></div>
+
+      <!-- 矩陣圖例 -->
+      <div style="margin-top: 24px; padding: 20px 24px; background: var(--bg-paper-2); border-radius: 4px;">
+        <div style="font-family: 'Inter', sans-serif; font-size: 12px; letter-spacing: 0.3em; color: var(--tea-brown); text-transform: uppercase; margin-bottom: 16px; text-align: center;">— LEGEND · 星等說明 —</div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+          <div style="padding: 16px; background: rgba(212,131,111,0.5); border-radius: 4px; text-align: center;">
+            <div style="font-family: 'Noto Serif TC', serif; font-weight: 700; font-size: 18px; color: #2C3345; margin-bottom: 4px;">⭐⭐ 旗艦</div>
+            <div style="font-size: 13px; color: #5C5247;">品牌的招牌酒款<br>菜單顯眼位置</div>
+          </div>
+          <div style="padding: 16px; background: rgba(196,165,123,0.4); border-radius: 4px; text-align: center;">
+            <div style="font-family: 'Noto Serif TC', serif; font-weight: 700; font-size: 18px; color: #2C3345; margin-bottom: 4px;">⭐ 常駐</div>
+            <div style="font-size: 13px; color: #5C5247;">菜單核心品項<br>長期固定供應</div>
+          </div>
+          <div style="padding: 16px; background: #EDE5D3; border-radius: 4px; text-align: center;">
+            <div style="font-family: 'Noto Serif TC', serif; font-weight: 700; font-size: 18px; color: #5C5247; margin-bottom: 4px;">△ 季節限定</div>
+            <div style="font-size: 13px; color: #5C5247;">可發想未來限定<br>不上常駐</div>
+          </div>
+          <div style="padding: 16px; background: #F5F0E6; border: 1px dashed #D9CFB8; border-radius: 4px; text-align: center;">
+            <div style="font-family: 'Noto Serif TC', serif; font-weight: 700; font-size: 18px; color: #8A8073; margin-bottom: 4px;">✗ 不做</div>
+            <div style="font-size: 13px; color: #5C5247;">風味打架<br>除非有特殊 twist</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="read-block">
+      <div class="read-card">
+        <div class="read-label">如何閱讀</div>
+        <div class="read-text">
+          縱軸 4 大茶軸，橫軸 7 種燒酎家族 = 28 個可能組合。<br>
+          顏色越深 = 風味共鳴越強。滑鼠移上去看每格的代表酒款。<br>
+          目前菜單覆蓋約 14/28 格（其餘留給未來開發）。
+        </div>
+      </div>
+      <div class="read-card inspire">
+        <div class="read-label">啟發什麼想像</div>
+        <div class="read-text">
+          ✦ 每個 △ 都是「未來季節限定」的候選<br>
+          ✦ 每個 ✗ 不是真的不行，是「需要 twist 解決」<br>
+          ✦ 看到空白格 = 看到機會
+        </div>
+      </div>
+    </div>
+
+    <div class="deep-link-bar">
+      💡 想看第一圈的「決策內容」與「常見陷阱」？<a href="5圈系統詳解.html">前往 5 圈系統詳解 · 第一圈</a>
+    </div>
+  </div>
+</section>
+
+<!-- =========== MAP 03 · 第二圈：Texture =========== -->
+<section class="map-section">
+  <div class="container">
+    <div class="section-num">MAP 03 / RING 02 · 第二圈</div>
+    <h2 class="section-title">Texture 質地工程 · 同酒不同口感</h2>
+    <p class="section-subtitle">同樣的「茶 × 燒酎」組合，不同 Texture 會變成完全不同的飲品體驗。3 檔碳酸 × 4 種冰塊 = 12 種口感。</p>
+
+    <div class="chart-card">
+      <div class="texture-matrix">
+        <div></div>
+        <div class="tex-header">長條冰<small>Spear</small></div>
+        <div class="tex-header">方塊冰<small>Cube</small></div>
+        <div class="tex-header">大冰球<small>Sphere</small></div>
+        <div class="tex-header">碎冰<small>Crushed</small></div>
+
+        <div class="tex-rowhead">強氣泡<small>Soda</small></div>
+        <div class="tex-cell featured">
+          <div class="tex-name">Highball 視覺感</div>
+          <div class="tex-example">客座 Highball、儀式款</div>
+        </div>
+        <div class="tex-cell featured">
+          <div class="tex-name">經典爽快</div>
+          <div class="tex-example">招牌烏龍嗨、沖繩香片嗨</div>
+        </div>
+        <div class="tex-cell">
+          <div class="tex-name">少見組合</div>
+          <div class="tex-example">—</div>
+        </div>
+        <div class="tex-cell featured">
+          <div class="tex-name">南國派對</div>
+          <div class="tex-example">荔枝紅玉割、洛神酸梅嗨</div>
+        </div>
+
+        <div class="tex-rowhead">微氣泡<small>Micro</small></div>
+        <div class="tex-cell">
+          <div class="tex-name">特色款</div>
+          <div class="tex-example">—</div>
+        </div>
+        <div class="tex-cell featured">
+          <div class="tex-name">職人茶割</div>
+          <div class="tex-example">極・焙茶麥酒、玄米玉露割</div>
+        </div>
+        <div class="tex-cell">
+          <div class="tex-name">本格升級</div>
+          <div class="tex-example">本格燒酎進階款</div>
+        </div>
+        <div class="tex-cell">
+          <div class="tex-name">少見組合</div>
+          <div class="tex-example">—</div>
+        </div>
+
+        <div class="tex-rowhead">無氣泡<small>Still</small></div>
+        <div class="tex-cell">
+          <div class="tex-name">少見組合</div>
+          <div class="tex-example">—</div>
+        </div>
+        <div class="tex-cell">
+          <div class="tex-name">水割</div>
+          <div class="tex-example">本格燒酎水割</div>
+        </div>
+        <div class="tex-cell featured">
+          <div class="tex-name">大人特調</div>
+          <div class="tex-example">琥珀焙茶拿鐵、黑糖伯爵老式</div>
+        </div>
+        <div class="tex-cell">
+          <div class="tex-name">少見組合</div>
+          <div class="tex-example">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sop-timeline-block">
+      <div class="sop-block-label">— OPERATIONS · 出杯流程 —</div>
+      <div class="sop-flow">
+        <div class="sop-flow-step">
+          <div class="sop-flow-num">Step 1</div>
+          <div class="sop-flow-action">加冰</div>
+        </div>
+        <div class="sop-flow-arrow">→</div>
+        <div class="sop-flow-step">
+          <div class="sop-flow-num">Step 2</div>
+          <div class="sop-flow-action">加酒</div>
+        </div>
+        <div class="sop-flow-arrow">→</div>
+        <div class="sop-flow-step">
+          <div class="sop-flow-num">Step 3</div>
+          <div class="sop-flow-action">加 Mixer</div>
+        </div>
+        <div class="sop-flow-arrow">→</div>
+        <div class="sop-flow-step">
+          <div class="sop-flow-num">Step 4</div>
+          <div class="sop-flow-action">加 Garnish</div>
+        </div>
+      </div>
+      <div class="sop-stat">
+        12 種口感組合，但 SOP 一致 — <strong>出杯時間 < 90 秒</strong>，吧台動線保持流暢。
+      </div>
+    </div>
+
+    <div class="read-block">
+      <div class="read-card">
+        <div class="read-label">如何閱讀</div>
+        <div class="read-text">
+          12 個格子是 12 種口感組合。深色 = 我們有對應酒款的「招牌組合」（預設 Texture）。<br>
+          客人可以指定「改成無氣泡」「給我長條冰」——這是進階點法，會出更慢但客人會感到專業。
+        </div>
+      </div>
+      <div class="read-card inspire">
+        <div class="read-label">啟發什麼想像</div>
+        <div class="read-text">
+          ✦ 空白格子 = 「同酒換 Texture」就是新品機會<br>
+          ✦ 招牌烏龍嗨 → 大冰球版 = 新的「品味派」品項<br>
+          ✦ 焙茶麥酒 → 強氣泡版 = 夏天限定爽快款
+        </div>
+      </div>
+    </div>
+
+    <div class="deep-link-bar">
+      💡 想看 Texture 的「綁定邏輯」與「常見陷阱」？<a href="5圈系統詳解.html">前往 5 圈系統詳解 · 第二圈</a>
+    </div>
+  </div>
+</section>
+
+<!-- =========== MAP 04 · 第三圈：Twist =========== -->
+<section class="map-section">
+  <div class="container">
+    <div class="section-num">MAP 04 / RING 03 · 第三圈</div>
+    <h2 class="section-title">Twist 風味點綴 · 客製化的樂趣</h2>
+    <p class="section-subtitle">+$30 的加價購、互動共創。讓客人感覺「自己在玩」，而不是被推銷。</p>
+
+    <div class="chart-card">
+      <div class="twist-quadrants">
+        <div class="twist-q cat-herb">
+          <div class="twist-icon">🌿</div>
+          <div class="twist-name">草本系</div>
+          <div class="twist-en">Herbal</div>
+          <ul class="twist-items">
+            <li>紫蘇葉（拍醒）</li>
+            <li>新鮮迷迭香</li>
+            <li>山椒鹽口</li>
+          </ul>
+          <div class="twist-pair">最佳搭配 · 綠茶軸 / 烏龍軸</div>
+        </div>
+
+        <div class="twist-q cat-fruit">
+          <div class="twist-icon">🍋</div>
+          <div class="twist-name">果香系</div>
+          <div class="twist-en">Fruity</div>
+          <ul class="twist-items">
+            <li>港式鹹檸檬</li>
+            <li>烤柳橙片</li>
+            <li>糖漬柚子皮</li>
+          </ul>
+          <div class="twist-pair">最佳搭配 · 烏龍軸 / 紅茶軸</div>
+        </div>
+
+        <div class="twist-q cat-spice">
+          <div class="twist-icon">🌶️</div>
+          <div class="twist-name">辛香系</div>
+          <div class="twist-en">Spice</div>
+          <ul class="twist-items">
+            <li>烤過的肉桂棒</li>
+            <li>糖漬薑片</li>
+            <li>丁香（少量）</li>
+          </ul>
+          <div class="twist-pair">最佳搭配 · 烘焙軸</div>
+        </div>
+
+        <div class="twist-q cat-local">
+          <div class="twist-icon">🌺</div>
+          <div class="twist-name">在地系</div>
+          <div class="twist-en">Local</div>
+          <ul class="twist-items">
+            <li>烏梅</li>
+            <li>桂花</li>
+            <li>客家擂茶粉</li>
+          </ul>
+          <div class="twist-pair">最佳搭配 · 全軸（彈性大）</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 邀請話術範本 -->
+    <div class="invitation-block">
+      <div class="block-label" style="display: inline-block; font-family: 'Inter', sans-serif; font-size: 12px; letter-spacing: 0.3em; color: var(--tea-brown); text-transform: uppercase; margin-bottom: 4px;">— 店員邀請話術範本 —</div>
+      <div class="invitation-grid">
+        <div class="invitation-card">
+          <div class="inv-context">客人點 招牌烏龍嗨</div>
+          <div class="inv-quote">想試試加鹹檸檬嗎？很解膩</div>
+        </div>
+        <div class="invitation-card">
+          <div class="inv-context">客人點 焙茶麥酒</div>
+          <div class="inv-quote">加一根烤肉桂，會像香料茶</div>
+        </div>
+        <div class="invitation-card">
+          <div class="inv-context">客人點 仙草黑糖嗨</div>
+          <div class="inv-quote">加桂花，會更阿嬤味</div>
+        </div>
+      </div>
+      <div class="sop-stat" style="margin-top: 16px;">
+        Twist 不主動加，要「<strong>邀請</strong>」客人加 — 失敗也沒關係，成功就是 +$30 + 一個共創故事。
+      </div>
+    </div>
+
+    <div class="read-block">
+      <div class="read-card">
+        <div class="read-label">如何閱讀</div>
+        <div class="read-text">
+          4 大系列共 12 個 twist 選項。每個系列對應特定茶軸最搭。<br>
+          預設不加，店員會「邀請」客人加：「想試試加 X 嗎？」
+        </div>
+      </div>
+      <div class="read-card inspire">
+        <div class="read-label">啟發什麼想像</div>
+        <div class="read-text">
+          ✦ 每季微調 1-2 個 twist（夏天芒果、冬天薑泥）<br>
+          ✦ 季節 twist = 不換主菜單就能輪替<br>
+          ✦ 1 個 twist = +$30 客單價，3 個就 +$90
+        </div>
+      </div>
+    </div>
+
+    <div class="deep-link-bar">
+      💡 想看 Twist 的「邀請話術」與「常見陷阱」？<a href="5圈系統詳解.html">前往 5 圈系統詳解 · 第三圈</a>
+    </div>
+  </div>
+</section>
+
+<!-- =========== MAP 05 · 第四圈：場景 =========== -->
+<section class="map-section">
+  <div class="container">
+    <div class="section-num">MAP 05 / RING 04 · 第四圈</div>
+    <h2 class="section-title">場景對應 · 客戶旅程動線</h2>
+    <p class="section-subtitle">從進門到離開的 5 個觸點。菜單章節順序就是客戶旅程順序。</p>
+
+    <div class="chart-card">
+      <div class="journey">
+        <div class="journey-line"></div>
+        <div class="journey-stops">
+          <div class="stop">
+            <div class="stop-time">進店 5 分</div>
+            <div class="stop-dot"></div>
+            <div class="stop-name">第一杯</div>
+            <div class="stop-chapter">解渴、開胃、冰涼<br>→ 🟢 經典爽快</div>
+            <div class="stop-time">15:00 - 16:00</div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">主餐時段</div>
+            <div class="stop-dot"></div>
+            <div class="stop-name">佐餐酒</div>
+            <div class="stop-chapter">解膩、配菜、多樣<br>→ 🟢 經典 + 🌿 在地</div>
+            <div class="stop-time">16:00 - 17:30</div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">中段</div>
+            <div class="stop-dot"></div>
+            <div class="stop-name">品味慢飲</div>
+            <div class="stop-chapter">安靜、深度、儀式<br>→ 🟡 職人 + 🌟 本格</div>
+            <div class="stop-time">17:30 - 19:00</div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">離場前</div>
+            <div class="stop-dot"></div>
+            <div class="stop-name">收尾酒</div>
+            <div class="stop-chapter">濃郁、甜感、暖心<br>→ 🔴 大人特調</div>
+            <div class="stop-time">19:00 - 20:00</div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">任何時段</div>
+            <div class="stop-dot"></div>
+            <div class="stop-name">試新探索</div>
+            <div class="stop-chapter">好玩、限定、客座<br>→ 🌿 在地 + 🛰 客座</div>
+            <div class="stop-time">隨機加點</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 典型一晚故事 -->
+      <div class="journey-typical">
+        <div class="typical-label">— A TYPICAL EVENING · 典型一晚的故事 —</div>
+        <div class="typical-story">
+          下午 3 點半，<strong>阿哲</strong>剛下班，一個人推門進來坐吧台。第一杯點了 <strong>招牌烏龍嗨</strong>，配著炸雞解膩。
+          4 點多朋友到了 3 個人，加點了一輪 <strong>沖繩香片嗨</strong> 和 <strong>仙草黑糖嗨</strong>，邊聊邊試新口味。
+          5 點半開始想喝慢一點，店員推薦 <strong>極・焙茶麥酒</strong>，加了 <strong>烤肉桂 twist</strong>，三種焦香在打架。
+          7 點多話題深入，最後一杯 <strong>琥珀焙茶拿鐵</strong> 收尾，像大人版的奶茶。8 點離開，意猶未盡。
+        </div>
+      </div>
+    </div>
+
+    <div class="read-block">
+      <div class="read-card">
+        <div class="read-label">如何閱讀</div>
+        <div class="read-text">
+          5 個觸點對應菜單的章節順序。客人從上往下看菜單 = 從第一杯喝到收尾。<br>
+          店員推薦時用「你想喝什麼感覺的」（場景），不是「你要什麼酒款」（產品）。
+        </div>
+      </div>
+      <div class="read-card inspire">
+        <div class="read-label">啟發什麼想像</div>
+        <div class="read-text">
+          每個觸點要至少有 2-3 款選擇，避免客人「沒得選」。<br>
+          可以設計「微醺旅程套餐」=從第一杯到收尾的 4 杯小酒組合。
+        </div>
+      </div>
+    </div>
+
+    <div class="deep-link-bar">
+      💡 想看場景對應的「菜單動線設計」與「常見陷阱」？<a href="5圈系統詳解.html">前往 5 圈系統詳解 · 第四圈</a>
+    </div>
+  </div>
+</section>
+
+<!-- =========== MAP 06 · 衛星系列 =========== -->
+<section class="map-section">
+  <div class="container">
+    <div class="section-num">MAP 06 / SATELLITES · 衛星系列</div>
+    <h2 class="section-title">核心宇宙之外 · 三大衛星</h2>
+    <p class="section-subtitle">主菜單 80% 在前 4 圈裡。剩下 20% 是「衛星系列」——延伸但不背離核心。</p>
+
+    <div class="chart-card">
+      <div class="planets">
+        <div class="planet">
+          <div class="planet-orbit">— ORBIT 01 —</div>
+          <div class="planet-name">⭐ 本格職人專區</div>
+          <div class="planet-en">Premium Honkaku</div>
+          <div class="planet-purpose">本格燒酎（單一蒸餾）+ 高品質茶葉 + 不加氣泡。拉客單價、滿足品飲老饕。</div>
+          <div class="planet-drinks">
+            <div class="planet-drinks-label">代表酒款（$$$）</div>
+            <div class="planet-drink-item">魔王芋燒酎 × 鐵觀音水割</div>
+            <div class="planet-drink-item">百年的孤獨 × 凍頂烏龍</div>
+            <div class="planet-drink-item">森伊藏 × 玉露割</div>
+          </div>
+          <div class="planet-rule" style="margin-top: 12px;">3-5 款，每季可輪替</div>
+        </div>
+
+        <div class="planet">
+          <div class="planet-orbit">— ORBIT 02 —</div>
+          <div class="planet-name">🌿 在地涼茶系列</div>
+          <div class="planet-en">Taiwan Local Twist</div>
+          <div class="planet-purpose">仙草、冬瓜、青草、洛神 + 燒酎，跟核心矩陣有對應。差異化武器、季節風情。</div>
+          <div class="planet-drinks">
+            <div class="planet-drinks-label">代表酒款（$$）</div>
+            <div class="planet-drink-item">仙草黑糖嗨</div>
+            <div class="planet-drink-item">冬瓜檸檬嗨</div>
+            <div class="planet-drink-item">青草琴酒嗨</div>
+            <div class="planet-drink-item">洛神酸梅嗨</div>
+          </div>
+          <div class="planet-rule" style="margin-top: 12px;">4 款，季節調整</div>
+        </div>
+
+        <div class="planet">
+          <div class="planet-orbit">— ORBIT 03 —</div>
+          <div class="planet-name">🛰 店主選酒 Highball</div>
+          <div class="planet-en">Guest Highball</div>
+          <div class="planet-purpose">非燒酎基底，但符合 Highball 精神。安全網、換口味、選物店概念延伸。</div>
+          <div class="planet-drinks">
+            <div class="planet-drinks-label">代表酒款（$$ - $$$）</div>
+            <div class="planet-drink-item">艾雷島泥煤 Highball</div>
+            <div class="planet-drink-item">美國波本 Highball</div>
+            <div class="planet-drink-item">北海道合同琴酒蘇打</div>
+            <div class="planet-drink-item">完熟桶陳梅酒 Highball</div>
+          </div>
+          <div class="planet-rule" style="margin-top: 12px;">固定 6 款（2 威 + 1 琴 + 1 梅酒 + 2 季節 Dealer's）</div>
+        </div>
+      </div>
+
+      <div class="sop-stat" style="margin-top: 24px; text-align: center;">
+        <strong>為什麼是 3 個衛星，不是 5 個？</strong> ｜ 多了會稀釋核心 80%。每個衛星都要能「<strong>連回核心宇宙的精神</strong>」，否則就是雜訊。
+      </div>
+    </div>
+
+    <div class="read-block">
+      <div class="read-card">
+        <div class="read-label">如何閱讀</div>
+        <div class="read-text">
+          三個衛星各自獨立但都繞著核心宇宙。<br>
+          客座 Highball 雖然不用燒酎，但用「Highball 形式」連回核心精神。
+        </div>
+      </div>
+      <div class="read-card inspire">
+        <div class="read-label">啟發什麼想像</div>
+        <div class="read-text">
+          未來可能還有第 4、第 5 衛星：House Spirit 瓶裝、聯名限定...<br>
+          但要先確保現有 3 個衛星都運作得好。
+        </div>
+      </div>
+    </div>
+
+    <div class="deep-link-bar">
+      💡 想看衛星系列的「選酒鐵則」與「常見陷阱」？<a href="5圈系統詳解.html">前往 5 圈系統詳解 · 衛星系列</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========== PART 2 DIVIDER =========== -->
+<div class="part-divider">
+  <div class="container">
+    <div class="part-num">PART 02 — 額外維度</div>
+    <h2 class="part-title">其他視角 · 看宇宙的不同面向</h2>
+    <p class="part-desc">
+      Part 1 是「<strong style="color:var(--hojicha);">方法論視角</strong>」（怎麼設計新酒）。<br>
+      Part 2 是「<strong style="color:var(--hojicha);">運營視角</strong>」（怎麼運用既有酒款）—— 從時間、文化、未來等角度切入同一個宇宙。
+    </p>
+  </div>
+</div>
+
+
+<!-- =========== MAP 07 · 風味光譜 =========== -->
+<section class="map-section">
+  <div class="container">
+    <div class="section-num">MAP 07 / FLOW · 風味光譜</div>
+    <h2 class="section-title">從清到濃的引導路徑</h2>
+    <p class="section-subtitle">把所有酒款按「清淡 → 濃郁」、「苦/草本 → 甜/奶感」排成 2D 座標。</p>
+
+    <div class="chart-card">
+      <div id="spectrum-chart" class="chart-container"></div>
+
+      <!-- 機會空白 callout -->
+      <div style="margin-top: 24px; padding: 20px 24px; background: rgba(212,131,111,0.08); border-radius: 4px; border-left: 4px solid var(--hojicha);">
+        <div style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.3em; color: var(--hojicha); text-transform: uppercase; margin-bottom: 10px;">★ OPPORTUNITY · 機會空白</div>
+        <div style="font-family: 'Noto Serif TC', serif; font-size: 16px; line-height: 1.7; color: var(--ink);">
+          目前菜單在「<strong>清淡 + 甜感</strong>」象限是空白——<br>
+          可開發方向：<strong>水蜜桃烏龍嗨</strong>（甲類燒酎 + 烏龍 + 白桃 + 蘇打）、<strong>蜂蜜檸檬玄米割</strong>、<strong>桂花綠茶嗨</strong> 等清爽型甜口酒款。
+        </div>
+      </div>
+    </div>
+
+    <div class="read-block">
+      <div class="read-card">
+        <div class="read-label">如何閱讀</div>
+        <div class="read-text">
+          橫軸 = 風味強度（清→濃），縱軸 = 甜度（苦→甜）<br>
+          顏色 = 章節分類，氣泡大小 = 推薦點單頻率<br>
+          虛線路徑 = 推薦的 Drink Flight 順序
+        </div>
+      </div>
+      <div class="read-card inspire">
+        <div class="read-label">啟發什麼想像</div>
+        <div class="read-text">
+          ✦ 客人第一杯落在左下（清+苦），最後落在右上（濃+甜）<br>
+          ✦ Flight A 走經典路線，Flight B 走在地路線<br>
+          ✦ 左上「清+甜」是品牌成長空間
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== MAP 08 · 季節輪 =========== -->
+<section class="map-section">
+  <div class="container">
+    <div class="section-num">MAP 08 / TIME · 季節輪</div>
+    <h2 class="section-title">全年的酒款節奏</h2>
+    <p class="section-subtitle">把酒款按「最佳賞味季節」排在 12 個月的圓上。團隊可以提前 3 個月準備季節限定，避免節奏錯亂。</p>
+
+    <div class="chart-card">
+      <div id="seasonal-wheel" style="display: flex; justify-content: center; padding: 24px 0;"></div>
+
+      <div class="seasons-detail">
+        <!-- 全年招牌 -->
+        <div class="year-round-banner">
+          <div class="year-round-icon">⭐</div>
+          <div class="year-round-content">
+            <div class="year-round-label">YEAR-ROUND ANCHOR · 全年招牌</div>
+            <div class="year-round-text">
+              <strong>招牌烏龍嗨</strong> 是宇宙的中心 — 不分季節、不分客群、永遠在菜單上。
+              四季春配甲類燒酎的清爽組合，是品牌的「定海神針」。其他酒款都圍繞它輪替。
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 季詳細 -->
+        <div class="seasons-grid">
+          <!-- 春 -->
+          <div class="season-card spring">
+            <div class="season-header">
+              <div class="season-icon">🌸</div>
+              <div class="season-name">春</div>
+              <div class="season-en">SPRING</div>
+              <div class="season-months">3 · 4 · 5 月</div>
+            </div>
+            <div class="season-axis">🟢 綠茶軸主導</div>
+            <div class="season-section">
+              <div class="season-label">主推酒款</div>
+              <div class="season-drinks">
+                <div class="season-drink">玄米玉露割</div>
+                <div class="season-drink">昭和綠茶嗨</div>
+                <div class="season-drink">青草琴酒嗨</div>
+              </div>
+            </div>
+            <div class="season-twist">
+              <strong>限定靈感</strong><br>
+              春茶新摘、櫻花漬、梅子糖漿、紫蘇葉、山菜
+            </div>
+          </div>
+
+          <!-- 夏 -->
+          <div class="season-card summer">
+            <div class="season-header">
+              <div class="season-icon">☀️</div>
+              <div class="season-name">夏</div>
+              <div class="season-en">SUMMER</div>
+              <div class="season-months">6 · 7 · 8 月</div>
+            </div>
+            <div class="season-axis">🟡 烏龍軸 + 🌿 在地涼茶</div>
+            <div class="season-section">
+              <div class="season-label">主推酒款</div>
+              <div class="season-drinks">
+                <div class="season-drink">招牌烏龍嗨</div>
+                <div class="season-drink">沖繩香片嗨</div>
+                <div class="season-drink">仙草黑糖嗨</div>
+                <div class="season-drink">冬瓜檸檬嗨</div>
+              </div>
+            </div>
+            <div class="season-twist">
+              <strong>限定靈感</strong><br>
+              台灣芒果、荔枝、鹹檸檬、碎冰、強氣泡
+            </div>
+          </div>
+
+          <!-- 秋 -->
+          <div class="season-card autumn">
+            <div class="season-header">
+              <div class="season-icon">🍁</div>
+              <div class="season-name">秋</div>
+              <div class="season-en">AUTUMN</div>
+              <div class="season-months">9 · 10 · 11 月</div>
+            </div>
+            <div class="season-axis">🟤 烘焙軸 + 🔴 紅茶軸</div>
+            <div class="season-section">
+              <div class="season-label">主推酒款</div>
+              <div class="season-drinks">
+                <div class="season-drink">極・焙茶麥酒</div>
+                <div class="season-drink">荔枝紅玉割</div>
+                <div class="season-drink">洛神酸梅嗨</div>
+              </div>
+            </div>
+            <div class="season-twist">
+              <strong>限定靈感</strong><br>
+              烤栗子、桂花、烤柳橙、肉桂、桶陳系
+            </div>
+          </div>
+
+          <!-- 冬 -->
+          <div class="season-card winter">
+            <div class="season-header">
+              <div class="season-icon">❄️</div>
+              <div class="season-name">冬</div>
+              <div class="season-en">WINTER</div>
+              <div class="season-months">12 · 1 · 2 月</div>
+            </div>
+            <div class="season-axis">🟤 烘焙軸 + 桶陳系</div>
+            <div class="season-section">
+              <div class="season-label">主推酒款</div>
+              <div class="season-drinks">
+                <div class="season-drink">琥珀焙茶拿鐵</div>
+                <div class="season-drink">黑糖伯爵老式</div>
+                <div class="season-drink">雙麥暴力嗨</div>
+              </div>
+            </div>
+            <div class="season-twist">
+              <strong>限定靈感</strong><br>
+              老薑、丁香、熱飲、加奶、燉物 pairing
+            </div>
+          </div>
+        </div>
+
+        <!-- 全年活動 -->
+        <div class="events-strip">
+          <div class="events-label">
+            年度活動節奏
+            <small>EVENT CALENDAR</small>
+          </div>
+          <div class="events-list">
+            <span class="event-tag">🧧 1 月 · 春節限定</span>
+            <span class="event-tag">🌸 3 月 · 春茶上市祭</span>
+            <span class="event-tag">👩 5 月 · 母親節 pairing</span>
+            <span class="event-tag">☀️ 7 月 · 開店週年</span>
+            <span class="event-tag">🍻 8 月 · 夏夜下午酒場</span>
+            <span class="event-tag">🎃 10 月 · 焙香月</span>
+            <span class="event-tag">🦃 11 月 · 大人特調季</span>
+            <span class="event-tag">🎄 12 月 · 跨年熱燒酎</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="read-block">
+      <div class="read-card">
+        <div class="read-label">如何閱讀</div>
+        <div class="read-text">
+          中圈 polar chart：12 格 = 12 個月，顏色 = 該月主導茶軸。<br>
+          下方 4 季卡片：每季的主推 3-4 款酒、對應茶軸、季節限定 twist 靈感。<br>
+          下方活動條：全年 8 個關鍵活動節點。
+        </div>
+      </div>
+      <div class="read-card inspire">
+        <div class="read-label">啟發什麼想像</div>
+        <div class="read-text">
+          ✦ 招牌烏龍嗨永遠在，其他季節輪替<br>
+          ✦ 4 季 × 3-4 款 = 約 14 款季節主推<br>
+          ✦ 8 個活動 = 8 個 IG / 行銷的內容支點<br>
+          ✦ 提前 3 個月開始準備下一季的限定品項
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== MAP 09 · 文化光譜 =========== -->
+<section class="map-section">
+  <div class="container">
+    <div class="section-num">MAP 09 / IDENTITY · 文化光譜</div>
+    <h2 class="section-title">日台混血的座標</h2>
+    <p class="section-subtitle">每杯酒落在「日式正統 ↔ 台灣在地」與「經典傳統 ↔ 創新實驗」的二維空間。</p>
+
+    <div class="chart-card">
+      <div id="culture-chart" class="chart-container"></div>
+
+      <!-- 機會空白 callout -->
+      <div style="margin-top: 24px; padding: 20px 24px; background: rgba(212,131,111,0.08); border-radius: 4px; border-left: 4px solid var(--hojicha);">
+        <div style="font-family: 'Inter', sans-serif; font-size: 12px; letter-spacing: 0.3em; color: var(--hojicha); text-transform: uppercase; margin-bottom: 12px;">★ OPPORTUNITY · 「台灣 × 創新」是品牌成長空間</div>
+        <div style="font-family: 'Noto Serif TC', serif; font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">
+          右上象限目前最少酒款——這正是「台灣第一家」名字的真正承諾。可開發的方向：
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px;">
+          <div style="padding: 12px 16px; background: var(--bg-paper); border-radius: 4px; font-family: 'Noto Serif TC', serif; font-size: 14.5px; color: var(--ink); border: 1px solid var(--line);">· 客家擂茶 × 米燒酎</div>
+          <div style="padding: 12px 16px; background: var(--bg-paper); border-radius: 4px; font-family: 'Noto Serif TC', serif; font-size: 14.5px; color: var(--ink); border: 1px solid var(--line);">· 麻辣花椒 × 黑糖燒酎</div>
+          <div style="padding: 12px 16px; background: var(--bg-paper); border-radius: 4px; font-family: 'Noto Serif TC', serif; font-size: 14.5px; color: var(--ink); border: 1px solid var(--line);">· 烏龍奶茶 × 桶陳麥</div>
+          <div style="padding: 12px 16px; background: var(--bg-paper); border-radius: 4px; font-family: 'Noto Serif TC', serif; font-size: 14.5px; color: var(--ink); border: 1px solid var(--line);">· 紅烏龍 × 芋燒酎</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="read-block">
+      <div class="read-card">
+        <div class="read-label">如何閱讀</div>
+        <div class="read-text">
+          X 軸：日式正統（左） ↔ 台灣在地（右）<br>
+          Y 軸：經典傳統（下） ↔ 創新實驗（上）<br>
+          顏色 = 章節分類，氣泡大小一致
+        </div>
+      </div>
+      <div class="read-card inspire">
+        <div class="read-label">啟發什麼想像</div>
+        <div class="read-text">
+          ✦ 4 個象限都該有酒款（目前最弱：右上「台灣×創新」）<br>
+          ✦ 這個空白 = 競爭對手最難複製的差異化空間<br>
+          ✦ 季節限定優先填這個象限
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== MAP 10 · 未來實驗室 =========== -->
+<section class="map-section">
+  <div class="container">
+    <div class="section-num">MAP 10 / FUTURE · 未來實驗室</div>
+    <h2 class="section-title">我們可能會做的事</h2>
+    <p class="section-subtitle">這些不一定都會實現，但都是「燒酎宇宙」可能延伸的方向。讓團隊看見願景的邊界——同時提醒：邊界永遠可以被推得更遠。</p>
+
+    <div class="future-grid">
+      <div class="future-card">
+        <div class="future-cat">PRODUCT</div>
+        <div class="future-title">House Spirit 自家浸漬</div>
+        <div class="future-desc">推出「店主限定」浸漬燒酎瓶裝。客人可以帶回家自己調。</div>
+        <div class="future-tag">短期可做</div>
+      </div>
+
+      <div class="future-card">
+        <div class="future-cat">EXPERIENCE</div>
+        <div class="future-title">茶酒 Pairing Class</div>
+        <div class="future-desc">每月小型品酒課程，教客人「燒酎家族 × 茶軸」搭配邏輯。</div>
+        <div class="future-tag">短期可做</div>
+      </div>
+
+      <div class="future-card">
+        <div class="future-cat">COLLABORATION</div>
+        <div class="future-title">在地茶農聯名</div>
+        <div class="future-desc">跟特定茶農合作出限定版。每季一個合作對象，講農的故事。</div>
+        <div class="future-tag">中期</div>
+      </div>
+
+      <div class="future-card">
+        <div class="future-cat">RETAIL</div>
+        <div class="future-title">瓶裝零售線</div>
+        <div class="future-desc">House Cocktail in Bottle、燒酎漬茶葉禮盒。多通路販售。</div>
+        <div class="future-tag">中期</div>
+      </div>
+
+      <div class="future-card">
+        <div class="future-cat">FOOD</div>
+        <div class="future-title">下酒菜 Menu</div>
+        <div class="future-desc">精選 5-8 道下酒小菜呼應酒款。台日混血、好做、好搭。</div>
+        <div class="future-tag">短期可做</div>
+      </div>
+
+      <div class="future-card">
+        <div class="future-cat">CULTURE</div>
+        <div class="future-title">下午酒場文化推廣</div>
+        <div class="future-desc">活動、文章、podcast，推廣「下午就能喝酒」的生活方式。</div>
+        <div class="future-tag">長期</div>
+      </div>
+
+      <div class="future-card">
+        <div class="future-cat">PARTNERSHIP</div>
+        <div class="future-title">在地餐廳酒單合作</div>
+        <div class="future-desc">跟其他餐廳合作酒單供應，他們的客人也喝到我們設計的酒。</div>
+        <div class="future-tag">中期</div>
+      </div>
+
+      <div class="future-card">
+        <div class="future-cat">EVENT</div>
+        <div class="future-title">「茶割祭」年度活動</div>
+        <div class="future-desc">每年一次品牌活動，邀日本廠商、台灣茶農、調酒師一起辦。</div>
+        <div class="future-tag">長期</div>
+      </div>
+
+      <div class="future-card">
+        <div class="future-cat">CONTENT</div>
+        <div class="future-title">燒酎宇宙 Wiki</div>
+        <div class="future-desc">建立公開知識庫，系統化分享燒酎、茶、調飲的知識。</div>
+        <div class="future-tag">短期可做</div>
+      </div>
+
+      <div class="future-card">
+        <div class="future-cat">EXPANSION</div>
+        <div class="future-title">第二個概念店</div>
+        <div class="future-desc">「台灣第一家麥茶嗨」「台灣第一家香片嗨」。同方法論，不同主角。</div>
+        <div class="future-tag">長期</div>
+      </div>
+
+      <div class="future-card">
+        <div class="future-cat">CRAFT</div>
+        <div class="future-title">自家蒸餾烏龍燒酎</div>
+        <div class="future-desc">真正的「台灣第一」——用台灣茶葉與穀物蒸餾出我們的燒酎。</div>
+        <div class="future-tag">長期願景</div>
+      </div>
+
+      <div class="future-card">
+        <div class="future-cat">COMMUNITY</div>
+        <div class="future-title">常客俱樂部</div>
+        <div class="future-desc">不做制式會員卡，做「常客社群」。專屬限定酒、提前試新品。</div>
+        <div class="future-tag">中期可做</div>
+      </div>
+    </div>
+
+    <div class="closing">
+      <div class="closing-text">
+        我們不會做完所有的事。<br>
+        但團隊裡的每個人，都應該知道<br>
+        「我們的世界有多大」。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== RELATED READING =========== -->
+<section class="related">
+  <div class="container">
+    <h2 class="related-h">繼續探索</h2>
+    <p class="related-sub">看完願景，再看完整定位或設計方法</p>
+    <div class="related-grid">
+      <a href="品牌介紹.html" class="related-card">
+        <div class="related-tag">DOOR 01 · BRAND BRIEF</div>
+        <div class="related-title">🍶 品牌介紹</div>
+        <div class="related-desc">完整品牌定位、賣什麼、不賣什麼。5 分鐘掃完一家店的全貌。</div>
+      </a>
+      <a href="5圈系統詳解.html" class="related-card">
+        <div class="related-tag">DOOR 03 · SYSTEM</div>
+        <div class="related-title">⚙️ 5 圈系統詳解</div>
+        <div class="related-desc">每一圈的決策內容、常見陷阱、8 步 SOP。深度教學版。</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =========== FOOTER =========== -->
+<footer>
+  <div class="container">
+    <a href="index.html" style="color: var(--tea-brown); text-decoration: none; letter-spacing: 0.25em;">← THE OOLONG HIGH · 回到品牌中心</a>
+    <div style="margin-top: 12px; opacity: 0.6;">UNIVERSE ATLAS v2 · 10 MAPS</div>
+  </div>
+</footer>
+
+<script>
+  const baseLayout = {
+    paper_bgcolor: 'rgba(0,0,0,0)',
+    plot_bgcolor: 'rgba(0,0,0,0)',
+    font: { family: 'Noto Sans TC, Inter, sans-serif', color: '#2C3345', size: 13 },
+    margin: { l: 80, r: 40, t: 40, b: 60 }
+  };
+
+  const drinks = {
+    name: ['招牌烏龍嗨', '昭和綠茶嗨', '沖繩香片嗨', '極・焙茶麥酒', '玄米玉露割', '荔枝紅玉割', '琥珀焙茶拿鐵', '黑糖伯爵老式', '仙草黑糖嗨', '冬瓜檸檬嗨', '青草琴酒嗨', '洛神酸梅嗨', '雙麥暴力嗨'],
+    chapter: ['CH1', 'CH1', 'CH1', 'CH2', 'CH2', 'CH2', 'CH3', 'CH3', 'CH4', 'CH4', 'CH4', 'CH4', 'CH4'],
+    intensity: [3, 2, 4, 6, 5, 6, 8, 9, 6, 4, 3, 5, 7],
+    sweetness: [2, 3, 3, 2, 3, 6, 8, 7, 7, 5, 1, 6, 3],
+    cultureX: [-3, -5, -4, -4, -5, -2, -3, -1, 5, 6, 7, 5, -3],
+    cultureY: [1, -2, -1, 2, -3, 4, 3, 1, 3, 1, 5, 4, 2],
+    popularity: [10, 5, 6, 8, 6, 7, 9, 6, 8, 7, 5, 6, 7]
+  };
+
+  const chapterColors = { 'CH1': '#6E8B5E', 'CH2': '#C4A57B', 'CH3': '#D4836F', 'CH4': '#8B6F47' };
+
+  // MAP 02: 茶軸 × 燒酎家族 矩陣 (Custom SVG)
+  function buildMatrix() {
+    const teaAxis = [
+      { emoji: '🟢', name: '綠茶軸' },
+      { emoji: '🟡', name: '烏龍軸' },
+      { emoji: '🟤', name: '烘焙軸' },
+      { emoji: '🔴', name: '紅茶軸' }
+    ];
+    const spiritFamily = ['甲類', '麥燒酎', '米燒酎', '芋燒酎', '黑糖', '泡盛', '桶陳麥'];
+
+    // Cell data: rating + label + drink
+    // ratings: 'flagship' (⭐⭐), 'classic' (⭐), 'seasonal' (△), 'no' (✗)
+    const data = [
+      // 綠茶軸
+      [
+        { r: 'classic',  label: '經典',  drink: '昭和綠茶嗨' },
+        { r: 'seasonal' },
+        { r: 'classic',  label: '升級',  drink: '玄米玉露割' },
+        { r: 'no' },
+        { r: 'no' },
+        { r: 'seasonal' },
+        { r: 'seasonal' }
+      ],
+      // 烏龍軸
+      [
+        { r: 'classic',  label: '招牌',  drink: '招牌烏龍嗨' },
+        { r: 'classic',  label: '進階',  drink: '極・烏龍麥酒' },
+        { r: 'seasonal' },
+        { r: 'seasonal' },
+        { r: 'no' },
+        { r: 'no' },
+        { r: 'seasonal' }
+      ],
+      // 烘焙軸
+      [
+        { r: 'seasonal' },
+        { r: 'flagship', label: '雙麥',  drink: '極・焙茶麥酒' },
+        { r: 'no' },
+        { r: 'no' },
+        { r: 'classic',  label: '仙草配', drink: '仙草黑糖嗨' },
+        { r: 'no' },
+        { r: 'flagship', label: '大人版', drink: '琥珀焙茶拿鐵' }
+      ],
+      // 紅茶軸
+      [
+        { r: 'seasonal' },
+        { r: 'seasonal' },
+        { r: 'no' },
+        { r: 'classic',  label: '荔枝魔法', drink: '荔枝紅玉割' },
+        { r: 'classic',  label: '蘭姆感',   drink: '黑糖伯爵老式' },
+        { r: 'seasonal' },
+        { r: 'seasonal' }
+      ]
+    ];
+
+    // Layout config
+    const cellW = 132;
+    const cellH = 100;
+    const headerH = 56;
+    const labelW = 132;
+    const gap = 5;
+
+    const totalW = labelW + 7 * cellW;
+    const totalH = headerH + 4 * cellH + 8;
+
+    // Display order: red top → green bottom (matches "by intensity" reading)
+    const displayAxis = [...teaAxis].reverse();
+    const displayData = [...data].reverse();
+
+    let svg = `<svg viewBox="0 0 ${totalW} ${totalH}" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; display: block;">`;
+
+    // Column headers (top row, spirit families)
+    spiritFamily.forEach((name, j) => {
+      const x = labelW + j * cellW + cellW / 2;
+      svg += `<text x="${x}" y="${headerH - 18}" text-anchor="middle" font-family="Noto Serif TC, serif" font-weight="600" font-size="15" fill="#2C3345">${name}</text>`;
+      // small tick line under header
+      svg += `<line x1="${x - 12}" y1="${headerH - 8}" x2="${x + 12}" y2="${headerH - 8}" stroke="#D4836F" stroke-width="1.5" opacity="0.6"/>`;
+    });
+
+    // Row label + cells
+    displayAxis.forEach((axis, i) => {
+      const rowY = headerH + i * cellH;
+
+      // Row label (left)
+      const labelY = rowY + cellH / 2;
+      svg += `<text x="${labelW - 20}" y="${labelY + 2}" text-anchor="end" dominant-baseline="middle" font-family="Noto Serif TC, serif" font-weight="600" font-size="16" fill="#2C3345">`;
+      svg += `<tspan font-size="18">${axis.emoji}</tspan>`;
+      svg += `<tspan dx="6">${axis.name}</tspan>`;
+      svg += `</text>`;
+
+      // Cells
+      displayData[i].forEach((cell, j) => {
+        const cellX = labelW + j * cellW + gap;
+        const cellY = rowY + gap;
+        const w = cellW - 2 * gap;
+        const h = cellH - 2 * gap;
+
+        let cellSvg = '';
+        switch (cell.r) {
+          case 'flagship':
+            cellSvg = `<g class="matrix-cell">
+              <rect x="${cellX}" y="${cellY}" width="${w}" height="${h}" rx="8" ry="8" fill="#D4836F" fill-opacity="0.92" stroke="#B8956A" stroke-width="1.5"/>
+              <text x="${cellX + w/2}" y="${cellY + 32}" text-anchor="middle" font-family="Noto Serif TC, serif" font-weight="700" font-size="14" fill="#FBF7EC">⭐⭐  ${cell.label}</text>
+              <text x="${cellX + w/2}" y="${cellY + 60}" text-anchor="middle" font-family="Noto Serif TC, serif" font-size="13" fill="#FBF7EC" opacity="0.95">${cell.drink}</text>
+              <line x1="${cellX + w/2 - 14}" y1="${cellY + 72}" x2="${cellX + w/2 + 14}" y2="${cellY + 72}" stroke="#FBF7EC" stroke-width="0.5" opacity="0.4"/>
+              <text x="${cellX + w/2}" y="${cellY + 86}" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" letter-spacing="2" fill="#FBF7EC" opacity="0.7">FLAGSHIP</text>
+            </g>`;
+            break;
+          case 'classic':
+            cellSvg = `<g class="matrix-cell">
+              <rect x="${cellX}" y="${cellY}" width="${w}" height="${h}" rx="8" ry="8" fill="#C4A57B" fill-opacity="0.55" stroke="#8B6F47" stroke-width="1"/>
+              <text x="${cellX + w/2}" y="${cellY + 32}" text-anchor="middle" font-family="Noto Serif TC, serif" font-weight="700" font-size="14" fill="#2C3345">⭐  ${cell.label}</text>
+              <text x="${cellX + w/2}" y="${cellY + 60}" text-anchor="middle" font-family="Noto Serif TC, serif" font-size="12" fill="#2C3345" opacity="0.9">${cell.drink}</text>
+              <line x1="${cellX + w/2 - 14}" y1="${cellY + 72}" x2="${cellX + w/2 + 14}" y2="${cellY + 72}" stroke="#5C5247" stroke-width="0.5" opacity="0.3"/>
+              <text x="${cellX + w/2}" y="${cellY + 86}" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" letter-spacing="2" fill="#5C5247" opacity="0.6">CLASSIC</text>
+            </g>`;
+            break;
+          case 'seasonal':
+            cellSvg = `<g class="matrix-cell matrix-cell-subtle">
+              <rect x="${cellX}" y="${cellY}" width="${w}" height="${h}" rx="8" ry="8" fill="#EDE5D3" stroke="#D9CFB8" stroke-width="1"/>
+              <text x="${cellX + w/2}" y="${cellY + h/2 - 4}" text-anchor="middle" dominant-baseline="middle" font-family="Noto Serif TC, serif" font-weight="600" font-size="20" fill="#8A8073">△</text>
+              <text x="${cellX + w/2}" y="${cellY + h/2 + 18}" text-anchor="middle" dominant-baseline="middle" font-family="Inter, sans-serif" font-size="9" letter-spacing="2" fill="#8A8073" opacity="0.7">SEASONAL</text>
+            </g>`;
+            break;
+          case 'no':
+            cellSvg = `<g class="matrix-cell matrix-cell-subtle">
+              <rect x="${cellX}" y="${cellY}" width="${w}" height="${h}" rx="8" ry="8" fill="#FBF7EC" stroke="#D9CFB8" stroke-width="1" stroke-dasharray="4 3" opacity="0.7"/>
+              <text x="${cellX + w/2}" y="${cellY + h/2 - 4}" text-anchor="middle" dominant-baseline="middle" font-family="Inter, sans-serif" font-size="18" fill="#8A8073" opacity="0.4">✗</text>
+              <text x="${cellX + w/2}" y="${cellY + h/2 + 18}" text-anchor="middle" dominant-baseline="middle" font-family="Inter, sans-serif" font-size="9" letter-spacing="2" fill="#8A8073" opacity="0.4">SKIP</text>
+            </g>`;
+            break;
+        }
+        svg += cellSvg;
+      });
+    });
+
+    svg += `</svg>`;
+
+    document.getElementById('matrix-chart').innerHTML = svg;
+  }
+  buildMatrix();
+
+  // MAP 07: 風味光譜 (Custom SVG)
+  function buildFlavorSpectrum() {
+    const W = 1000, H = 620;
+    const m = { top: 50, right: 60, bottom: 110, left: 110 };
+    const pw = W - m.left - m.right;
+    const ph = H - m.top - m.bottom;
+    const xMin = 0, xMax = 10, yMin = 0, yMax = 10;
+    const toX = v => m.left + (v - xMin) / (xMax - xMin) * pw;
+    const toY = v => m.top + ph - (v - yMin) / (yMax - yMin) * ph;
+
+    const data = drinks.name.map((n, i) => ({
+      name: n,
+      x: drinks.intensity[i],
+      y: drinks.sweetness[i],
+      ch: drinks.chapter[i],
+      pop: drinks.popularity[i]
+    }));
+
+    let svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; display: block;">`;
+
+    // 4 quadrant backgrounds
+    const midX = 5, midY = 5;
+    svg += `<rect x="${toX(0)}" y="${toY(midY)}" width="${toX(midX) - toX(0)}" height="${toY(0) - toY(midY)}" fill="#6E8B5E" fill-opacity="0.07"/>`;
+    svg += `<rect x="${toX(midX)}" y="${toY(midY)}" width="${toX(xMax) - toX(midX)}" height="${toY(0) - toY(midY)}" fill="#C4A57B" fill-opacity="0.07"/>`;
+    svg += `<rect x="${toX(midX)}" y="${toY(yMax)}" width="${toX(xMax) - toX(midX)}" height="${toY(midY) - toY(yMax)}" fill="#D4836F" fill-opacity="0.1"/>`;
+    svg += `<rect x="${toX(0)}" y="${toY(yMax)}" width="${toX(midX) - toX(0)}" height="${toY(midY) - toY(yMax)}" fill="#8B6F47" fill-opacity="0.07"/>`;
+
+    // Grid lines (dashed, subtle)
+    for (let v = 2; v <= 8; v += 2) {
+      svg += `<line x1="${toX(v)}" y1="${m.top}" x2="${toX(v)}" y2="${m.top + ph}" stroke="#D9CFB8" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>`;
+      svg += `<line x1="${m.left}" y1="${toY(v)}" x2="${m.left + pw}" y2="${toY(v)}" stroke="#D9CFB8" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>`;
+    }
+
+    // Center divider (slightly stronger at midpoint)
+    svg += `<line x1="${toX(midX)}" y1="${m.top}" x2="${toX(midX)}" y2="${m.top + ph}" stroke="#5C5247" stroke-width="1" opacity="0.25"/>`;
+    svg += `<line x1="${m.left}" y1="${toY(midY)}" x2="${m.left + pw}" y2="${toY(midY)}" stroke="#5C5247" stroke-width="1" opacity="0.25"/>`;
+
+    // Axes
+    svg += `<line x1="${m.left}" y1="${m.top + ph}" x2="${m.left + pw}" y2="${m.top + ph}" stroke="#2C3345" stroke-width="1.5"/>`;
+    svg += `<line x1="${m.left}" y1="${m.top}" x2="${m.left}" y2="${m.top + ph}" stroke="#2C3345" stroke-width="1.5"/>`;
+
+    // Tick marks + numeric labels
+    for (let v = 0; v <= 10; v += 2) {
+      // X axis ticks
+      svg += `<line x1="${toX(v)}" y1="${m.top + ph}" x2="${toX(v)}" y2="${m.top + ph + 7}" stroke="#2C3345" stroke-width="1.5"/>`;
+      svg += `<text x="${toX(v)}" y="${m.top + ph + 26}" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#2C3345">${v}</text>`;
+      // Y axis ticks
+      svg += `<line x1="${m.left}" y1="${toY(v)}" x2="${m.left - 7}" y2="${toY(v)}" stroke="#2C3345" stroke-width="1.5"/>`;
+      svg += `<text x="${m.left - 14}" y="${toY(v) + 5}" text-anchor="end" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#2C3345">${v}</text>`;
+    }
+
+    // Axis titles
+    svg += `<text x="${m.left + pw/2}" y="${H - 60}" text-anchor="middle" font-family="Noto Serif TC, serif" font-weight="600" font-size="18" fill="#2C3345">清淡  ←  風味強度  →  濃郁</text>`;
+    svg += `<text x="38" y="${m.top + ph/2}" text-anchor="middle" font-family="Noto Serif TC, serif" font-weight="600" font-size="18" fill="#2C3345" transform="rotate(-90 38 ${m.top + ph/2})">苦/草本  ←  甜度  →  甜/奶感</text>`;
+
+    // Corner quadrant labels
+    svg += `<text x="${toX(0.3)}" y="${toY(0.6)}" font-family="Noto Serif TC, serif" font-style="italic" font-size="14" fill="#6E8B5E" font-weight="500">第一杯區</text>`;
+    svg += `<text x="${toX(9.7)}" y="${toY(0.6)}" text-anchor="end" font-family="Noto Serif TC, serif" font-style="italic" font-size="14" fill="#5C5247" font-weight="500">佐重口味</text>`;
+    svg += `<text x="${toX(9.7)}" y="${toY(9.7)}" text-anchor="end" font-family="Noto Serif TC, serif" font-style="italic" font-size="14" fill="#D4836F" font-weight="600">收尾甜點酒</text>`;
+    svg += `<text x="${toX(0.3)}" y="${toY(9.7)}" font-family="Noto Serif TC, serif" font-style="italic" font-size="14" fill="#D4836F" font-weight="600">★ 清+甜 空白</text>`;
+
+    // Flight paths
+    const flightAIdx = [0, 2, 3, 6];
+    const flightBIdx = [10, 0, 8, 7];
+    const flightAPoints = flightAIdx.map(i => `${toX(data[i].x).toFixed(1)},${toY(data[i].y).toFixed(1)}`).join(' ');
+    const flightBPoints = flightBIdx.map(i => `${toX(data[i].x).toFixed(1)},${toY(data[i].y).toFixed(1)}`).join(' ');
+    svg += `<polyline points="${flightAPoints}" stroke="#6E8B5E" stroke-width="2.5" stroke-dasharray="6 5" fill="none" opacity="0.65"/>`;
+    svg += `<polyline points="${flightBPoints}" stroke="#D4836F" stroke-width="2.5" stroke-dasharray="6 5" fill="none" opacity="0.65"/>`;
+
+    // Data points
+    data.forEach(d => {
+      const cx = toX(d.x);
+      const cy = toY(d.y);
+      const r = 9 + (d.pop * 1.4);
+      const color = chapterColors[d.ch];
+      svg += `<g class="spectrum-point">`;
+      svg += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${color}" fill-opacity="0.7" stroke="#5C5247" stroke-width="1.5"/>`;
+      svg += `<text x="${cx}" y="${cy - r - 8}" text-anchor="middle" font-family="Noto Sans TC, sans-serif" font-size="12.5" fill="#2C3345" font-weight="500">${d.name}</text>`;
+      svg += `</g>`;
+    });
+
+    // Legend (bottom of chart, horizontal)
+    const legendY = H - 26;
+    svg += `<g>`;
+    svg += `<line x1="${m.left + 30}" y1="${legendY}" x2="${m.left + 56}" y2="${legendY}" stroke="#6E8B5E" stroke-width="2.5" stroke-dasharray="6 5"/>`;
+    svg += `<text x="${m.left + 64}" y="${legendY + 5}" font-family="Noto Sans TC, sans-serif" font-size="13" fill="#2C3345" font-weight="500">Flight A · 經典路線</text>`;
+    svg += `<line x1="${m.left + 240}" y1="${legendY}" x2="${m.left + 266}" y2="${legendY}" stroke="#D4836F" stroke-width="2.5" stroke-dasharray="6 5"/>`;
+    svg += `<text x="${m.left + 274}" y="${legendY + 5}" font-family="Noto Sans TC, sans-serif" font-size="13" fill="#2C3345" font-weight="500">Flight B · 在地路線</text>`;
+    svg += `<text x="${m.left + 470}" y="${legendY + 5}" font-family="Noto Sans TC, sans-serif" font-size="12" fill="#5C5247" font-style="italic">氣泡大小 = 推薦點單頻率</text>`;
+    svg += `</g>`;
+
+    svg += `</svg>`;
+    document.getElementById('spectrum-chart').innerHTML = svg;
+  }
+  buildFlavorSpectrum();
+
+  // MAP 08: 季節羅盤輪 (Custom SVG)
+  function buildSeasonalWheel() {
+    const cx = 300, cy = 300, r = 240;
+    const months = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+
+    // Helper: convert clockwise-from-top angle (degrees) to SVG point
+    const point = (radius, angleDeg) => {
+      const rad = (angleDeg - 90) * Math.PI / 180;
+      return { x: cx + radius * Math.cos(rad), y: cy + radius * Math.sin(rad) };
+    };
+
+    // Helper: build pie slice path
+    const slice = (startAngle, endAngle, radius) => {
+      const start = point(radius, startAngle);
+      const end = point(radius, endAngle);
+      return `M ${cx} ${cy} L ${start.x.toFixed(1)} ${start.y.toFixed(1)} A ${radius} ${radius} 0 0 1 ${end.x.toFixed(1)} ${end.y.toFixed(1)} Z`;
+    };
+
+    let svg = `<svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" style="max-width: 500px; width: 100%; height: auto;">`;
+
+    // Soft background
+    svg += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="#FBF7EC"/>`;
+
+    // 4 Season quadrants (clockwise from top)
+    svg += `<g opacity="0.55">`;
+    svg += `<path d="${slice(-45, 45, r)}" fill="#8B6F47"/>`;       // Winter (top)
+    svg += `<path d="${slice(45, 135, r)}" fill="#A8C497"/>`;       // Spring (right)
+    svg += `<path d="${slice(135, 225, r)}" fill="#E8D9B5"/>`;      // Summer (bottom)
+    svg += `<path d="${slice(225, 315, r)}" fill="#D4836F"/>`;      // Autumn (left)
+    svg += `</g>`;
+
+    // Quadrant divider lines (subtle)
+    svg += `<g stroke="#5C5247" stroke-width="1" opacity="0.25">`;
+    [45, 135, 225, 315].forEach(angle => {
+      const p = point(r, angle);
+      svg += `<line x1="${cx}" y1="${cy}" x2="${p.x.toFixed(1)}" y2="${p.y.toFixed(1)}"/>`;
+    });
+    svg += `</g>`;
+
+    // Outer circle border
+    svg += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#5C5247" stroke-width="2" opacity="0.35"/>`;
+
+    // Month tick marks + labels (12 months)
+    for (let i = 0; i < 12; i++) {
+      const angle = i * 30;
+      const inner = point(r - 6, angle);
+      const outer = point(r + 8, angle);
+      const label = point(r + 30, angle);
+
+      svg += `<line x1="${inner.x.toFixed(1)}" y1="${inner.y.toFixed(1)}" x2="${outer.x.toFixed(1)}" y2="${outer.y.toFixed(1)}" stroke="#5C5247" stroke-width="1.5" opacity="0.5"/>`;
+      svg += `<text x="${label.x.toFixed(1)}" y="${(label.y + 4).toFixed(1)}" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#2C3345" font-weight="500">${months[i]}</text>`;
+    }
+
+    // Season labels in each quadrant (centered)
+    const seasonLabels = [
+      { text: '❄️', sub: '冬', angle: 0,   tcolor: '#FBF7EC' },
+      { text: '🌸', sub: '春', angle: 90,  tcolor: '#2C3345' },
+      { text: '☀️', sub: '夏', angle: 180, tcolor: '#5C5247' },
+      { text: '🍁', sub: '秋', angle: 270, tcolor: '#FBF7EC' }
+    ];
+    seasonLabels.forEach(s => {
+      const p = point(155, s.angle);
+      svg += `<text x="${p.x.toFixed(1)}" y="${(p.y - 6).toFixed(1)}" text-anchor="middle" font-size="32">${s.text}</text>`;
+      svg += `<text x="${p.x.toFixed(1)}" y="${(p.y + 24).toFixed(1)}" text-anchor="middle" font-family="Noto Serif TC, serif" font-size="22" font-weight="700" fill="${s.tcolor}">${s.sub}</text>`;
+    });
+
+    // Inner anchor circle (with shadow effect)
+    svg += `<circle cx="${cx}" cy="${cy}" r="82" fill="#F5F0E6" stroke="#D4836F" stroke-width="2.5"/>`;
+    svg += `<circle cx="${cx}" cy="${cy}" r="78" fill="none" stroke="#D4836F" stroke-width="0.5" opacity="0.5"/>`;
+
+    // Center anchor text
+    svg += `<text x="${cx}" y="${cy - 18}" text-anchor="middle" font-size="18">⭐</text>`;
+    svg += `<text x="${cx}" y="${cy + 6}" text-anchor="middle" font-family="Noto Serif TC, serif" font-size="15" font-weight="600" fill="#2C3345">招牌烏龍嗨</text>`;
+    svg += `<text x="${cx}" y="${cy + 26}" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" letter-spacing="3" fill="#8B6F47" font-weight="500">YEAR-ROUND</text>`;
+
+    svg += `</svg>`;
+
+    document.getElementById('seasonal-wheel').innerHTML = svg;
+  }
+  buildSeasonalWheel();
+
+  // MAP 09: 文化光譜 (Custom SVG)
+  function buildCultureSpectrum() {
+    const W = 1000, H = 620;
+    const m = { top: 50, right: 60, bottom: 90, left: 110 };
+    const pw = W - m.left - m.right;
+    const ph = H - m.top - m.bottom;
+    const xMin = -7, xMax = 7, yMin = -5, yMax = 8;
+    const toX = v => m.left + (v - xMin) / (xMax - xMin) * pw;
+    const toY = v => m.top + ph - (v - yMin) / (yMax - yMin) * ph;
+
+    const data = drinks.name.map((n, i) => ({
+      name: n,
+      x: drinks.cultureX[i],
+      y: drinks.cultureY[i],
+      ch: drinks.chapter[i]
+    }));
+
+    let svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; display: block;">`;
+
+    // 4 quadrant backgrounds
+    svg += `<rect x="${toX(xMin)}" y="${toY(0)}" width="${toX(0) - toX(xMin)}" height="${toY(yMin) - toY(0)}" fill="#8B6F47" fill-opacity="0.07"/>`;
+    svg += `<rect x="${toX(0)}" y="${toY(0)}" width="${toX(xMax) - toX(0)}" height="${toY(yMin) - toY(0)}" fill="#C4A57B" fill-opacity="0.07"/>`;
+    svg += `<rect x="${toX(xMin)}" y="${toY(yMax)}" width="${toX(0) - toX(xMin)}" height="${toY(0) - toY(yMax)}" fill="#A8C497" fill-opacity="0.07"/>`;
+    // 右上機會空白：highlighted with dashed border
+    svg += `<rect x="${toX(0)}" y="${toY(yMax)}" width="${toX(xMax) - toX(0)}" height="${toY(0) - toY(yMax)}" fill="#D4836F" fill-opacity="0.15" stroke="#D4836F" stroke-width="1.5" stroke-dasharray="5 4"/>`;
+
+    // Grid lines (dashed, subtle)
+    for (let v = xMin + 2; v <= xMax - 2; v += 2) {
+      if (v === 0) continue; // skip 0 (drawn as axis)
+      svg += `<line x1="${toX(v)}" y1="${m.top}" x2="${toX(v)}" y2="${m.top + ph}" stroke="#D9CFB8" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>`;
+    }
+    for (let v = yMin + 2; v <= yMax - 2; v += 2) {
+      if (v === 0) continue;
+      svg += `<line x1="${m.left}" y1="${toY(v)}" x2="${m.left + pw}" y2="${toY(v)}" stroke="#D9CFB8" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>`;
+    }
+
+    // Plot frame
+    svg += `<rect x="${m.left}" y="${m.top}" width="${pw}" height="${ph}" fill="none" stroke="#D9CFB8" stroke-width="1" opacity="0.6"/>`;
+
+    // Center axes (X=0, Y=0) — drawn through middle, stronger
+    svg += `<line x1="${toX(0)}" y1="${m.top}" x2="${toX(0)}" y2="${m.top + ph}" stroke="#5C5247" stroke-width="2" opacity="0.6"/>`;
+    svg += `<line x1="${m.left}" y1="${toY(0)}" x2="${m.left + pw}" y2="${toY(0)}" stroke="#5C5247" stroke-width="2" opacity="0.6"/>`;
+
+    // X tick marks + labels (on bottom edge)
+    for (let v = xMin; v <= xMax; v += 2) {
+      svg += `<line x1="${toX(v)}" y1="${m.top + ph}" x2="${toX(v)}" y2="${m.top + ph + 7}" stroke="#2C3345" stroke-width="1.5"/>`;
+      svg += `<text x="${toX(v)}" y="${m.top + ph + 26}" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#2C3345">${v}</text>`;
+    }
+    // Y tick marks + labels (on left edge)
+    for (let v = yMin; v <= yMax; v += 2) {
+      svg += `<line x1="${m.left}" y1="${toY(v)}" x2="${m.left - 7}" y2="${toY(v)}" stroke="#2C3345" stroke-width="1.5"/>`;
+      svg += `<text x="${m.left - 14}" y="${toY(v) + 5}" text-anchor="end" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#2C3345">${v}</text>`;
+    }
+
+    // Axis titles
+    svg += `<text x="${m.left + pw/2}" y="${H - 30}" text-anchor="middle" font-family="Noto Serif TC, serif" font-weight="600" font-size="18" fill="#2C3345">日式正統  ←→  台灣在地</text>`;
+    svg += `<text x="38" y="${m.top + ph/2}" text-anchor="middle" font-family="Noto Serif TC, serif" font-weight="600" font-size="18" fill="#2C3345" transform="rotate(-90 38 ${m.top + ph/2})">經典傳統  ←→  創新實驗</text>`;
+
+    // Corner quadrant labels (placed in 4 corners far from data)
+    svg += `<text x="${toX(-6.7)}" y="${toY(-4.5)}" font-family="Noto Serif TC, serif" font-style="italic" font-size="14" fill="#5C5247" font-weight="500">日式經典</text>`;
+    svg += `<text x="${toX(6.7)}" y="${toY(-4.5)}" text-anchor="end" font-family="Noto Serif TC, serif" font-style="italic" font-size="14" fill="#5C5247" font-weight="500">台灣經典</text>`;
+    svg += `<text x="${toX(-6.7)}" y="${toY(7.5)}" font-family="Noto Serif TC, serif" font-style="italic" font-size="14" fill="#5C5247" font-weight="500">日式創新</text>`;
+    svg += `<text x="${toX(6.7)}" y="${toY(7.5)}" text-anchor="end" font-family="Noto Serif TC, serif" font-style="italic" font-size="15" fill="#D4836F" font-weight="700">★ 台灣 × 創新</text>`;
+
+    // Data points
+    data.forEach(d => {
+      const cx = toX(d.x);
+      const cy = toY(d.y);
+      const r = 13;
+      const color = chapterColors[d.ch];
+      svg += `<g class="spectrum-point">`;
+      svg += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${color}" fill-opacity="0.75" stroke="#5C5247" stroke-width="1.5"/>`;
+      svg += `<text x="${cx}" y="${cy - r - 8}" text-anchor="middle" font-family="Noto Sans TC, sans-serif" font-size="12.5" fill="#2C3345" font-weight="500">${d.name}</text>`;
+      svg += `</g>`;
+    });
+
+    svg += `</svg>`;
+    document.getElementById('culture-chart').innerHTML = svg;
+  }
+  buildCultureSpectrum();
+</script>
+
+</body>
+</html>

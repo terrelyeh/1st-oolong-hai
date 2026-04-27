@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5 圈系統詳解 · 台灣第一家烏龍嗨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-paper: #F5F0E6;
+    --bg-paper-2: #EDE5D3;
+    --bg-paper-3: #E8DFC9;
+    --ink: #2C3345;
+    --ink-soft: #5C5247;
+    --ink-faint: #8A8073;
+    --tea-brown: #8B6F47;
+    --barley: #C4A57B;
+    --hojicha: #D4836F;
+    --green: #6E8B5E;
+    --black-sugar: #4A3A2A;
+    --line: #D9CFB8;
+    --highlight: #E8D9B5;
+    --gold: #B8956A;
+    --warn: #C77654;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-paper);
+    color: var(--ink);
+    font-family: "Noto Sans TC", "Inter", system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    font-size: 18px;
+    font-feature-settings: "tnum" on;
+  }
+
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+  /* === Hero === */
+  .hero {
+    padding: 96px 0 80px;
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, var(--bg-paper-2) 0%, var(--bg-paper) 100%);
+  }
+
+  .brand-mark {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 600;
+    font-size: 14.5px;
+    letter-spacing: 0.4em;
+    color: var(--tea-brown);
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+
+  .brand-title {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 56px;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+
+  .brand-tagline {
+    font-family: "Noto Serif TC", serif;
+    font-size: 21px;
+    color: var(--ink-soft);
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  /* === Hero overview row (circles + summary list) === */
+  .hero-overview-row {
+    display: grid;
+    grid-template-columns: 460px 1fr;
+    gap: 60px;
+    margin-top: 64px;
+    align-items: center;
+    text-align: left;
+  }
+
+  /* === Overview circles === */
+  .overview {
+    position: relative;
+    height: 480px;
+    width: 460px;
+  }
+
+  .ov-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid var(--barley);
+  }
+
+  .ov-c5 { width: 460px; height: 460px; border-style: dashed; opacity: 0.5; background: rgba(232,217,181,0.15); }
+  .ov-c4 { width: 360px; height: 360px; border-style: dashed; opacity: 0.65; background: rgba(232,217,181,0.25); }
+  .ov-c3 { width: 270px; height: 270px; opacity: 0.8; background: rgba(232,217,181,0.4); }
+  .ov-c2 { width: 180px; height: 180px; background: rgba(196,165,123,0.45); }
+  .ov-c1 {
+    width: 100px; height: 100px;
+    background: var(--hojicha);
+    border-color: var(--hojicha);
+    color: var(--bg-paper);
+    font-weight: 600;
+  }
+
+  .ov-label {
+    position: absolute;
+    font-family: "Noto Serif TC", serif;
+    font-weight: 500;
+    font-size: 14.5px;
+    color: var(--ink);
+    background: var(--bg-paper);
+    padding: 4px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+  }
+
+  .ov-l-center { top: 50%; left: 50%; color: var(--bg-paper); background: transparent; border: none; font-weight: 700; font-size: 14.5px; padding: 0; }
+  .ov-l-1 { top: calc(50% - 80px); left: 50%; }
+  .ov-l-2 { top: calc(50% - 125px); left: 50%; }
+  .ov-l-3 { top: calc(50% - 170px); left: 50%; }
+  .ov-l-4 { top: calc(50% - 215px); left: 50%; }
+
+  /* === Ring overview list (right side of circles) === */
+  .ring-overview-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .rol-item {
+    display: grid;
+    grid-template-columns: 78px 1fr;
+    gap: 18px;
+    padding: 16px 22px;
+    background: var(--bg-paper);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    border-left: 4px solid var(--barley);
+    align-items: center;
+    transition: all 0.2s ease;
+  }
+
+  .rol-item:hover {
+    background: var(--bg-paper-3);
+    transform: translateX(4px);
+    border-left-color: var(--hojicha);
+  }
+
+  .rol-item.is-core { border-left-color: var(--hojicha); background: var(--bg-paper-2); }
+  .rol-item.is-r1 { border-left-color: var(--barley); }
+  .rol-item.is-r2 { border-left-color: var(--green); }
+  .rol-item.is-r3 { border-left-color: var(--hojicha); }
+  .rol-item.is-r4 { border-left-color: var(--tea-brown); }
+
+  .rol-num {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    color: var(--hojicha);
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: center;
+    padding: 6px 8px;
+    background: var(--bg-paper-3);
+    border-radius: 4px;
+  }
+
+  .rol-content { line-height: 1.5; }
+
+  .rol-name {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .rol-desc {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 968px) {
+    .hero-overview-row { grid-template-columns: 1fr; gap: 32px; }
+    .overview { margin: 0 auto; }
+  }
+
+  /* === Section base === */
+  .ring-section {
+    padding: 96px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .ring-section:nth-child(odd) {
+    background: var(--bg-paper);
+  }
+
+  .ring-section:nth-child(even) {
+    background: var(--bg-paper-2);
+  }
+
+  .ring-header {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+    align-items: start;
+    margin-bottom: 48px;
+  }
+
+  .ring-circle-vis {
+    position: relative;
+    width: 180px;
+    height: 180px;
+  }
+
+  .ring-circle-vis .ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    border: 1.5px solid var(--barley);
+  }
+
+  .ring-circle-vis .r5 { width: 180px; height: 180px; border-style: dashed; opacity: 0.4; }
+  .ring-circle-vis .r4 { width: 140px; height: 140px; border-style: dashed; opacity: 0.55; }
+  .ring-circle-vis .r3 { width: 100px; height: 100px; opacity: 0.7; }
+  .ring-circle-vis .r2 { width: 70px; height: 70px; opacity: 0.85; background: rgba(232,217,181,0.4); }
+  .ring-circle-vis .r1 { width: 40px; height: 40px; background: var(--hojicha); border-color: var(--hojicha); }
+
+  .ring-circle-vis .active-ring {
+    background: rgba(212,131,111,0.3);
+    border-color: var(--hojicha);
+    border-style: solid !important;
+    border-width: 2.5px;
+    opacity: 1;
+  }
+
+  .ring-info .ring-num {
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    color: var(--hojicha);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .ring-name {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .ring-en {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.2em;
+    color: var(--tea-brown);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .ring-essence {
+    font-size: 20px;
+    line-height: 1.7;
+    color: var(--ink);
+    padding: 20px 24px;
+    background: var(--bg-paper);
+    border-left: 3px solid var(--hojicha);
+    border-radius: 4px;
+  }
+
+  .ring-section:nth-child(even) .ring-essence {
+    background: var(--bg-paper);
+  }
+
+  /* Content blocks */
+  .content-block {
+    margin-top: 32px;
+  }
+
+  .block-label {
+    display: inline-block;
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding: 4px 12px;
+    background: var(--bg-paper);
+    border-radius: 12px;
+    border: 1px solid var(--line);
+  }
+
+  .ring-section:nth-child(even) .block-label {
+    background: var(--bg-paper);
+  }
+
+  .block-content {
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--ink);
+  }
+
+  .why-text {
+    font-family: "Noto Serif TC", serif;
+    font-size: 19px;
+    line-height: 1.8;
+    color: var(--ink);
+    padding: 24px;
+    background: var(--bg-paper);
+    border-radius: 4px;
+    border: 1px solid var(--line);
+  }
+
+  .ring-section:nth-child(even) .why-text { background: var(--bg-paper); }
+
+  /* Decision list */
+  .decision-list {
+    background: var(--bg-paper);
+    border-radius: 4px;
+    padding: 24px;
+    border: 1px solid var(--line);
+  }
+
+  .ring-section:nth-child(even) .decision-list { background: var(--bg-paper); }
+
+  .decision-list h4 {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 14px;
+    color: var(--ink);
+    letter-spacing: 0.01em;
+  }
+
+  .decision-list ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .decision-list li {
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: 17px;
+    color: var(--ink);
+  }
+
+  .decision-list li:last-child { border-bottom: none; }
+
+  .decision-list li::before {
+    content: "▸";
+    color: var(--hojicha);
+    margin-right: 12px;
+    font-size: 16px;
+  }
+
+  /* Examples grid */
+  .examples-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .example-card {
+    padding: 20px;
+    background: var(--bg-paper);
+    border-radius: 4px;
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--barley);
+  }
+
+  .example-card.good { border-top-color: var(--green); }
+  .example-card.warning { border-top-color: var(--barley); }
+  .example-card.bad { border-top-color: var(--warn); }
+
+  .ring-section:nth-child(even) .example-card { background: var(--bg-paper); }
+
+  .ex-tag {
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .ex-name {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 21px;
+    margin-bottom: 10px;
+    color: var(--ink);
+    letter-spacing: 0.01em;
+  }
+
+  .ex-desc {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+
+  .ex-meta {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--line);
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 0.05em;
+  }
+
+  /* Traps section */
+  .trap-block {
+    margin-top: 24px;
+    padding: 24px;
+    background: rgba(199,118,84,0.08);
+    border-left: 3px solid var(--warn);
+    border-radius: 4px;
+  }
+
+  .trap-title {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--warn);
+    margin-bottom: 12px;
+  }
+
+  .trap-list {
+    list-style: none;
+  }
+
+  .trap-list li {
+    padding: 6px 0 6px 28px;
+    position: relative;
+    font-size: 16px;
+    color: var(--ink);
+    line-height: 1.7;
+  }
+
+  .trap-list li::before {
+    content: "⚠";
+    position: absolute;
+    left: 0;
+    color: var(--warn);
+    font-weight: 700;
+  }
+
+  /* Connector — bridge between rings (darker, more prominent) */
+  .connector {
+    margin: 60px 0 -40px;
+    padding: 32px 40px;
+    background: linear-gradient(135deg, #2C2520 0%, #3A3128 100%);
+    border-radius: 8px;
+    text-align: center;
+    font-family: "Noto Serif TC", serif;
+    font-size: 18px;
+    color: var(--ink-light);
+    letter-spacing: 0.04em;
+    line-height: 1.7;
+    box-shadow: 0 8px 20px rgba(44, 37, 32, 0.15);
+    position: relative;
+  }
+
+  .connector::before {
+    content: "↓";
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    background: var(--hojicha);
+    color: #FBF7EC;
+    border-radius: 50%;
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(212, 131, 111, 0.3);
+  }
+
+  .connector strong {
+    color: var(--hojicha);
+    font-weight: 700;
+  }
+
+  /* Special tables */
+  .texture-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .texture-cell {
+    padding: 16px;
+    background: var(--bg-paper);
+    border-radius: 4px;
+    border: 1px solid var(--line);
+    text-align: center;
+  }
+
+  .ring-section:nth-child(even) .texture-cell { background: var(--bg-paper); }
+
+  .tex-name {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 19px;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+
+  .tex-desc {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  /* Twist categories */
+  .twist-cats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .twist-cat {
+    padding: 20px 16px;
+    background: var(--bg-paper);
+    border-radius: 4px;
+    border: 1px solid var(--line);
+  }
+
+  .ring-section:nth-child(even) .twist-cat { background: var(--bg-paper); }
+
+  .twist-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .twist-name {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 6px;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+
+  .twist-items {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+
+  .twist-pair {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--line);
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+  }
+
+  /* Scenario list */
+  .scenarios {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .scenario {
+    padding: 16px;
+    background: var(--bg-paper);
+    border-radius: 4px;
+    border: 1px solid var(--line);
+    text-align: center;
+  }
+
+  .ring-section:nth-child(even) .scenario { background: var(--bg-paper); }
+
+  .scen-time {
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .scen-name {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+
+  .scen-chapter {
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  /* SOP timeline */
+  .sop-timeline {
+    margin-top: 32px;
+    counter-reset: sop;
+  }
+
+  .sop-step {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+
+  .sop-step:last-child { border-bottom: none; }
+
+  .sop-num {
+    counter-increment: sop;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--bg-paper-2);
+    border: 2px solid var(--hojicha);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--hojicha);
+  }
+
+  .sop-num::before { content: counter(sop); }
+
+  .sop-content h4 {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 21px;
+    margin-bottom: 8px;
+    color: var(--ink);
+    letter-spacing: 0.01em;
+  }
+
+  .sop-content p {
+    font-size: 16px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+
+  /* Top nav */
+  .top-nav {
+    padding: 16px 32px;
+    background: var(--bg-paper-2);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+  .top-nav a { color: var(--tea-brown); text-decoration: none; transition: color 0.2s; }
+  .top-nav a:hover { color: var(--ink); }
+
+  /* Related */
+  .related { padding: 80px 0; background: var(--bg-paper-2); border-bottom: 1px solid var(--line); }
+  .related-h { font-family: "Noto Serif TC", serif; font-weight: 600; font-size: 28px; text-align: center; margin-bottom: 8px; }
+  .related-sub { text-align: center; color: var(--ink-soft); margin-bottom: 40px; }
+  .related-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .related-card { padding: 28px; background: var(--bg-paper); border: 1px solid var(--line); border-radius: 4px; text-decoration: none; color: var(--ink); transition: all 0.25s; display: block; position: relative; }
+  .related-card:hover { background: var(--highlight); transform: translateY(-2px); border-color: var(--barley); }
+  .related-card::after { content: "→"; position: absolute; top: 28px; right: 24px; color: var(--hojicha); font-family: "Inter", sans-serif; font-size: 20px; transition: transform 0.25s; }
+  .related-card:hover::after { transform: translateX(4px); }
+  .related-tag { font-family: "Inter", sans-serif; font-size: 10px; letter-spacing: 0.3em; color: var(--hojicha); text-transform: uppercase; margin-bottom: 8px; }
+  .related-title { font-family: "Noto Serif TC", serif; font-weight: 600; font-size: 21px; margin-bottom: 6px; padding-right: 32px; }
+  .related-desc { font-size: 14.5px; color: var(--ink-soft); line-height: 1.7; }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 60px 0;
+    color: var(--ink-soft);
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+  }
+
+  @media (max-width: 768px) {
+    .brand-title { font-size: 36px; }
+    .ring-header { grid-template-columns: 1fr; gap: 24px; }
+    .ring-circle-vis { margin: 0 auto; }
+    .examples-grid, .twist-cats, .scenarios { grid-template-columns: 1fr; }
+    .texture-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =========== TOP NAV =========== -->
+<nav class="top-nav">
+  <a href="index.html">← 回品牌中心</a>
+  <span style="color: var(--ink-soft);">SYSTEM · 5 圈系統詳解</span>
+</nav>
+
+<!-- =========== HERO =========== -->
+<header class="hero">
+  <div class="container">
+    <div class="brand-mark">— System Deep-Dive —</div>
+    <h1 class="brand-title">5 圈系統 · 詳解</h1>
+    <p class="brand-tagline">
+      由核心往外擴散的酒單設計系統。<br>
+      圓心不可動搖，越往外越多自由度。<br>
+      每一圈都有自己的角色、決策、範例與陷阱。
+    </p>
+
+    <div class="hero-overview-row">
+      <div class="overview">
+        <div class="ov-circle ov-c5"></div>
+        <div class="ov-circle ov-c4"></div>
+        <div class="ov-circle ov-c3"></div>
+        <div class="ov-circle ov-c2"></div>
+        <div class="ov-circle ov-c1"></div>
+        <div class="ov-label ov-l-center">燒酎×茶</div>
+        <div class="ov-label ov-l-1">茶軸 × 燒酎家族</div>
+        <div class="ov-label ov-l-2">Texture 質地</div>
+        <div class="ov-label ov-l-3">Twist 點綴</div>
+        <div class="ov-label ov-l-4">場景對應</div>
+      </div>
+
+      <div class="ring-overview-list">
+        <div class="rol-item is-core">
+          <div class="rol-num">CORE · 圓心</div>
+          <div class="rol-content">
+            <div class="rol-name">燒酎 × 茶</div>
+            <div class="rol-desc">所有產品的不可動搖核心方程式 — 80% 常駐品項以此為主</div>
+          </div>
+        </div>
+        <div class="rol-item is-r1">
+          <div class="rol-num">RING 01</div>
+          <div class="rol-content">
+            <div class="rol-name">茶軸 × 燒酎家族</div>
+            <div class="rol-desc">產品的 X-Y 座標系統 — 4 茶軸 × 7 燒酎家族 = 28 個可能組合</div>
+          </div>
+        </div>
+        <div class="rol-item is-r2">
+          <div class="rol-num">RING 02</div>
+          <div class="rol-content">
+            <div class="rol-name">Texture 質地工程</div>
+            <div class="rol-desc">同一杯酒的口感變數 — 3 種碳酸 × 4 種冰塊 = 12 種口感</div>
+          </div>
+        </div>
+        <div class="rol-item is-r3">
+          <div class="rol-num">RING 03</div>
+          <div class="rol-content">
+            <div class="rol-name">Twist 風味點綴</div>
+            <div class="rol-desc">+$30 的客製樂趣 — 4 大系列（草本 / 果香 / 辛香 / 在地）</div>
+          </div>
+        </div>
+        <div class="rol-item is-r4">
+          <div class="rol-num">RING 04</div>
+          <div class="rol-content">
+            <div class="rol-name">場景對應</div>
+            <div class="rol-desc">5 個場景對應客戶旅程 — 第一杯 / 佐餐 / 慢飲 / 收尾 / 試新</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<!-- =========== 圓心 =========== -->
+<section class="ring-section">
+  <div class="container">
+    <div class="ring-header">
+      <div class="ring-circle-vis">
+        <div class="ring r5"></div>
+        <div class="ring r4"></div>
+        <div class="ring r3"></div>
+        <div class="ring r2"></div>
+        <div class="ring r1 active-ring"></div>
+      </div>
+      <div class="ring-info">
+        <div class="ring-num">CORE · 圓心</div>
+        <h2 class="ring-name">燒酎 × 茶</h2>
+        <div class="ring-en">The Founding Equation</div>
+        <div class="ring-essence">
+          所有產品的不可動搖核心。任何 idea 必須能跟燒酎或茶建立關係，才能進入這個系統。<br>
+          <strong>圓心定義「我們是什麼」，不是「我們做什麼」。</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">為什麼需要這個圓心</div>
+      <div class="why-text">
+        燒酎是個性鮮明但門檻高的酒種，茶是台灣人最熟悉但少跟酒結合的飲品。
+        把這兩個放在一起，創造了一個「<strong>既熟悉又新鮮</strong>」的產品。<br><br>
+        圓心不只是配方，是<strong>品牌的純度防線</strong>——當有人提案「來點 mojito 吧」「進個威士忌吧」時，圓心讓我們可以理直氣壯說「不」。
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">這一層的決策</div>
+      <div class="decision-list">
+        <h4>圓心的 3 條公理</h4>
+        <ul>
+          <li>燒酎是基酒主軸：<strong>80% 的常駐品項</strong>以燒酎為基酒</li>
+          <li>茶是個性靈魂：<strong>每杯酒的「人格」由茶決定</strong></li>
+          <li>Highball / 茶割是表現形式：我們是「Highball 選物店」，所有酒都是 Highball / 茶割變體</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">範例</div>
+      <div class="examples-grid">
+        <div class="example-card good">
+          <div class="ex-tag">通過 ✓</div>
+          <div class="ex-name">招牌烏龍嗨</div>
+          <div class="ex-desc">燒酎 ✓ + 茶 ✓ + Highball 形式 ✓</div>
+          <div class="ex-meta">100% 符合圓心</div>
+        </div>
+        <div class="example-card warning">
+          <div class="ex-tag">破例 ⚠</div>
+          <div class="ex-name">店主選酒 Highball</div>
+          <div class="ex-desc">威士忌 / 琴酒，但是 Highball 形式。屬於「客座」衛星系列</div>
+          <div class="ex-meta">總量 ≤ 20%</div>
+        </div>
+        <div class="example-card bad">
+          <div class="ex-tag">不通過 ✗</div>
+          <div class="ex-name">純威士忌 Neat</div>
+          <div class="ex-desc">沒有茶、不是 Highball。會稀釋品牌定位</div>
+          <div class="ex-meta">直接拒絕</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trap-block">
+      <div class="trap-title">⚠ 常見陷阱</div>
+      <ul class="trap-list">
+        <li><strong>為了討好客人破例</strong>：「客人想喝 mojito 啊」「葡萄酒應該也加吧」——一旦破例，品牌純度就開始流失</li>
+        <li><strong>把「衛星系列」誤當核心</strong>：客座 Highball 本來是 20% 的安全網，做太多會喧賓奪主</li>
+        <li><strong>圓心動搖</strong>：如果發現自己在問「我們是燒酎店還是 Highball 店」，代表圓心需要重新定錨</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="connector">
+      <strong>圓心定義了「我們做什麼」</strong> · 第一圈定義「具體可以做哪些組合」 →
+    </div>
+  </div>
+</section>
+
+
+<!-- =========== 第一圈 =========== -->
+<section class="ring-section">
+  <div class="container">
+    <div class="ring-header">
+      <div class="ring-circle-vis">
+        <div class="ring r5"></div>
+        <div class="ring r4"></div>
+        <div class="ring r3"></div>
+        <div class="ring r2 active-ring"></div>
+        <div class="ring r1"></div>
+      </div>
+      <div class="ring-info">
+        <div class="ring-num">RING 01 · 第一圈</div>
+        <h2 class="ring-name">茶軸 × 燒酎家族</h2>
+        <div class="ring-en">The Product Matrix</div>
+        <div class="ring-essence">
+          產品的 X-Y 座標系統。4 個茶軸 × 7 個燒酎家族 = 28 個可能組合。<br>
+          <strong>任何常駐品項都會落在這個矩陣的某個格子。</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">為什麼需要矩陣</div>
+      <div class="why-text">
+        沒有矩陣，就會「<strong>想到什麼推什麼</strong>」——菜單越長越亂、員工背不起來、客人選不出。<br><br>
+        有矩陣，每個品項都有<strong>邏輯位置</strong>。客人問「為什麼這樣搭」答得出來；員工說明新品有依據；季節限定知道從哪個格子發想；空白的格子就是「未來機會」。
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">這一層的決策</div>
+      <div class="decision-list">
+        <h4>遇到新酒款 idea，問三個問題</h4>
+        <ul>
+          <li>它落在矩陣的哪個格子？（4 茶軸 × 7 燒酎家族中的哪一格）</li>
+          <li>那一格是什麼星等？⭐⭐ / ⭐ / △ / ✗？</li>
+          <li>這格已有常駐品嗎？如果有，這個 idea 就只能做季節限定</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">範例（4 個經典格子）</div>
+      <div class="examples-grid">
+        <div class="example-card good">
+          <div class="ex-tag">⭐⭐ 旗艦組合</div>
+          <div class="ex-name">焙茶 × 麥燒酎</div>
+          <div class="ex-desc">「雙麥」共鳴。麥燒酎的穀物香 + 焙茶的烘焙味，是天作之合</div>
+          <div class="ex-meta">代表酒：極・焙茶麥酒</div>
+        </div>
+        <div class="example-card good">
+          <div class="ex-tag">⭐ 經典招牌</div>
+          <div class="ex-name">烏龍 × 甲類燒酎</div>
+          <div class="ex-desc">甲類乾淨無味，讓烏龍茶當主角。最大眾、最日常</div>
+          <div class="ex-meta">代表酒：招牌烏龍嗨</div>
+        </div>
+        <div class="example-card warning">
+          <div class="ex-tag">△ 季節限定範圍</div>
+          <div class="ex-name">綠茶 × 桶陳麥</div>
+          <div class="ex-desc">能做但不主推。桶陳的木桶味會壓住綠茶細緻感</div>
+          <div class="ex-meta">適合：秋冬限定試新</div>
+        </div>
+        <div class="example-card bad">
+          <div class="ex-tag">✗ 不做</div>
+          <div class="ex-name">綠茶 × 芋燒酎</div>
+          <div class="ex-desc">芋燒酎個性太強、紅薯臭會徹底蓋過綠茶。除非有強 twist 否則砍</div>
+          <div class="ex-meta">直接放棄</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trap-block">
+      <div class="trap-title">⚠ 常見陷阱</div>
+      <ul class="trap-list">
+        <li><strong>被 ✗ 格子吸引</strong>：「我想做芋燒酎×綠茶，因為很特別」——特別不等於好喝。先過矩陣這一關</li>
+        <li><strong>同一格塞太多品項</strong>：「烏龍 × 甲類」不需要 5 款，1 款招牌就好。剩下做季節限定</li>
+        <li><strong>忽略 △ 的價值</strong>：△ 不是「不能做」，是「常駐有風險，但限定可以玩」。季節限定的養分都在這</li>
+        <li><strong>沒有空白格子</strong>：如果 28 個格子都填滿了，反而失去「未來機會」的視野</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="connector">
+      <strong>第一圈決定「酒體與風味」</strong> · 第二圈決定「同樣的酒，怎麼喝」 →
+    </div>
+  </div>
+</section>
+
+
+<!-- =========== 第二圈 =========== -->
+<section class="ring-section">
+  <div class="container">
+    <div class="ring-header">
+      <div class="ring-circle-vis">
+        <div class="ring r5"></div>
+        <div class="ring r4"></div>
+        <div class="ring r3 active-ring"></div>
+        <div class="ring r2"></div>
+        <div class="ring r1"></div>
+      </div>
+      <div class="ring-info">
+        <div class="ring-num">RING 02 · 第二圈</div>
+        <h2 class="ring-name">Texture 質地工程</h2>
+        <div class="ring-en">The Texture Engineering</div>
+        <div class="ring-essence">
+          同樣的酒（茶 × 燒酎組合）可以有完全不同的「口感」。<br>
+          <strong>碳酸強度 × 冰塊形態</strong>，決定一杯酒從第一口到最後一口的味覺變化。
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">為什麼需要 Texture 層</div>
+      <div class="why-text">
+        同樣是「烏龍 × 燒酎」，加強氣泡是<strong>解膩痛快</strong>，做成水割就變成<strong>佐餐慢飲</strong>，加大冰球又變成<strong>慢飲品味</strong>。<br><br>
+        Texture 是「讓菜單變寬」的免費武器——同樣的原料，不同口感，就能服務不同場景。
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">碳酸強度（3 檔）</div>
+      <div class="texture-grid">
+        <div class="texture-cell">
+          <div class="tex-name">強氣泡 Soda</div>
+          <div class="tex-desc">氣泡顆粒大、刺激感強<br>適合第一杯 / 解膩 / 配炸物</div>
+        </div>
+        <div class="texture-cell">
+          <div class="tex-name">微氣泡 Micro</div>
+          <div class="tex-desc">氣泡細緻、不搶味<br>適合高級茶割 / 想喝原味</div>
+        </div>
+        <div class="texture-cell">
+          <div class="tex-name">無氣泡 Still</div>
+          <div class="tex-desc">純粹水割、慢飲<br>適合本格 / 品味 / 佐冷盤</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">冰塊形態（4 種）</div>
+      <div class="texture-grid" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="texture-cell">
+          <div class="tex-name">長條冰 Spear</div>
+          <div class="tex-desc">融水慢、視覺感強<br>Highball 專用</div>
+        </div>
+        <div class="texture-cell">
+          <div class="tex-name">方塊冰 Cube</div>
+          <div class="tex-desc">融水中等、通用<br>大部分酒款</div>
+        </div>
+        <div class="texture-cell">
+          <div class="tex-name">大冰球 Sphere</div>
+          <div class="tex-desc">融水極慢、純粹<br>本格慢飲</div>
+        </div>
+        <div class="texture-cell">
+          <div class="tex-name">碎冰 Crushed</div>
+          <div class="tex-desc">融水快、清涼<br>夏天南國風</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">範例（同酒不同 Texture）</div>
+      <div class="examples-grid">
+        <div class="example-card good">
+          <div class="ex-tag">CH1 經典</div>
+          <div class="ex-name">招牌烏龍嗨</div>
+          <div class="ex-desc">強氣泡 + 方塊冰<br>第一口爽快、適合配炸物</div>
+          <div class="ex-meta">解膩痛快路線</div>
+        </div>
+        <div class="example-card good">
+          <div class="ex-tag">CH2 職人</div>
+          <div class="ex-name">極・焙茶麥酒</div>
+          <div class="ex-desc">微氣泡 + 大冰球<br>香氣完整、不被破壞</div>
+          <div class="ex-meta">慢飲品味路線</div>
+        </div>
+        <div class="example-card good">
+          <div class="ex-tag">CH3 大人</div>
+          <div class="ex-name">琥珀焙茶拿鐵</div>
+          <div class="ex-desc">無氣泡 + 加奶<br>溫潤、像甜點酒</div>
+          <div class="ex-meta">收尾甜品路線</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trap-block">
+      <div class="trap-title">⚠ 常見陷阱</div>
+      <ul class="trap-list">
+        <li><strong>每杯都讓客人選 6 個變數</strong>：點酒會變成「氣泡？冰塊？比例？」<strong>客人會累。預設綁定，進階才開放選。</strong></li>
+        <li><strong>所有酒都用同一種冰</strong>：失去 Texture 的價值。長條冰、大冰球、碎冰要分開用</li>
+        <li><strong>強氣泡水溫不夠冷</strong>：氣泡會疲軟、口感變鈍。氣泡水永遠冰到 2°C</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="connector">
+      <strong>第二圈決定「口感」</strong> · 第三圈讓客人「玩起來」 →
+    </div>
+  </div>
+</section>
+
+
+<!-- =========== 第三圈 =========== -->
+<section class="ring-section">
+  <div class="container">
+    <div class="ring-header">
+      <div class="ring-circle-vis">
+        <div class="ring r5"></div>
+        <div class="ring r4 active-ring"></div>
+        <div class="ring r3"></div>
+        <div class="ring r2"></div>
+        <div class="ring r1"></div>
+      </div>
+      <div class="ring-info">
+        <div class="ring-num">RING 03 · 第三圈</div>
+        <h2 class="ring-name">Twist 風味點綴</h2>
+        <div class="ring-en">The Customization Layer</div>
+        <div class="ring-essence">
+          客製化、+$30 的加價購、互動樂趣的所在。<br>
+          <strong>讓客人感覺自己在共同創作，而不是被賣加價購。</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">為什麼需要 Twist 層</div>
+      <div class="why-text">
+        Twist 是品牌「<strong>有趣</strong>」DNA 的具體實現。沒有 twist，菜單就是固定 25 款；有 twist，每款都能玩出 5 種變化。<br><br>
+        同時也是<strong>客單價提升器</strong>——每杯 +$30，但因為「客人自己加的」感覺像是樂趣不是被推銷。
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">4 大 Twist 系列</div>
+      <div class="twist-cats">
+        <div class="twist-cat">
+          <div class="twist-icon">🌿</div>
+          <div class="twist-name">草本系</div>
+          <div class="twist-items">紫蘇葉<br>新鮮迷迭香<br>山椒鹽口</div>
+          <div class="twist-pair">配 綠茶 / 烏龍軸</div>
+        </div>
+        <div class="twist-cat">
+          <div class="twist-icon">🍋</div>
+          <div class="twist-name">果香系</div>
+          <div class="twist-items">鹹檸檬<br>烤柳橙<br>糖漬柚子皮</div>
+          <div class="twist-pair">配 烏龍 / 紅茶軸</div>
+        </div>
+        <div class="twist-cat">
+          <div class="twist-icon">🌶️</div>
+          <div class="twist-name">辛香系</div>
+          <div class="twist-items">烤肉桂<br>薑片<br>丁香</div>
+          <div class="twist-pair">配 烘焙軸</div>
+        </div>
+        <div class="twist-cat">
+          <div class="twist-icon">🌺</div>
+          <div class="twist-name">在地系</div>
+          <div class="twist-items">烏梅<br>桂花<br>客家擂茶粉</div>
+          <div class="twist-pair">配 全軸（彈性大）</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">範例（搭配建議）</div>
+      <div class="examples-grid">
+        <div class="example-card good">
+          <div class="ex-tag">🍋 果香系</div>
+          <div class="ex-name">招牌烏龍嗨 + 鹹檸檬</div>
+          <div class="ex-desc">經典爽快 + 鹹檸檬，港式鹹檸七的概念。中和茶的澀感，回甘更強烈</div>
+          <div class="ex-meta">推薦話術：想試試加鹹檸檬嗎？很解膩</div>
+        </div>
+        <div class="example-card good">
+          <div class="ex-tag">🌶️ 辛香系</div>
+          <div class="ex-name">焙茶麥酒 + 烤肉桂</div>
+          <div class="ex-desc">焦香加倍。肉桂的木質香與焙茶共鳴，像在喝高級香料茶</div>
+          <div class="ex-meta">推薦話術：加一根烤肉桂，會像香料茶</div>
+        </div>
+        <div class="example-card good">
+          <div class="ex-tag">🌺 在地系</div>
+          <div class="ex-name">仙草黑糖嗨 + 桂花</div>
+          <div class="ex-desc">在地中的在地。桂花把仙草甜感拉出來，更阿嬤味</div>
+          <div class="ex-meta">推薦話術：加桂花，會更阿嬤味</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trap-block">
+      <div class="trap-title">⚠ 常見陷阱</div>
+      <ul class="trap-list">
+        <li><strong>Twist 選項做太多</strong>：超過 12 種就會選擇障礙。維持 8-10 種，每季可以微調</li>
+        <li><strong>主動把 twist 加進酒裡</strong>：失去「客人自己選的」樂趣感。預設不加，店員「邀請」客人加</li>
+        <li><strong>強推 +$30</strong>：話術像賣保險，毀掉品牌氣質。要說「這款我覺得加 X 會更好玩」</li>
+        <li><strong>每杯酒都推薦 twist</strong>：有些酒（特別是本格）就是要喝原味，不要打擾客人</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="connector">
+      <strong>第三圈讓客人「客製」</strong> · 第四圈決定「這杯給什麼時刻」 →
+    </div>
+  </div>
+</section>
+
+
+<!-- =========== 第四圈 =========== -->
+<section class="ring-section">
+  <div class="container">
+    <div class="ring-header">
+      <div class="ring-circle-vis">
+        <div class="ring r5 active-ring"></div>
+        <div class="ring r4"></div>
+        <div class="ring r3"></div>
+        <div class="ring r2"></div>
+        <div class="ring r1"></div>
+      </div>
+      <div class="ring-info">
+        <div class="ring-num">RING 04 · 第四圈</div>
+        <h2 class="ring-name">場景對應</h2>
+        <div class="ring-en">The Occasion Layer</div>
+        <div class="ring-essence">
+          每杯酒都「服務一個時刻」。<br>
+          <strong>菜單的章節順序 = 客戶旅程的順序</strong>，從進門到離開的引導動線。
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">為什麼需要場景層</div>
+      <div class="why-text">
+        客人坐下來不會說「我要喝強氣泡甲類燒酎配烏龍」，他會說「<strong>我想要清爽一點</strong>」「<strong>配炸物的</strong>」「<strong>來個收尾</strong>」。<br><br>
+        場景層把產品翻譯成<strong>客人的語言</strong>，讓店員推薦有依據、菜單有引導。
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">5 大場景</div>
+      <div class="scenarios">
+        <div class="scenario">
+          <div class="scen-time">進店 5 分鐘</div>
+          <div class="scen-name">第一杯</div>
+          <div class="scen-chapter">解渴、開胃、冰涼<br>→ CH1 經典爽快</div>
+        </div>
+        <div class="scenario">
+          <div class="scen-time">主餐時段</div>
+          <div class="scen-name">佐餐酒</div>
+          <div class="scen-chapter">解膩、配菜、多樣<br>→ CH1 + CH4 在地</div>
+        </div>
+        <div class="scenario">
+          <div class="scen-time">中段</div>
+          <div class="scen-name">品味慢飲</div>
+          <div class="scen-chapter">安靜、深度、儀式<br>→ CH2 職人 + 本格</div>
+        </div>
+        <div class="scenario">
+          <div class="scen-time">離場前</div>
+          <div class="scen-name">收尾甜點酒</div>
+          <div class="scen-chapter">濃郁、甜感、暖心<br>→ CH3 大人特調</div>
+        </div>
+        <div class="scenario">
+          <div class="scen-time">任何時段</div>
+          <div class="scen-name">試新探索</div>
+          <div class="scen-chapter">好玩、限定、客座<br>→ CH4 + 客座 Highball</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">客戶旅程動線</div>
+      <div class="why-text" style="text-align: center; font-family: 'Inter', sans-serif; font-size: 16px;">
+        進門 → <strong style="color:var(--green);">第一杯（CH1 經典）</strong> → <strong style="color:var(--tea-brown);">佐餐 / 試新（CH4 / CH1）</strong> → <strong style="color:var(--barley);">慢飲（CH2 職人）</strong> → <strong style="color:var(--hojicha);">收尾（CH3 大人）</strong> → 離場<br><br>
+        <span style="font-family: 'Noto Serif TC';">菜單從上往下排，就是客戶旅程順序。</span>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">範例（場景思考）</div>
+      <div class="examples-grid">
+        <div class="example-card good">
+          <div class="ex-tag">場景：第一杯</div>
+          <div class="ex-name">招牌烏龍嗨</div>
+          <div class="ex-desc">強氣泡 + 解渴 + 配炸物。客人坐下 5 分鐘內適合，幾乎人人會點</div>
+          <div class="ex-meta">90% 客人會點</div>
+        </div>
+        <div class="example-card good">
+          <div class="ex-tag">場景：慢飲</div>
+          <div class="ex-name">極・焙茶麥酒</div>
+          <div class="ex-desc">微氣泡 + 香氣複雜 + 不適合配重口味。中段聊天時喝</div>
+          <div class="ex-meta">點過烏龍嗨後的進階選擇</div>
+        </div>
+        <div class="example-card good">
+          <div class="ex-tag">場景：收尾</div>
+          <div class="ex-name">琥珀焙茶拿鐵</div>
+          <div class="ex-desc">加奶 + 甜感 + 暖心。離場前的最後一杯，也是甜點酒</div>
+          <div class="ex-meta">取代咖啡 / 餐後酒</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trap-block">
+      <div class="trap-title">⚠ 常見陷阱</div>
+      <ul class="trap-list">
+        <li><strong>一款酒想服務太多場景</strong>：「這杯是第一杯也適合佐餐也適合慢飲」=「這杯沒個性」。每款只服務 1-2 個場景</li>
+        <li><strong>忘記場景對應的菜單順序</strong>：菜單把收尾酒放第一、第一杯放最後 → 客人混亂</li>
+        <li><strong>缺場景的覆蓋</strong>：5 個場景必須都有對應品項。如果「收尾」只有 1 款，客人沒選擇</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="connector">
+      <strong>4 圈完整覆蓋核心宇宙</strong> · 衛星系列負責邊界擴張 →
+    </div>
+  </div>
+</section>
+
+
+<!-- =========== 衛星系列 =========== -->
+<section class="ring-section">
+  <div class="container">
+    <div class="ring-header">
+      <div class="ring-circle-vis">
+        <div class="ring r5"></div>
+        <div class="ring r4"></div>
+        <div class="ring r3"></div>
+        <div class="ring r2"></div>
+        <div class="ring r1"></div>
+        <!-- 衛星：所有圈都不亮，意味著在外面 -->
+        <div style="position:absolute; top:5px; right:5px; width:24px; height:24px; border-radius:50%; background: var(--barley); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color: var(--bg-paper);">★</div>
+      </div>
+      <div class="ring-info">
+        <div class="ring-num">SATELLITES · 衛星系列</div>
+        <h2 class="ring-name">核心宇宙之外</h2>
+        <div class="ring-en">The Outer Worlds</div>
+        <div class="ring-essence">
+          主菜單 80% 在前 4 圈裡。剩下 20% 是「衛星系列」——<strong>延伸但不背離核心</strong>。<br>
+          擴大守備範圍、提升客單價、防止單調，但不能讓它喧賓奪主。
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">3 大衛星</div>
+      <div class="examples-grid">
+        <div class="example-card good">
+          <div class="ex-tag">衛星 1</div>
+          <div class="ex-name">⭐ 本格職人專區</div>
+          <div class="ex-desc">本格燒酎（單一蒸餾）+ 高品質茶葉 + 不加氣泡。拉客單價、滿足品飲老饕</div>
+          <div class="ex-meta">3-5 款，每季可輪替</div>
+        </div>
+        <div class="example-card good">
+          <div class="ex-tag">衛星 2</div>
+          <div class="ex-name">🌿 在地涼茶系列</div>
+          <div class="ex-desc">仙草、冬瓜、青草、洛神 + 燒酎，跟核心矩陣有對應。差異化武器、季節風情</div>
+          <div class="ex-meta">4 款，季節調整</div>
+        </div>
+        <div class="example-card warning">
+          <div class="ex-tag">衛星 3</div>
+          <div class="ex-name">🛰 店主選酒 Highball</div>
+          <div class="ex-desc">非燒酎基底，但符合 Highball 精神。安全網 + 換口味 + 選物店概念延伸</div>
+          <div class="ex-meta">固定 6 款（3 威士忌 + 2 琴酒 + 1 Dealer's Choice）</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <div class="block-label">客座 Highball 選酒鐵則</div>
+      <div class="decision-list">
+        <h4>3 條防止稀釋品牌的鐵則</h4>
+        <ul>
+          <li><strong>「Highball 表現好」優先</strong>：清爽、香氣線條乾淨、加氣泡不會扁</li>
+          <li><strong>「能連回茶割宇宙」</strong>：每支酒都有一句話橋樑。例：「喜歡焙茶桶陳麥的，會喜歡這支木質調威士忌」</li>
+          <li><strong>數量少、輪替有理由</strong>：像選物店的「本月精選」，不是長期擴張</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trap-block">
+      <div class="trap-title">⚠ 常見陷阱</div>
+      <ul class="trap-list">
+        <li><strong>衛星擴張過頭</strong>：客座 Highball 從 6 款變 15 款 → 客人開始覺得「這是威士忌酒吧」</li>
+        <li><strong>本格區無人點</strong>：定價太高、客群錯配、店員不會推薦 → 變成擺設</li>
+        <li><strong>在地系列做太「fusion」</strong>：「客家擂茶 × 抹茶 × 黑糖燒酎 × 山椒」← 太複雜，破壞「不繁複」DNA</li>
+        <li><strong>衛星之間互相打架</strong>：客座 Highball 跟本格區搶同一群「想喝講究」的客人</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========== 8 步 SOP =========== -->
+<section class="ring-section">
+  <div class="container">
+    <div class="ring-num" style="margin-bottom: 16px;">PUTTING IT TOGETHER</div>
+    <h2 style="font-family: 'Noto Serif TC'; font-weight: 600; font-size: 36px; margin-bottom: 12px;">怎麼用這 5 圈系統發想新酒款</h2>
+    <p style="font-size: 19px; color: var(--ink-soft); max-width: 720px; margin-bottom: 32px;">
+      任何新酒款 idea，依序走完這 8 步。<strong>任何一步通不過 → 砍。</strong>
+    </p>
+
+    <div class="sop-timeline">
+      <div class="sop-step">
+        <div class="sop-num"></div>
+        <div class="sop-content">
+          <h4>落在矩陣哪個格子？</h4>
+          <p>茶軸 + 燒酎家族 = 哪個座標？⭐⭐ / ⭐ / △ / ✗？如果是 ✗，必須有特殊 twist 解決，否則砍。</p>
+        </div>
+      </div>
+      <div class="sop-step">
+        <div class="sop-num"></div>
+        <div class="sop-content">
+          <h4>屬於哪個圈？</h4>
+          <p>第一圈（核心常駐）/ 第三圈（Twist 變體）/ 衛星（本格 / 在地 / 客座）</p>
+        </div>
+      </div>
+      <div class="sop-step">
+        <div class="sop-num"></div>
+        <div class="sop-content">
+          <h4>風味邏輯能講嗎？</h4>
+          <p>為什麼這樣配？是「共鳴」（同類疊加）還是「互補」（對立平衡）？一句話講不清楚 → 砍。</p>
+        </div>
+      </div>
+      <div class="sop-step">
+        <div class="sop-num"></div>
+        <div class="sop-content">
+          <h4>跟既有品項重疊嗎？</h4>
+          <p>已經有類似座標的常駐？→ 那就做季節限定，不上常駐。完全空白 → 可以考慮上常駐。</p>
+        </div>
+      </div>
+      <div class="sop-step">
+        <div class="sop-num"></div>
+        <div class="sop-content">
+          <h4>適合哪個場景？</h4>
+          <p>第一杯 / 佐餐 / 慢飲 / 收尾 / 試新？每杯酒只能服務 1-2 個場景，不要貪心。</p>
+        </div>
+      </div>
+      <div class="sop-step">
+        <div class="sop-num"></div>
+        <div class="sop-content">
+          <h4>屬於哪個章節？</h4>
+          <p>🟢 經典 / 🟡 職人 / 🔴 大人 / 🌿 在地 / 🛰 客座 / 🌟 本格</p>
+        </div>
+      </div>
+      <div class="sop-step">
+        <div class="sop-num"></div>
+        <div class="sop-content">
+          <h4>套品牌過濾器</h4>
+          <p>通過「品牌世界觀」北極星嗎？踩到「品牌禁區」嗎？任何一個踩到 → 砍。</p>
+        </div>
+      </div>
+      <div class="sop-step">
+        <div class="sop-num"></div>
+        <div class="sop-content">
+          <h4>用 Brand Voice 寫 30-60 字描述</h4>
+          <p>用 6 個 pattern 寫一則。寫不出來 → 代表這杯酒沒有可講的故事 → 砍。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== RELATED READING =========== -->
+<section class="related">
+  <div class="container">
+    <h2 class="related-h">繼續探索</h2>
+    <p class="related-sub">學會了系統，再看品牌定位與完整願景</p>
+    <div class="related-grid">
+      <a href="index.html" class="related-card">
+        <div class="related-tag">BRAND HUB · 品牌中心</div>
+        <div class="related-title">🍶 品牌介紹</div>
+        <div class="related-desc">完整品牌定位、4 張力、賣什麼、不賣什麼。看「我們是誰」的全貌。</div>
+      </a>
+      <a href="燒酎宇宙地圖.html" class="related-card">
+        <div class="related-tag">VISION MAP · 願景地圖</div>
+        <div class="related-title">🌌 燒酎宇宙地圖</div>
+        <div class="related-desc">10 張互動式風味地圖。看「我們的世界有多大、未來能往哪走」。</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =========== FOOTER =========== -->
+<footer>
+  <div class="container">
+    <a href="index.html" style="color: var(--tea-brown); text-decoration: none; letter-spacing: 0.25em;">← THE OOLONG HIGH · 回到品牌中心</a>
+    <div style="margin-top: 12px; opacity: 0.6;">5-CIRCLE SYSTEM DEEP-DIVE v1</div>
+  </div>
+</footer>
+
+</body>
+</html>
