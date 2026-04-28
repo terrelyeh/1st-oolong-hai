@@ -80,15 +80,32 @@
 
   /* === Hero === */
   .hero {
-    padding: 96px 0 80px;
-    text-align: center;
+    padding: 88px 0 72px;
     border-bottom: 1px solid var(--line);
     background: linear-gradient(180deg, var(--bg-paper-2) 0%, var(--bg-paper) 100%);
   }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .hero-text { text-align: left; }
+  .hero-visual { display: flex; align-items: center; justify-content: center; }
+  .hero-visual img {
+    width: 100%;
+    height: auto;
+    max-width: 460px;
+    display: block;
+    border-radius: 4px;
+    box-shadow:
+      0 16px 48px rgba(44, 51, 69, 0.16),
+      0 4px 14px rgba(44, 51, 69, 0.08);
+  }
   .brand-mark { font-family: "Noto Serif TC", serif; font-weight: 600; font-size: 14.5px; letter-spacing: 0.4em; color: var(--tea-brown); margin-bottom: 24px; text-transform: uppercase; }
-  .brand-title { font-family: "Noto Serif TC", serif; font-weight: 700; font-size: 56px; letter-spacing: 0.04em; line-height: 1.2; color: var(--ink); margin-bottom: 16px; }
+  .brand-title { font-family: "Noto Serif TC", serif; font-weight: 700; font-size: 56px; letter-spacing: 0.04em; line-height: 1.15; color: var(--ink); margin-bottom: 16px; }
   .brand-en { font-family: "Inter", sans-serif; font-weight: 500; font-size: 18px; letter-spacing: 0.3em; color: var(--tea-brown); margin-bottom: 32px; text-transform: uppercase; }
-  .brand-tagline { font-family: "Noto Serif TC", serif; font-size: 21px; color: var(--ink-soft); max-width: 680px; margin: 0 auto; line-height: 1.8; }
+  .brand-tagline { font-family: "Noto Serif TC", serif; font-size: 21px; color: var(--ink-soft); max-width: 680px; line-height: 1.8; }
 
   /* === Part divider === */
   .part-divider {
@@ -1111,19 +1128,32 @@
   /* Footer */
   footer { text-align: center; padding: 60px 0; color: var(--ink-soft); font-family: "Inter", sans-serif; font-size: 13px; letter-spacing: 0.2em; }
 
-  /* === Responsive · 手機版優化 === */
+  /* === Responsive · 手機版字級系統 ===
+     統一 type scale (≤768px):
+       eyebrow 11 / caption 13 / body 15 / lead 16
+       h4 18 / h3 22 / h2 24 / h2-emphasis 26 / h1 34 / display 40
+  */
   @media (max-width: 768px) {
+    body { font-size: 16px; }
     .container, .container-tight { padding: 0 20px; }
 
     /* Hero */
     .hero { padding: 56px 0 40px; }
-    .brand-mark { font-size: 12px; letter-spacing: 0.3em; }
-    .brand-title { font-size: 36px; }
-    .brand-en { font-size: 14.5px; letter-spacing: 0.2em; margin-bottom: 24px; }
-    .brand-tagline { font-size: 16px; line-height: 1.7; }
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      text-align: center;
+    }
+    .hero-text { text-align: center; }
+    .hero-visual { order: -1; }
+    .hero-visual img { max-width: 320px; }
+    .brand-mark { font-size: 11px; letter-spacing: 0.3em; }
+    .brand-title { font-size: 34px; }
+    .brand-en { font-size: 13px; letter-spacing: 0.2em; margin-bottom: 24px; }
+    .brand-tagline { font-size: 16px; line-height: 1.7; margin: 0 auto; }
 
     /* Top nav */
-    .top-nav { font-size: 10px; padding: 12px 16px; letter-spacing: 0.2em; }
+    .top-nav { font-size: 11px; padding: 12px 16px; letter-spacing: 0.2em; }
 
     /* Part divider (黑色塊) */
     .part-divider { padding: 56px 0 40px; }
@@ -1143,13 +1173,13 @@
     /* Read block - stack */
     .read-block { grid-template-columns: 1fr; gap: 12px; }
     .read-card { padding: 18px 20px; }
-    .read-text { font-size: 14px; }
+    .read-text { font-size: 13px; line-height: 1.7; }
 
     /* Equation */
     .eq-display { padding: 32px 0; }
     .eq-row { gap: 20px; }
-    .eq-term { font-size: 56px; }
-    .eq-op { font-size: 40px; margin-top: -8px; }
+    .eq-term { font-size: 40px; }
+    .eq-op { font-size: 28px; margin-top: -6px; }
 
     /* Core axioms - 1 col */
     .core-axioms { grid-template-columns: 1fr; gap: 12px; }
@@ -1161,7 +1191,7 @@
       overflow-x: auto;
       display: grid !important;
     }
-    .tex-header, .tex-rowhead { font-size: 16px; padding: 14px 10px; }
+    .tex-header, .tex-rowhead { font-size: 13px; padding: 14px 10px; }
     .tex-cell { padding: 14px 10px; }
     .tex-name { font-size: 13px; }
     .tex-example { font-size: 11px; }
@@ -1170,13 +1200,13 @@
     .twist-quadrants { grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .twist-q { padding: 18px 14px; }
     .twist-icon { font-size: 24px; }
-    .twist-name { font-size: 17px; }
+    .twist-name { font-size: 18px; }
     .twist-items li { font-size: 13px; padding: 4px 0; }
 
     /* Invitation grid - 3 col → 1 col */
     .invitation-grid { grid-template-columns: 1fr !important; }
     .invitation-card { padding: 16px 20px; }
-    .inv-quote { font-size: 14px; }
+    .inv-quote { font-size: 13px; line-height: 1.7; }
 
     /* Journey - stack */
     .journey-line { display: none; }
@@ -1185,17 +1215,17 @@
 
     /* Journey typical story */
     .journey-typical { padding: 18px 22px; }
-    .typical-story { font-size: 14px; line-height: 1.85; }
+    .typical-story { font-size: 13px; line-height: 1.85; }
 
     /* Planets - stack */
     .planets { grid-template-columns: 1fr; gap: 14px; }
     .planet { padding: 22px 20px; }
-    .planet-name { font-size: 19px; }
+    .planet-name { font-size: 18px; }
 
     /* Seasonal year-round banner */
     .year-round-banner { padding: 18px 22px; gap: 16px; }
     .year-round-icon { font-size: 28px; }
-    .year-round-text { font-size: 14.5px; }
+    .year-round-text { font-size: 13px; line-height: 1.7; }
 
     /* Seasons grid - 4 col → 2 col */
     .seasons-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -1210,11 +1240,11 @@
     /* Future grid - 3 col → 1 col */
     .future-grid { grid-template-columns: 1fr; gap: 12px; }
     .future-card { padding: 18px 20px; }
-    .future-title { font-size: 17px; }
+    .future-title { font-size: 18px; }
 
     /* Closing */
     .closing { padding: 40px 24px; margin: 40px 0 0; }
-    .closing-text { font-size: 17px; }
+    .closing-text { font-size: 16px; line-height: 1.85; }
 
     /* SOP flow - stack vertically */
     .sop-flow { flex-direction: column; gap: 8px; }
@@ -1227,17 +1257,23 @@
     /* Related */
     .related { padding: 56px 0; }
     .related-h { font-size: 22px; }
+    .related-sub { font-size: 14px; }
     .related-grid { grid-template-columns: 1fr; gap: 12px; }
     .related-card { padding: 22px 24px; }
+    .related-tag { font-size: 11px; }
+    .related-title { font-size: 18px; }
+    .related-desc { font-size: 13px; }
 
-    footer { padding: 32px 16px; line-height: 1.6; }
+    footer { padding: 32px 16px; font-size: 11px; line-height: 1.6; }
   }
 
   @media (max-width: 480px) {
-    .brand-title { font-size: 30px; }
+    .brand-title { font-size: 28px; }
+    .brand-tagline { font-size: 15px; }
     .section-title { font-size: 22px; }
-    .part-title { font-size: 22px; }
-    .eq-term { font-size: 44px; }
+    .part-title { font-size: 24px; }
+    .eq-term { font-size: 32px; }
+    .planet-name, .twist-name, .season-name, .future-title { font-size: 17px; }
     .twist-quadrants, .seasons-grid { grid-template-columns: 1fr !important; }
   }
 </style>
@@ -1252,15 +1288,20 @@
 
 <!-- =========== HERO =========== -->
 <header class="hero">
-  <div class="container">
-    <div class="brand-mark">— Universe Atlas —</div>
-    <h1 class="brand-title">我們的燒酎宇宙</h1>
-    <div class="brand-en">The Shochu Universe</div>
-    <p class="brand-tagline">
-      這份地圖系統性涵蓋燒酎宇宙的<strong>所有面向</strong>。<br>
-      Part 1 是 5 圈核心結構，Part 2 是其他維度的視角。<br>
-      想看任何一層的<strong>細節決策與陷阱</strong>？跳到 5 圈系統詳解。
-    </p>
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <div class="brand-mark">— Universe Atlas —</div>
+      <h1 class="brand-title">我們的<br>燒酎宇宙</h1>
+      <div class="brand-en">The Shochu Universe</div>
+      <p class="brand-tagline">
+        這份地圖系統性涵蓋燒酎宇宙的<strong>所有面向</strong>。<br>
+        Part 1 是 5 圈核心結構，Part 2 是其他維度的視角。<br>
+        想看任何一層的<strong>細節決策與陷阱</strong>？跳到 5 圈系統詳解。
+      </p>
+    </div>
+    <div class="hero-visual">
+      <img src="Images/oolonghai_7.png" alt="台灣第一家烏龍嗨 · Memory Re:Encoded">
+    </div>
   </div>
 </header>
 

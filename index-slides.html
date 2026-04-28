@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>台灣第一家烏龍嗨 · 簡報版</title>
+<meta name="description" content="台灣第一家烏龍嗨 · 品牌介紹簡報版（16:10）">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="slides.css">
+<style>
+  /* ============ Page-specific slide styles ============ */
+
+  /* === Cover (Slide 01) === */
+  .slide.cover { background: linear-gradient(180deg, var(--bg-paper-2) 0%, var(--bg-paper) 60%); }
+  .slide.cover .slide-inner {
+    padding: 88px 100px 88px 140px;
+  }
+  .cover-inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 72px;
+    text-align: left;
+  }
+  .cover-text {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 960px;
+  }
+  .cover-visual {
+    flex: 0 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .cover-visual img {
+    height: 92%;
+    width: auto;
+    display: block;
+    border-radius: 4px;
+    box-shadow:
+      0 24px 60px rgba(44, 51, 69, 0.22),
+      0 6px 16px rgba(44, 51, 69, 0.12);
+  }
+  .cover-mark {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: 0.5em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    margin-bottom: 48px;
+  }
+  .cover-title {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 132px;
+    letter-spacing: 0.02em;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .cover-en {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 32px;
+    letter-spacing: 0.32em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    margin-bottom: 48px;
+  }
+  .cover-tagline {
+    font-family: "Noto Serif TC", serif;
+    font-size: 30px;
+    line-height: 1.75;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+  }
+  .cover-rule {
+    width: 96px;
+    height: 2px;
+    background: var(--barley);
+    margin: 0 0 40px;
+    opacity: 0.7;
+  }
+  .cover-foot {
+    margin-top: 56px;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.4em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+  }
+
+  /* === North Star (Slide 02) === */
+  .northstar-inner {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .northstar-label {
+    font-family: "Inter", sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.6em;
+    color: var(--hojicha);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 80px;
+  }
+  .northstar-text {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 600;
+    font-size: 88px;
+    line-height: 1.5;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    max-width: 1400px;
+  }
+  .northstar-text strong {
+    color: var(--hojicha);
+    font-weight: 700;
+  }
+  .northstar-foot {
+    margin-top: 80px;
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.4em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+  }
+
+  /* === Tensions (Slide 03) === */
+  .tensions-grid {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .tension-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 64px;
+    padding: 36px 0;
+    align-items: center;
+    border-bottom: 1.5px dashed var(--line);
+  }
+  .tension-row:last-child { border-bottom: none; }
+  .tension-left {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 84px;
+    color: var(--ink);
+    text-align: right;
+    letter-spacing: 0.06em;
+    line-height: 1.1;
+  }
+  .tension-right {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 500;
+    font-size: 72px;
+    color: var(--tea-brown);
+    text-align: left;
+    font-style: italic;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+  }
+  .tension-divider {
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    color: var(--hojicha);
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* === DNA (Slide 04) === */
+  .dna-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .dna-pill {
+    background: var(--bg-paper-2);
+    border: 1.5px solid var(--barley);
+    border-radius: 14px;
+    padding: 56px 8px;
+    text-align: center;
+  }
+  .dna-word {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 48px;
+    color: var(--ink);
+    margin-bottom: 16px;
+    letter-spacing: 0.04em;
+  }
+  .dna-en {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.18em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .dna-foot {
+    margin-top: 56px;
+    font-family: "Noto Sans TC", sans-serif;
+    font-size: 24px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* === Culture is/isn't (Slide 05) === */
+  .culture-coords {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    margin-top: 24px;
+    flex: 1;
+  }
+  .culture-block {
+    padding: 56px 56px 64px;
+    border-left: 5px solid var(--line);
+    background: var(--bg-paper-2);
+    border-radius: 4px;
+  }
+  .culture-block.is { border-left-color: var(--green); }
+  .culture-block.isnt { border-left-color: var(--ink-soft); opacity: 0.88; }
+  .culture-label {
+    font-family: "Inter", sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    color: var(--tea-brown);
+    font-weight: 700;
+  }
+  .culture-block.isnt .culture-label { color: var(--ink-soft); }
+  .culture-list { list-style: none; }
+  .culture-list li {
+    font-family: "Noto Serif TC", serif;
+    font-size: 28px;
+    line-height: 2;
+    color: var(--ink);
+    padding-left: 28px;
+    position: relative;
+  }
+  .culture-list li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--barley);
+  }
+
+  /* === Equation (Slide 06) === */
+  .equation-stage {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 64px;
+    margin-top: -40px;
+  }
+  .eq-row {
+    display: flex;
+    align-items: center;
+    gap: 96px;
+  }
+  .eq-block { text-align: center; }
+  .eq-term {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 260px;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: 0.04em;
+  }
+  .eq-sub {
+    font-family: "Inter", sans-serif;
+    font-size: 24px;
+    letter-spacing: 0.4em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    margin-top: 28px;
+    font-weight: 500;
+  }
+  .eq-op {
+    font-family: "Inter", sans-serif;
+    font-size: 180px;
+    color: var(--hojicha);
+    font-weight: 300;
+    line-height: 1;
+    margin-top: -40px;
+  }
+  .eq-result {
+    font-family: "Noto Serif TC", serif;
+    font-size: 32px;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+    text-align: center;
+  }
+  .eq-result strong { color: var(--hojicha); font-weight: 600; }
+
+  /* === Chapters (Slide 07) === */
+  .chapters-layout {
+    display: grid;
+    grid-template-columns: 520px 1fr;
+    gap: 80px;
+    flex: 1;
+    margin-top: 8px;
+  }
+  .chapters-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .chapters-menu img {
+    width: 100%;
+    height: auto;
+    max-height: 940px;
+    display: block;
+    border-radius: 4px;
+    box-shadow:
+      0 24px 60px rgba(44, 51, 69, 0.20),
+      0 6px 16px rgba(44, 51, 69, 0.10);
+  }
+  .chapters-side {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .chapters-side .slide-eyebrow { margin-bottom: 18px; }
+  .chapters-side .slide-title { font-size: 64px; margin-bottom: 14px; }
+  .chapters-side .slide-subtitle { font-size: 24px; margin-bottom: 28px; max-width: 100%; }
+
+  .chapters-grid-side {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    flex: 1;
+  }
+  .chapters-grid-side .chapter-card {
+    padding: 30px 30px 26px;
+    display: flex;
+    flex-direction: column;
+  }
+  .chapters-grid-side .chapter-num { font-size: 13px; margin-bottom: 12px; letter-spacing: 0.35em; }
+  .chapters-grid-side .chapter-name { font-size: 38px; margin-bottom: 4px; }
+  .chapters-grid-side .chapter-en { font-size: 16px; margin-bottom: 16px; }
+  .chapters-grid-side .chapter-desc { font-size: 17px; line-height: 1.65; margin-bottom: 12px; flex: 1; }
+  .chapters-grid-side .chapter-price { font-size: 14px; }
+
+  /* Original chapters-grid (kept in case used elsewhere) */
+  .chapters-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    margin-top: 16px;
+    flex: 1;
+  }
+  .chapter-card {
+    padding: 48px 48px 40px;
+    background: var(--bg-paper-2);
+    border-left: 6px solid var(--barley);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+  }
+  .chapter-card.c2 { border-left-color: var(--tea-brown); }
+  .chapter-card.c3 { border-left-color: var(--black-sugar); }
+  .chapter-card.c4 { border-left-color: var(--green); }
+  .chapter-num {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.4em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+  .chapter-name {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 56px;
+    color: var(--ink);
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+  }
+  .chapter-en {
+    font-family: "Inter", sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.2em;
+    color: var(--tea-brown);
+    margin-bottom: 28px;
+    font-weight: 500;
+  }
+  .chapter-desc {
+    font-family: "Noto Sans TC", sans-serif;
+    font-size: 22px;
+    line-height: 1.75;
+    color: var(--ink);
+    margin-bottom: 24px;
+    flex: 1;
+  }
+  .chapter-price {
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    color: var(--ink-soft);
+    letter-spacing: 0.12em;
+  }
+
+  /* === Matrix (Slide 08) === */
+  .matrix-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 4px;
+    font-family: "Noto Sans TC", sans-serif;
+    margin-top: 16px;
+  }
+  .matrix-table th, .matrix-table td {
+    padding: 22px 8px;
+    text-align: center;
+    background: var(--bg-paper-2);
+    border-radius: 4px;
+  }
+  .matrix-table thead th {
+    font-size: 22px;
+    color: var(--ink);
+    font-weight: 700;
+    background: var(--highlight);
+    padding: 18px 8px;
+  }
+  .matrix-table thead th small {
+    display: block;
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+  .matrix-table tbody th.tea-row {
+    text-align: left;
+    padding: 22px 24px;
+    font-size: 22px;
+    background: var(--highlight);
+    color: var(--ink);
+    width: 220px;
+  }
+  .matrix-table tbody th.tea-row small {
+    display: block;
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-weight: 400;
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+  .matrix-table .cell-best {
+    background: rgba(212, 131, 111, 0.22);
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--hojicha);
+  }
+  .matrix-table .cell-best small {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+  .matrix-table .cell-flagship { background: rgba(212, 131, 111, 0.5); }
+  .matrix-table .cell-meh { color: var(--ink-soft); font-size: 28px; }
+  .matrix-table .cell-empty { color: var(--line); font-size: 24px; }
+  .matrix-legend {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    margin-top: 24px;
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+  .matrix-legend strong { color: var(--hojicha); font-weight: 700; }
+
+  /* === 5-Ring System (Slide 09) === */
+  .rings-layout {
+    display: grid;
+    grid-template-columns: 620px 1fr;
+    gap: 100px;
+    align-items: center;
+    margin-top: 24px;
+    flex: 1;
+  }
+  .rings-vis {
+    width: 620px;
+    height: 620px;
+    position: relative;
+    margin: 0 auto;
+  }
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .ring-5 { width: 620px; height: 620px; border-color: var(--line); background: var(--bg-paper-2); }
+  .ring-4 { width: 500px; height: 500px; border-color: var(--barley); background: rgba(196, 165, 123, 0.10); }
+  .ring-3 { width: 380px; height: 380px; border-color: var(--tea-brown); background: rgba(139, 111, 71, 0.13); }
+  .ring-2 { width: 250px; height: 250px; border-color: var(--hojicha); background: rgba(212, 131, 111, 0.18); }
+  .ring-1 { width: 130px; height: 130px; border-color: var(--ink); background: var(--ink); }
+  .ring-num {
+    position: absolute;
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--ink);
+    background: var(--bg-paper);
+    padding: 4px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+  .ring-name-label {
+    position: absolute;
+    font-family: "Noto Serif TC", serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+    background: var(--bg-paper);
+    padding: 4px 10px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .rl-1 { top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--bg-paper); background: transparent; font-size: 22px; font-weight: 700; }
+  .rl-2 { top: 50%; left: calc(50% + 70px); transform: translateY(-50%); }
+  .rl-3 { top: 50%; left: calc(50% + 130px); transform: translateY(-50%); }
+  .rl-4 { top: 50%; left: calc(50% + 195px); transform: translateY(-50%); }
+  .rl-5 { top: 14px; left: 50%; transform: translateX(-50%); font-size: 16px; }
+
+  .rings-side h3 {
+    font-family: "Noto Serif TC", serif;
+    font-size: 38px;
+    line-height: 1.5;
+    color: var(--ink);
+    font-weight: 600;
+    margin-bottom: 32px;
+    letter-spacing: 0.02em;
+  }
+  .rings-side p {
+    font-family: "Noto Sans TC", sans-serif;
+    font-size: 22px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
+  .rings-side p strong { color: var(--ink); font-weight: 600; }
+
+  /* === Examples (Slide 10) === */
+  .examples-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 1fr;
+    gap: 22px;
+    margin-top: 16px;
+    flex: 1;
+  }
+  .example-card {
+    background: var(--bg-paper-2);
+    border-left: 5px solid var(--barley);
+    border-radius: 4px;
+    padding: 32px 32px 28px;
+    display: flex;
+    flex-direction: column;
+  }
+  .example-card.c1 { border-left-color: var(--barley); }
+  .example-card.c2 { border-left-color: var(--tea-brown); }
+  .example-card.c3 { border-left-color: var(--black-sugar); }
+  .example-card.c4 { border-left-color: var(--green); }
+  .example-card.guest { border-left-color: var(--gold); grid-column: span 2; }
+  .example-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 18px;
+    gap: 16px;
+  }
+  .example-name {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 30px;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .example-tag {
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .example-body {
+    font-family: "Noto Sans TC", sans-serif;
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--ink);
+  }
+
+  /* === Donts (Slide 11) === */
+  .donts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    margin-top: 16px;
+    flex: 1;
+  }
+  .dont-card {
+    background: var(--bg-paper-2);
+    border-left: 5px solid var(--hojicha);
+    border-radius: 4px;
+    padding: 40px 48px 40px 96px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .dont-card::before {
+    content: "✕";
+    position: absolute;
+    left: 40px;
+    top: 36px;
+    font-family: "Inter", sans-serif;
+    font-size: 36px;
+    color: var(--hojicha);
+    font-weight: 700;
+    line-height: 1;
+  }
+  .dont-cat {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.3em;
+    color: var(--hojicha);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    font-weight: 700;
+  }
+  .dont-text {
+    font-family: "Noto Sans TC", sans-serif;
+    font-size: 22px;
+    line-height: 1.85;
+    color: var(--ink);
+  }
+
+  /* === Closing CTA (Slide 12) === */
+  .closing-inner {
+    align-items: center;
+    text-align: center;
+  }
+  .closing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    margin-top: 64px;
+    width: 100%;
+    max-width: 1500px;
+  }
+  .closing-card {
+    background: var(--bg-paper);
+    border: 2px solid var(--barley);
+    border-radius: 8px;
+    padding: 56px 48px;
+    text-decoration: none;
+    color: var(--ink);
+    text-align: left;
+  }
+  .closing-tag {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.32em;
+    color: var(--hojicha);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    font-weight: 700;
+  }
+  .closing-title {
+    font-family: "Noto Serif TC", serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 20px;
+    letter-spacing: 0.02em;
+  }
+  .closing-desc {
+    font-family: "Noto Sans TC", sans-serif;
+    font-size: 21px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+  .closing-foot {
+    margin-top: 80px;
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.4em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body class="mode-doc">
+
+<!-- ===================== Toolbar ===================== -->
+<div class="toolbar">
+  <div class="group">
+    <button data-mode="doc" class="is-active">📜 文件</button>
+    <button data-mode="slide">🎬 簡報</button>
+  </div>
+  <span class="counter">01 / 12</span>
+  <button data-action="fullscreen">⛶ 全螢幕</button>
+  <button data-action="print">🖨 列印</button>
+</div>
+
+<div class="slide-nav">
+  <button data-action="prev">←</button>
+  <span class="counter">01 / 12</span>
+  <button data-action="next">→</button>
+</div>
+
+<div class="kbd-hint">← → 翻頁　·　ESC 退出簡報　·　F 全螢幕　·　P 切換模式</div>
+
+<!-- ===================== Slides ===================== -->
+<main class="stage">
+
+  <!-- ━━━━━━━━━━ Slide 01 — Cover ━━━━━━━━━━ -->
+  <div class="slide-wrap">
+    <div class="slide cover">
+      <div class="slide-inner cover-inner">
+        <div class="cover-text">
+          <div class="cover-mark">— OOLONG HAI · BRAND BOOK —</div>
+          <h1 class="cover-title">台灣第一家<br>烏龍嗨</h1>
+          <div class="cover-en">The Oolong Hai</div>
+          <div class="cover-rule"></div>
+          <p class="cover-tagline">日常但不一般的燒酎下午酒場<br>帶著 90 年代喫茶店的氣味<br>現在喝得到。</p>
+          <div class="cover-foot">— 2026 · Brand Book Vol. 01 —</div>
+        </div>
+        <div class="cover-visual">
+          <img src="Images/oolonghai_5.png" alt="台灣第一家烏龍嗨 · 日式昭和感 × 現代夜店感">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━ Slide 02 — North Star ━━━━━━━━━━ -->
+  <div class="slide-wrap">
+    <div class="slide">
+      <div class="slide-inner northstar-inner">
+        <div class="northstar-label">★ NORTH STAR · 北極星</div>
+        <div class="northstar-text">
+          朋友來我家，<br>
+          我分享有趣的東西，<br>
+          但<strong>不是為了炫耀</strong>。
+        </div>
+        <div class="northstar-foot">— 所有決策的最終參照 —</div>
+        <div class="slide-pagenum">02 / 12</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━ Slide 03 — Tensions ━━━━━━━━━━ -->
+  <div class="slide-wrap">
+    <div class="slide">
+      <div class="slide-inner">
+        <div class="slide-eyebrow">★ OUR ESSENCE</div>
+        <h2 class="slide-title">我們的 4 個張力</h2>
+        <p class="slide-subtitle">很多店在「日常親切」和「專業講究」之間二選一。<br>我們選擇<strong style="color:var(--ink); font-weight: 600;">同時是</strong>——這 4 個原則就是我們的氣質。</p>
+
+        <div class="tensions-grid">
+          <div class="tension-row">
+            <div class="tension-left">日常</div>
+            <div class="tension-divider">— 但 —</div>
+            <div class="tension-right">不一般</div>
+          </div>
+          <div class="tension-row">
+            <div class="tension-left">隨性</div>
+            <div class="tension-divider">— 但是 —</div>
+            <div class="tension-right">講究</div>
+          </div>
+          <div class="tension-row">
+            <div class="tension-left">熱情</div>
+            <div class="tension-divider">— 但 —</div>
+            <div class="tension-right">不刻意討好</div>
+          </div>
+          <div class="tension-row">
+            <div class="tension-left">有個性</div>
+            <div class="tension-divider">— 但 —</div>
+            <div class="tension-right">不張揚</div>
+          </div>
+        </div>
+
+        <div class="slide-brandmark">OOLONG HAI</div>
+        <div class="slide-pagenum">03 / 12</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━ Slide 04 — DNA ━━━━━━━━━━ -->
+  <div class="slide-wrap">
+    <div class="slide">
+      <div class="slide-inner">
+        <div class="slide-eyebrow">01 / 我們是什麼</div>
+        <h2 class="slide-title">7 個 Brand DNA</h2>
+        <p class="slide-subtitle">這 7 個關鍵詞共同定義了這家店的氣質——當未來任何決策猶豫時，回來看這些字。</p>
+
+        <div class="dna-grid">
+          <div class="dna-pill"><div class="dna-word">不假掰</div><div class="dna-en">No Airs</div></div>
+          <div class="dna-pill"><div class="dna-word">庶民</div><div class="dna-en">For Everyone</div></div>
+          <div class="dna-pill"><div class="dna-word">日常</div><div class="dna-en">Daily</div></div>
+          <div class="dna-pill"><div class="dna-word">自在</div><div class="dna-en">At Ease</div></div>
+          <div class="dna-pill"><div class="dna-word">在地</div><div class="dna-en">Local</div></div>
+          <div class="dna-pill"><div class="dna-word">有趣</div><div class="dna-en">Playful</div></div>
+          <div class="dna-pill"><div class="dna-word">不繁複</div><div class="dna-en">Simple</div></div>
+        </div>
+
+        <p class="dna-foot">這些字共同決定了一杯酒、一張桌子、一句話該長什麼樣子。</p>
+
+        <div class="slide-brandmark">OOLONG HAI</div>
+        <div class="slide-pagenum">04 / 12</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━ Slide 05 — Culture is/isn't ━━━━━━━━━━ -->
+  <div class="slide-wrap">
+    <div class="slide">
+      <div class="slide-inner">
+        <div class="slide-eyebrow">01 / 我們是什麼</div>
+        <h2 class="slide-title">我們的座標</h2>
+        <p class="slide-subtitle">用「是這個 / 不是這個」來定位，比形容詞精準得多。</p>
+
+        <div class="culture-coords">
+          <div class="culture-block is">
+            <div class="culture-label">✓ 我們像這些</div>
+            <ul class="culture-list">
+              <li>日本下町居酒屋 — 庶民價位，但器物講究</li>
+              <li>昭和喫茶店 — 隨意點一杯，但選豆很挑</li>
+              <li>老派唱片行 — 真心推薦，但不強迫推銷</li>
+              <li>City pop 唱片封面 — 都會 vibe 鮮明，但不喧嘩</li>
+            </ul>
+          </div>
+          <div class="culture-block isnt">
+            <div class="culture-label">✗ 我們不是這些</div>
+            <ul class="culture-list">
+              <li>高端調酒吧 — 講究，但失去日常</li>
+              <li>精品咖啡店 — 有個性，但太刻意</li>
+              <li>純日式居酒屋 — 講究，但太遙遠</li>
+              <li>網美店 — 有風格，但太張揚</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="slide-brandmark">OOLONG HAI</div>
+        <div class="slide-pagenum">05 / 12</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━ Slide 06 — Equation ━━━━━━━━━━ -->
+  <div class="slide-wrap">
+    <div class="slide">
+      <div class="slide-inner">
+        <div class="slide-eyebrow">02 / 我們賣什麼</div>
+        <h2 class="slide-title">核心方程式</h2>
+        <p class="slide-subtitle">所有酒款都是這個公式的變體。燒酎是骨架，茶是靈魂。</p>
+
+        <div class="equation-stage">
+          <div class="eq-row">
+            <div class="eq-block">
+              <div class="eq-term">燒酎</div>
+              <div class="eq-sub">Spirit · Backbone</div>
+            </div>
+            <div class="eq-op">×</div>
+            <div class="eq-block">
+              <div class="eq-term">茶</div>
+              <div class="eq-sub">Tea · Soul</div>
+            </div>
+          </div>
+          <div class="eq-result">= 我們的靈魂　<strong>80%</strong> 的常駐品項以此為核心</div>
+        </div>
+
+        <div class="slide-brandmark">OOLONG HAI</div>
+        <div class="slide-pagenum">06 / 12</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━ Slide 07 — Chapters ━━━━━━━━━━ -->
+  <div class="slide-wrap">
+    <div class="slide">
+      <div class="slide-inner">
+        <div class="chapters-layout">
+          <div class="chapters-menu">
+            <img src="Images/oolonghai_6.png" alt="台灣第一家烏龍嗨 · 菜單樣式">
+          </div>
+          <div class="chapters-side">
+            <div class="slide-eyebrow">02 / 我們賣什麼</div>
+            <h2 class="slide-title">菜單分為四個章節</h2>
+            <p class="slide-subtitle">從入門到進階、從爽快到慢飲——每章節對應一種飲酒情境。</p>
+
+            <div class="chapters-grid-side">
+              <div class="chapter-card c1">
+                <div class="chapter-num">CH. 01</div>
+                <div class="chapter-name">經典爽快</div>
+                <div class="chapter-en">Classic High</div>
+                <div class="chapter-desc">入門、第一杯、解膩、配炸物。強氣泡 + 燒酎 + 茶。</div>
+                <div class="chapter-price">$ · 親民日常</div>
+              </div>
+              <div class="chapter-card c2">
+                <div class="chapter-num">CH. 02</div>
+                <div class="chapter-name">職人茶割</div>
+                <div class="chapter-en">Craft Wari</div>
+                <div class="chapter-desc">進階、品茶、無氣泡或微氣泡、慢飲。本格燒酎登場。</div>
+                <div class="chapter-price">$$ · 中價位</div>
+              </div>
+              <div class="chapter-card c3">
+                <div class="chapter-num">CH. 03</div>
+                <div class="chapter-name">大人特調</div>
+                <div class="chapter-en">Signature &amp; Latte</div>
+                <div class="chapter-desc">收尾酒、甜點酒、加奶或大冰球。桶陳與黑糖燒酎。</div>
+                <div class="chapter-price">$$$ · 進階</div>
+              </div>
+              <div class="chapter-card c4">
+                <div class="chapter-num">CH. 04</div>
+                <div class="chapter-name">在地涼茶</div>
+                <div class="chapter-en">Local Twist</div>
+                <div class="chapter-desc">台灣涼茶（仙草、冬瓜、青草、洛神）+ 燒酎，季節限定。</div>
+                <div class="chapter-price">$$ · 差異化亮點</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-brandmark">OOLONG HAI</div>
+        <div class="slide-pagenum">07 / 12</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━ Slide 08 — Matrix ━━━━━━━━━━ -->
+  <div class="slide-wrap">
+    <div class="slide">
+      <div class="slide-inner">
+        <div class="slide-eyebrow">03 / 我們怎麼設計商品</div>
+        <h2 class="slide-title">風味矩陣 · 4 茶軸 × 7 燒酎家族</h2>
+        <p class="slide-subtitle">28 個可能組合。⭐⭐ 旗艦 / ⭐ 經典 / △ 季節限定 / ✗ 不做。</p>
+
+        <table class="matrix-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>甲類<small>Korui</small></th>
+              <th>麥燒酎<small>Mugi</small></th>
+              <th>米燒酎<small>Kome</small></th>
+              <th>芋燒酎<small>Imo</small></th>
+              <th>黑糖<small>Kokuto</small></th>
+              <th>泡盛<small>Awamori</small></th>
+              <th>桶陳麥<small>Aged</small></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="tea-row">🟢 綠茶軸<small>綠茶 / 抹茶 / 青草</small></th>
+              <td class="cell-best">⭐<small>經典</small></td>
+              <td class="cell-meh">△</td>
+              <td class="cell-best">⭐<small>升級</small></td>
+              <td class="cell-empty">✗</td>
+              <td class="cell-empty">✗</td>
+              <td class="cell-meh">△</td>
+              <td class="cell-meh">△</td>
+            </tr>
+            <tr>
+              <th class="tea-row">🟡 烏龍軸<small>四季春 / 金萱 / 冬瓜</small></th>
+              <td class="cell-best">⭐<small>招牌</small></td>
+              <td class="cell-best">⭐<small>進階</small></td>
+              <td class="cell-meh">△</td>
+              <td class="cell-meh">△</td>
+              <td class="cell-empty">✗</td>
+              <td class="cell-empty">✗</td>
+              <td class="cell-meh">△</td>
+            </tr>
+            <tr>
+              <th class="tea-row">🟤 烘焙軸<small>焙茶 / 麥茶 / 仙草</small></th>
+              <td class="cell-meh">△</td>
+              <td class="cell-best cell-flagship">⭐⭐<small>雙麥</small></td>
+              <td class="cell-empty">✗</td>
+              <td class="cell-empty">✗</td>
+              <td class="cell-best">⭐<small>仙草配</small></td>
+              <td class="cell-empty">✗</td>
+              <td class="cell-best cell-flagship">⭐⭐<small>大人版</small></td>
+            </tr>
+            <tr>
+              <th class="tea-row">🔴 紅茶軸<small>伯爵 / 紅玉 / 洛神</small></th>
+              <td class="cell-meh">△</td>
+              <td class="cell-meh">△</td>
+              <td class="cell-empty">✗</td>
+              <td class="cell-best">⭐<small>荔枝魔法</small></td>
+              <td class="cell-best">⭐<small>蘭姆感</small></td>
+              <td class="cell-meh">△</td>
+              <td class="cell-meh">△</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="matrix-legend">
+          <span><strong>⭐⭐</strong> 旗艦組合</span>
+          <span><strong>⭐</strong> 經典 / 主推</span>
+          <span style="color:var(--ink-soft);"><strong style="color:var(--ink-soft);">△</strong> 季節限定範圍</span>
+          <span style="color:var(--line);"><strong style="color:var(--line);">✗</strong> 風味打架</span>
+        </div>
+
+        <div class="slide-brandmark">OOLONG HAI</div>
+        <div class="slide-pagenum">08 / 12</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━ Slide 09 — 5-Ring System ━━━━━━━━━━ -->
+  <div class="slide-wrap">
+    <div class="slide">
+      <div class="slide-inner">
+        <div class="slide-eyebrow">04 / 設計新品的方法</div>
+        <h2 class="slide-title">5 圈系統 · 由核心往外擴散</h2>
+        <p class="slide-subtitle">圓心不可動搖（燒酎 × 茶），往外越多自由度。</p>
+
+        <div class="rings-layout">
+          <div class="rings-vis">
+            <div class="ring ring-5"></div>
+            <div class="ring ring-4"></div>
+            <div class="ring ring-3"></div>
+            <div class="ring ring-2"></div>
+            <div class="ring ring-1"></div>
+            <div class="ring-name-label rl-1">燒酎×茶</div>
+            <div class="ring-name-label rl-2">茶軸 × 燒酎</div>
+            <div class="ring-name-label rl-3">Texture</div>
+            <div class="ring-name-label rl-4">Twist</div>
+            <div class="ring-name-label rl-5">場景對應</div>
+          </div>
+
+          <div class="rings-side">
+            <h3>不靠靈感、靠系統。<br>任何 idea 都能落點、評估、命名。</h3>
+            <p><strong>圓心</strong>定義「我們做什麼」<br><strong>第一圈</strong>是產品矩陣<br><strong>第二圈</strong>是質地工程<br><strong>第三圈</strong>是客製化點綴<br><strong>第四圈</strong>是場景對應</p>
+            <p style="margin-top: 32px; padding: 20px 24px; background: var(--bg-paper-2); border-left: 3px solid var(--barley); border-radius: 4px; font-size: 19px; line-height: 1.7;">
+              圈外還有<strong>「衛星系列」</strong>：本格職人專區、客座 Highball、季節限定 Local Twist。
+            </p>
+          </div>
+        </div>
+
+        <div class="slide-brandmark">OOLONG HAI</div>
+        <div class="slide-pagenum">09 / 12</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━ Slide 10 — Examples ━━━━━━━━━━ -->
+  <div class="slide-wrap">
+    <div class="slide">
+      <div class="slide-inner">
+        <div class="slide-eyebrow">05 / 看實際的酒</div>
+        <h2 class="slide-title">五款代表性商品</h2>
+        <p class="slide-subtitle">每一杯都有可講的邏輯，但說的時候像朋友聊天。</p>
+
+        <div class="examples-grid">
+          <div class="example-card c1">
+            <div class="example-header">
+              <div class="example-name">招牌烏龍嗨</div>
+              <div class="example-tag">CH. 01 經典</div>
+            </div>
+            <div class="example-body">四季春冷萃 8 小時 + 甲類燒酎，氣泡水冰到 2°C 才打。<br>茶香都在、酒不搶戲、氣泡咬到底。配炸物會更危險。</div>
+          </div>
+
+          <div class="example-card c2">
+            <div class="example-header">
+              <div class="example-name">極・焙茶麥酒</div>
+              <div class="example-tag">CH. 02 職人</div>
+            </div>
+            <div class="example-body">深焙凍頂泡進壹岐麥燒酎 6 小時，加一根烤過的肉桂。<br>三種焦香在打架——茶的火、麥的烤、肉桂的木。慢慢喝。</div>
+          </div>
+
+          <div class="example-card c3">
+            <div class="example-header">
+              <div class="example-name">琥珀焙茶拿鐵</div>
+              <div class="example-tag">CH. 03 大人</div>
+            </div>
+            <div class="example-body">焙茶濃縮 + 桶陳麥燒酎 + 燕麥奶 + 一撮黑糖黃豆粉。<br>桶陳本身就有威士忌的木桶香——所以不需要威士忌。冬天必點。</div>
+          </div>
+
+          <div class="example-card c4">
+            <div class="example-header">
+              <div class="example-name">仙草黑糖嗨</div>
+              <div class="example-tag">CH. 04 在地</div>
+            </div>
+            <div class="example-body">仙草茶 + 奄美黑糖燒酎 + 一點蜂蜜。<br>黑糖燒酎跟仙草本來就是一家人。<br>有阿嬤的味道，又有酒鬼的快樂。</div>
+          </div>
+
+          <div class="example-card guest">
+            <div class="example-header">
+              <div class="example-name">艾雷島泥煤 Highball</div>
+              <div class="example-tag">🛰 客座系列</div>
+            </div>
+            <div class="example-body">我們不賣燒酎以外的烈酒。但會為了你想喝的破例。<br>這支泥煤威士忌帶煙燻味，配氣泡水大口喝、配煙燻料理是絕配——但我們也只挑一支泥煤代表，不堆酒牆。</div>
+          </div>
+        </div>
+
+        <div class="slide-brandmark">OOLONG HAI</div>
+        <div class="slide-pagenum">10 / 12</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━ Slide 11 — Donts ━━━━━━━━━━ -->
+  <div class="slide-wrap">
+    <div class="slide">
+      <div class="slide-inner">
+        <div class="slide-eyebrow">06 / 為了不變成另一種店</div>
+        <h2 class="slide-title">守護 4 個張力的紅線</h2>
+        <p class="slide-subtitle">品牌的個性，更多時候是「<strong style="color:var(--ink); font-weight: 600;">不做什麼</strong>」守住的。</p>
+
+        <div class="donts-grid">
+          <div class="dont-card">
+            <div class="dont-cat">守護 · 日常 但不一般</div>
+            <div class="dont-text">不用黑色大理石、shock 燈光、speakeasy 隱密入口、過度高端裝潢——這些會讓我們失去「日常」感。</div>
+          </div>
+          <div class="dont-card">
+            <div class="dont-cat">守護 · 隨性 但是講究</div>
+            <div class="dont-text">不做 30 秒搖盪、煙燻、火燒等繁複工序；菜單不堆「精緻」「奢華」「嚴選」這些詞。</div>
+          </div>
+          <div class="dont-card">
+            <div class="dont-cat">守護 · 熱情 但不刻意討好</div>
+            <div class="dont-text">不做業配感 KOL 合作、不強調「IG 打卡熱點」、不過度修圖網美風——刻意討好會稀釋熱情的真誠。</div>
+          </div>
+          <div class="dont-card">
+            <div class="dont-cat">守護 · 有個性 但不張揚</div>
+            <div class="dont-text">不用 SOP 話術、制服、不強推套餐升級、不設低消門檻——這些把個性「裝出來」，反而張揚了。</div>
+          </div>
+        </div>
+
+        <div class="slide-brandmark">OOLONG HAI</div>
+        <div class="slide-pagenum">11 / 12</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━ Slide 12 — Closing CTA ━━━━━━━━━━ -->
+  <div class="slide-wrap">
+    <div class="slide">
+      <div class="slide-inner closing-inner">
+        <div class="slide-eyebrow" style="margin-bottom: 16px;">— 簡報結束 ·  Brand Book Ends Here —</div>
+        <h2 class="slide-title" style="font-size: 96px;">想再往下走？</h2>
+        <p class="slide-subtitle" style="text-align: center; margin: 0 auto 0;">看完品牌介紹，這兩份文件帶你進入更深的層次。</p>
+
+        <div class="closing-grid">
+          <div class="closing-card">
+            <div class="closing-tag">VISION MAP · 願景地圖</div>
+            <div class="closing-title">🌌 燒酎宇宙地圖</div>
+            <div class="closing-desc">10 張互動式風味地圖。看「我們的世界有多大、未來能往哪走」。<br>給團隊與夥伴看的願景全景。</div>
+          </div>
+          <div class="closing-card">
+            <div class="closing-tag">SYSTEM · 系統詳解</div>
+            <div class="closing-title">⚙️ 5 圈系統詳解</div>
+            <div class="closing-desc">酒單設計系統的完整教學。<br>每圈含 what / why / 範例 / 陷阱 / 8 步 SOP。<br>給員工與產品開發夥伴。</div>
+          </div>
+        </div>
+
+        <div class="closing-foot">— Thank You —</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="slides.js"></script>
+</body>
+</html>

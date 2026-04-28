@@ -1,0 +1,302 @@
+/* ============================================================
+   slides.css — 共用簡報系統
+   16:10 畫布 (1920×1200)
+   兩種模式：mode-doc（文件 / 列印）、mode-slide（簡報翻頁）
+   ============================================================ */
+
+:root {
+  /* 品牌色 (與三個主頁一致) */
+  --bg-paper: #F5F0E6;
+  --bg-paper-2: #EDE5D3;
+  --ink: #2C3345;
+  --ink-soft: #5C5247;
+  --tea-brown: #8B6F47;
+  --barley: #C4A57B;
+  --hojicha: #D4836F;
+  --green: #6E8B5E;
+  --black-sugar: #4A3A2A;
+  --line: #D9CFB8;
+  --highlight: #E8D9B5;
+  --gold: #C9A64E;
+
+  /* Slide 畫布 */
+  --slide-w: 1920px;
+  --slide-h: 1200px;
+  --scale: 1;
+
+  /* 舞台背景（slide 外圍） */
+  --stage-bg: #1a1612;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  background: var(--stage-bg);
+  color: var(--ink);
+  font-family: "Noto Sans TC", "Inter", system-ui, sans-serif;
+  font-feature-settings: "tnum" on;
+  min-height: 100vh;
+}
+
+body { overflow-x: hidden; }
+body.mode-doc { padding: 56px 0; }
+body.mode-slide { overflow: hidden; height: 100vh; padding: 0; }
+
+/* === Stage layout === */
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+body.mode-slide .stage {
+  display: block;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* === Slide wrapper（佔據 scale 後的實際大小） === */
+.slide-wrap {
+  width: calc(var(--slide-w) * var(--scale));
+  height: calc(var(--slide-h) * var(--scale));
+  position: relative;
+  background: var(--bg-paper);
+  box-shadow: 0 16px 64px rgba(0,0,0,0.55), 0 4px 16px rgba(0,0,0,0.3);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+body.mode-slide .slide-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+body.mode-slide .slide-wrap.is-active { display: block; }
+
+/* === Slide canvas（固定 1920×1200, 透過 scale 縮放） === */
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--slide-w);
+  height: var(--slide-h);
+  transform: scale(var(--scale));
+  transform-origin: top left;
+  overflow: hidden;
+}
+
+.slide-inner {
+  width: 100%;
+  height: 100%;
+  padding: 96px 140px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* === 公用 slide 排版元件 === */
+.slide-eyebrow {
+  font-family: "Inter", sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.5em;
+  color: var(--tea-brown);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 28px;
+}
+.slide-title {
+  font-family: "Noto Serif TC", serif;
+  font-weight: 700;
+  font-size: 88px;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+.slide-subtitle {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 30px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin-bottom: 56px;
+  max-width: 1400px;
+}
+.slide-pagenum {
+  position: absolute;
+  bottom: 56px;
+  right: 140px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.4em;
+  color: var(--tea-brown);
+  text-transform: uppercase;
+  font-feature-settings: "tnum" on;
+}
+.slide-brandmark {
+  position: absolute;
+  bottom: 56px;
+  left: 140px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.4em;
+  color: var(--tea-brown);
+  text-transform: uppercase;
+}
+
+/* === 工具列（永遠可見） === */
+.toolbar {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 1000;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 6px 8px;
+  border-radius: 22px;
+  font-family: "Inter", sans-serif;
+  color: rgba(255, 255, 255, 0.9);
+}
+.toolbar .group {
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 16px;
+}
+.toolbar button {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.85);
+  padding: 7px 14px;
+  border-radius: 14px;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: all 0.15s;
+  font-weight: 600;
+}
+.toolbar button:hover { background: rgba(255,255,255,0.1); }
+.toolbar button.is-active {
+  background: rgba(255,255,255,0.95);
+  color: #1a1612;
+}
+.toolbar .counter {
+  padding: 0 14px;
+  letter-spacing: 0.18em;
+  font-variant-numeric: tabular-nums;
+  font-size: 11px;
+  white-space: nowrap;
+  color: rgba(255,255,255,0.85);
+}
+
+/* === 簡報模式底部翻頁列 === */
+.slide-nav {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: none;
+  align-items: center;
+  gap: 12px;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 8px 12px;
+  border-radius: 22px;
+  font-family: "Inter", sans-serif;
+  color: rgba(255,255,255,0.85);
+}
+body.mode-slide .slide-nav { display: flex; }
+.slide-nav button {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.9);
+  padding: 6px 14px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+.slide-nav button:hover { background: rgba(255,255,255,0.12); }
+.slide-nav .counter {
+  padding: 0 8px;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* === 鍵盤提示（首次顯示） === */
+.kbd-hint {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 90;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(12px);
+  color: rgba(255,255,255,0.7);
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-family: "Inter", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  display: none;
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+body.mode-slide .kbd-hint.is-visible { display: block; }
+
+/* === 列印 === */
+@page {
+  size: 1920px 1200px;
+  margin: 0;
+}
+@media print {
+  html, body {
+    background: white !important;
+    overflow: visible !important;
+    height: auto !important;
+  }
+  body.mode-doc, body.mode-slide {
+    padding: 0 !important;
+    height: auto !important;
+  }
+  .toolbar, .slide-nav, .kbd-hint { display: none !important; }
+  :root { --scale: 1 !important; }
+  .stage {
+    display: block !important;
+    height: auto !important;
+    gap: 0 !important;
+  }
+  .slide-wrap {
+    width: 1920px !important;
+    height: 1200px !important;
+    transform: none !important;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    margin: 0 !important;
+    page-break-after: always;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    display: block !important;
+  }
+  .slide {
+    transform: none !important;
+    position: relative !important;
+  }
+  .slide-wrap:last-child { page-break-after: auto; }
+}

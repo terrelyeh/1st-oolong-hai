@@ -68,9 +68,36 @@
   /* === Hero === */
   .hero {
     padding: 96px 0 80px;
-    text-align: center;
     border-bottom: 1px solid var(--line);
     background: linear-gradient(180deg, var(--bg-paper-2) 0%, var(--bg-paper) 100%);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .hero-text {
+    text-align: left;
+  }
+
+  .hero-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-visual img {
+    width: 100%;
+    height: auto;
+    max-width: 480px;
+    display: block;
+    border-radius: 4px;
+    box-shadow:
+      0 16px 48px rgba(44, 51, 69, 0.16),
+      0 4px 14px rgba(44, 51, 69, 0.08);
   }
 
   .brand-mark {
@@ -88,7 +115,7 @@
     font-weight: 700;
     font-size: 64px;
     letter-spacing: 0.02em;
-    line-height: 1.15;
+    line-height: 1.1;
     color: var(--ink);
     margin-bottom: 16px;
   }
@@ -108,19 +135,16 @@
     font-size: 22px;
     color: var(--ink-soft);
     max-width: 560px;
-    margin: 0 auto;
     line-height: 1.6;
   }
 
   .north-star {
-    margin-top: 56px;
-    padding: 32px 40px;
+    margin-top: 48px;
+    padding: 28px 36px;
     background: var(--bg-paper);
     border: 1px solid var(--line);
     border-radius: 4px;
     max-width: 520px;
-    margin-left: auto;
-    margin-right: auto;
     position: relative;
   }
 
@@ -697,6 +721,7 @@
 
   @media (max-width: 768px) {
     .tensions-action-grid { grid-template-columns: 1fr; }
+    .tac-evidence { font-size: 15px; }
   }
 
   .tension-row {
@@ -746,7 +771,7 @@
   @media (max-width: 768px) {
     .tensions-grid { padding: 16px 24px; }
     .tension-row { grid-template-columns: 1fr; gap: 8px; padding: 20px 0; }
-    .tension-left, .tension-right { text-align: center; font-size: 28px; }
+    .tension-left, .tension-right { text-align: center; }
     .tension-divider { padding: 6px 0; }
   }
 
@@ -876,9 +901,10 @@
   }
 
   @media (max-width: 768px) {
-    .the-one-name { font-size: 48px; }
-    .the-one-recipe { grid-template-columns: 50px 1fr; font-size: 17px; }
-    .the-one-why { font-size: 18px; }
+    .the-one-name { font-size: 40px; }
+    .the-one-recipe { grid-template-columns: 50px 1fr; font-size: 16px; }
+    .the-one-why { font-size: 16px; }
+    .the-one-why strong { font-size: 17px; }
   }
 
   /* === Inline deep links === */
@@ -1083,57 +1109,71 @@
     letter-spacing: 0.2em;
   }
 
-  /* === Responsive · 手機版優化 === */
+  /* === Responsive · 手機版字級系統 ===
+     統一 type scale (≤768px):
+       eyebrow 11 / caption 13 / body 15 / lead 16
+       h4 18 / h3 22 / h2 24 / h2-emphasis 26 / h1 34 / display 40
+  */
   @media (max-width: 768px) {
+    body { font-size: 16px; }
     .container { padding: 0 20px; }
 
     /* Hero */
     .hero { padding: 56px 0 40px; }
-    .brand-mark { font-size: 12px; letter-spacing: 0.3em; }
-    .brand-title { font-size: 38px; }
-    .brand-en { font-size: 14.5px; letter-spacing: 0.2em; margin-bottom: 28px; }
-    .brand-tagline { font-size: 17px; line-height: 1.7; }
-    .north-star { padding: 24px 24px; max-width: 100%; }
-    .north-star-text { font-size: 17px; }
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      text-align: center;
+    }
+    .hero-text { text-align: center; }
+    .hero-visual { order: -1; }
+    .hero-visual img { max-width: 320px; }
+    .brand-mark { font-size: 11px; letter-spacing: 0.3em; }
+    .brand-title { font-size: 34px; }
+    .brand-en { font-size: 13px; letter-spacing: 0.2em; margin-bottom: 28px; }
+    .brand-tagline { font-size: 16px; line-height: 1.7; margin: 0 auto; }
+    .north-star { padding: 22px 24px; max-width: 100%; margin: 32px auto 0; }
+    .north-star-text { font-size: 16px; }
 
     /* Sections */
     section { padding: 56px 0; }
-    .section-num { font-size: 12px; letter-spacing: 0.3em; }
-    .section-title { font-size: 28px; }
-    .section-subtitle { font-size: 16px; margin-bottom: 36px; }
+    .section-num { font-size: 11px; letter-spacing: 0.3em; }
+    .section-title { font-size: 24px; }
+    .section-subtitle { font-size: 15px; margin-bottom: 32px; }
 
     /* Tensions */
     .tensions-section { padding: 64px 0; }
-    .tensions-title { font-size: 28px; }
-    .tensions-subtitle { font-size: 16px; margin-bottom: 40px; line-height: 1.7; }
+    .tensions-title { font-size: 26px; }
+    .tensions-subtitle { font-size: 15px; margin-bottom: 36px; line-height: 1.7; }
     .tensions-grid { padding: 8px 20px; }
     .tension-row { grid-template-columns: 1fr; gap: 6px; padding: 18px 0; }
-    .tension-left, .tension-right { text-align: center; font-size: 26px; }
-    .tension-divider { padding: 4px 0; }
+    .tension-left, .tension-right { text-align: center; font-size: 24px; }
+    .tension-divider { font-size: 11px; padding: 4px 0; }
 
     /* DNA pills */
     .dna-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .dna-pill { padding: 18px 8px; }
     .dna-word { font-size: 18px; }
-    .dna-en { font-size: 10px; }
+    .dna-en { font-size: 11px; }
 
     /* Culture coords - stack */
     .culture-coords { grid-template-columns: 1fr; gap: 16px; }
     .culture-block { padding: 20px; }
-    .culture-list li { font-size: 16px; }
+    .culture-label { font-size: 11px; }
+    .culture-list li { font-size: 15px; line-height: 1.85; }
 
     /* Equation */
     .equation { padding: 24px 0; }
     .eq-row { gap: 16px; flex-wrap: nowrap; }
-    .eq-term { font-size: 40px; }
-    .eq-op { font-size: 28px; margin-top: -6px; }
-    .eq-result { font-size: 16px; }
+    .eq-term { font-size: 36px; }
+    .eq-op { font-size: 24px; margin-top: -6px; }
+    .eq-result { font-size: 15px; }
 
     /* Chapters - 2 col */
     .chapters { grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .chapter-card { padding: 18px 14px; }
-    .chapter-name { font-size: 17px; }
-    .chapter-desc { font-size: 14px; }
+    .chapter-name { font-size: 16px; }
+    .chapter-desc { font-size: 13px; }
 
     /* Matrix - horizontal scroll */
     .matrix-wrap { overflow-x: auto; padding: 16px; }
@@ -1151,30 +1191,37 @@
     .examples { grid-template-columns: 1fr; gap: 14px; }
     .example-card { padding: 22px 20px; }
     .example-card[style*="grid-column"] { grid-column: span 1 !important; }
-    .example-name { font-size: 19px; }
+    .example-name { font-size: 18px; }
     .example-body { font-size: 15px; line-height: 1.8; }
 
     /* Donts - 1 col */
     .donts { grid-template-columns: 1fr; gap: 12px; }
     .dont-card { padding: 16px 20px 16px 48px; }
     .dont-card::before { left: 16px; top: 14px; font-size: 18px; }
-    .dont-text { font-size: 14px; line-height: 1.7; }
+    .dont-text { font-size: 13px; line-height: 1.7; }
 
     /* Related */
     .related { padding: 56px 0; }
-    .related-h { font-size: 24px; }
+    .related-h { font-size: 22px; }
+    .related-sub { font-size: 14px; }
     .related-grid { grid-template-columns: 1fr; gap: 14px; }
     .related-card { padding: 22px 24px; }
+    .related-tag { font-size: 11px; }
+    .related-title { font-size: 18px; }
+    .related-desc { font-size: 13px; }
 
     /* Footer */
-    footer { padding: 28px 16px; line-height: 1.6; }
+    footer { padding: 28px 16px; font-size: 11px; line-height: 1.6; }
   }
 
   @media (max-width: 480px) {
-    .brand-title { font-size: 32px; }
-    .section-title { font-size: 24px; }
+    .brand-title { font-size: 28px; }
+    .brand-tagline { font-size: 15px; }
+    .section-title { font-size: 22px; }
     .tensions-title { font-size: 24px; }
-    .eq-term { font-size: 32px; }
+    .tension-left, .tension-right { font-size: 22px; }
+    .eq-term { font-size: 30px; }
+    .the-one-name { font-size: 34px; }
     .dna-grid { grid-template-columns: repeat(2, 1fr); }
     .chapters { grid-template-columns: 1fr; }
   }
@@ -1184,15 +1231,20 @@
 
 <!-- =========== HERO =========== -->
 <header class="hero">
-  <div class="container">
-    <div class="brand-mark">— OOLONG HAI · BRAND HUB —</div>
-    <h1 class="brand-title">台灣第一家烏龍嗨</h1>
-    <div class="brand-en">The Oolong Hai</div>
-    <p class="brand-tagline">日常但不一般的燒酎下午酒場<br>帶著 90 年代喫茶店的氣味，現在喝得到。</p>
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <div class="brand-mark">— OOLONG HAI · BRAND HUB —</div>
+      <h1 class="brand-title">台灣第一家<br>烏龍嗨</h1>
+      <div class="brand-en">The Oolong Hai</div>
+      <p class="brand-tagline">日常但不一般的燒酎下午酒場<br>帶著 90 年代喫茶店的氣味，現在喝得到。</p>
 
-    <div class="north-star">
-      <div class="north-star-label">★ North Star</div>
-      <div class="north-star-text">朋友來我家，我分享有趣的東西，<br>但不是為了炫耀。</div>
+      <div class="north-star">
+        <div class="north-star-label">★ North Star</div>
+        <div class="north-star-text">朋友來我家，我分享有趣的東西，<br>但不是為了炫耀。</div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="Images/oolonghai_2.png" alt="台灣第一家烏龍嗨 · Tradition Remixed">
     </div>
   </div>
 </header>
