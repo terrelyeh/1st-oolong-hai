@@ -107,6 +107,54 @@
     text-align: left;
   }
 
+  /* === Hero output preview (#6 menu sample) === */
+  .hero-output {
+    margin-top: 72px;
+    padding-top: 56px;
+    border-top: 1px dashed var(--line);
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 48px;
+    align-items: center;
+    text-align: left;
+  }
+  .hero-output-img {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+    box-shadow:
+      0 16px 48px rgba(44, 51, 69, 0.18),
+      0 4px 14px rgba(44, 51, 69, 0.08);
+  }
+  .hero-output-label {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    color: var(--hojicha);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+  .hero-output-h {
+    font-family: "Noto Serif TC", serif;
+    font-size: 28px;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.4;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .hero-output-p {
+    font-family: "Noto Sans TC", sans-serif;
+    font-size: 16px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    max-width: 560px;
+  }
+  .hero-output-p strong { color: var(--ink); font-weight: 600; }
+
   /* === Overview circles === */
   .overview {
     position: relative;
@@ -490,6 +538,72 @@
     font-weight: 700;
   }
 
+  /* === Texture feature poster (#3 inset) === */
+  .texture-feature {
+    margin: 32px 0 56px;
+    padding: 36px;
+    background: var(--bg-paper);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .texture-feature-img {
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+    box-shadow:
+      0 20px 56px rgba(20, 18, 16, 0.45),
+      0 6px 18px rgba(20, 18, 16, 0.25);
+  }
+  .texture-feature-label {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    color: var(--hojicha);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+  .texture-feature-h {
+    font-family: "Noto Serif TC", serif;
+    font-size: 26px;
+    line-height: 1.5;
+    color: var(--ink);
+    margin-bottom: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .texture-feature-h strong { color: var(--hojicha); font-weight: 700; }
+  .texture-feature-p {
+    font-family: "Noto Sans TC", sans-serif;
+    font-size: 16px;
+    color: var(--ink-soft);
+    line-height: 1.85;
+  }
+  .texture-feature-p strong { color: var(--ink); font-weight: 600; }
+  .texture-feature-spectrum {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+  .texture-feature-spectrum-bar {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, var(--barley) 0%, var(--hojicha) 100%);
+    border-radius: 2px;
+  }
+
   /* Connector — bridge between rings (darker, more prominent) */
   .connector {
     margin: 60px 0 -40px;
@@ -758,6 +872,32 @@
     .hero-overview-row { grid-template-columns: 1fr !important; gap: 32px; max-width: 100%; }
     .overview { width: 100%; max-width: 460px; margin: 0 auto; }
 
+    /* Hero output preview (#6) - stack */
+    .hero-output {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-top: 48px;
+      padding-top: 40px;
+      text-align: center;
+    }
+    .hero-output-img { max-width: 220px; margin: 0 auto; }
+    .hero-output-h { font-size: 22px; }
+    .hero-output-p { font-size: 14px; margin: 0 auto; }
+    .hero-output-label { font-size: 11px; }
+
+    /* Texture feature (#3) - stack */
+    .texture-feature {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding: 24px;
+      text-align: center;
+    }
+    .texture-feature-img { max-width: 280px; margin: 0 auto; }
+    .texture-feature-h { font-size: 20px; }
+    .texture-feature-p { font-size: 14px; }
+    .texture-feature-label { font-size: 11px; }
+    .texture-feature-spectrum { justify-content: center; }
+
     /* Ring overview list */
     .rol-item { grid-template-columns: 70px 1fr; gap: 14px; padding: 14px 16px; }
     .rol-num { font-size: 11px; padding: 5px 6px; letter-spacing: 0.2em; }
@@ -881,6 +1021,8 @@
         <div class="ov-label ov-l-4">場景對應</div>
       </div>
 
+
+
       <div class="ring-overview-list">
         <div class="rol-item is-core">
           <div class="rol-num">CORE · 圓心</div>
@@ -917,6 +1059,19 @@
             <div class="rol-desc">5 個場景對應客戶旅程 — 第一杯 / 佐餐 / 慢飲 / 收尾 / 試新</div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- 成品預覽：5 圈跑完之後產出的菜單長什麼樣子 -->
+    <div class="hero-output">
+      <img src="Images/oolonghai_6.png" alt="台灣第一家烏龍嗨 · 菜單樣品" class="hero-output-img">
+      <div class="hero-output-text">
+        <div class="hero-output-label">— OUTPUT PREVIEW · 系統的成品 —</div>
+        <h3 class="hero-output-h">這套 5 圈系統最終產出的菜單，<br>長這樣。</h3>
+        <p class="hero-output-p">
+          先看「<strong>成品</strong>」，再回頭看每一圈的設計邏輯——你會發現菜單上每一行字的位置、價位、排序、命名，背後都對應到 5 圈裡的某個決策。<br>
+          系統不是拘束，是讓每個決定都有依據。
+        </p>
       </div>
     </div>
   </div>
@@ -1117,6 +1272,24 @@
         <div class="ring-essence">
           同樣的酒（茶 × 燒酎組合）可以有完全不同的「口感」。<br>
           <strong>碳酸強度 × 冰塊形態</strong>，決定一杯酒從第一口到最後一口的味覺變化。
+        </div>
+      </div>
+    </div>
+
+    <!-- Texture 視覺主題：清醒 → 微醺，從一塊冰開始 -->
+    <div class="texture-feature">
+      <img src="Images/oolonghai_3.png" alt="台灣第一家烏龍嗨 · Clear to Mellow" class="texture-feature-img">
+      <div>
+        <div class="texture-feature-label">— CLEAR TO MELLOW · 質地的本質 —</div>
+        <h3 class="texture-feature-h">一杯酒從<strong>清醒</strong>到<strong>微醺</strong>，<br>變化都從一塊冰開始。</h3>
+        <p class="texture-feature-p">
+          冰塊的<strong>大小、形狀、融水速度</strong>，決定了從第一口到最後一口的味覺曲線。<br>
+          氣泡決定「節奏」，冰塊決定「時間」——這就是 Texture 工程在做的事。
+        </p>
+        <div class="texture-feature-spectrum">
+          <span>清醒</span>
+          <div class="texture-feature-spectrum-bar"></div>
+          <span style="color: var(--hojicha);">微醺</span>
         </div>
       </div>
     </div>
