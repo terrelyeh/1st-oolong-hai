@@ -3,3 +3,8 @@
 node_modules/
 *.bak
 *_old.*
+
+# Auto-generated thumbnails (nanobanana MCP)
+*_thumb.jpeg
+*_thumb.jpg
+*_thumb.png

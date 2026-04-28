@@ -259,17 +259,17 @@
   }
   .photo-grid-3 {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    grid-template-columns: 1fr;
+    gap: 28px;
   }
   .photo-grid-3 img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    display: block;
     border-radius: 4px;
     box-shadow:
-      0 12px 28px rgba(44, 51, 69, 0.10),
-      0 3px 8px rgba(44, 51, 69, 0.06);
+      0 16px 40px rgba(44, 51, 69, 0.13),
+      0 4px 12px rgba(44, 51, 69, 0.06);
   }
   .photo-asymmetric {
     display: grid;
@@ -371,6 +371,53 @@
     background: var(--bg-paper-2);
   }
 
+  /* === Lightbox (click image to enlarge) === */
+  .chapter img,
+  .poster-spread img {
+    cursor: zoom-in;
+    transition: transform 0.2s;
+  }
+  .chapter img:hover,
+  .poster-spread img:hover {
+    transform: scale(1.005);
+  }
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 18, 16, 0.94);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    cursor: zoom-out;
+    animation: lb-fade 0.18s ease-out;
+  }
+  .lightbox img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+    cursor: zoom-out;
+  }
+  .lightbox-hint {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.55);
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+  @keyframes lb-fade { from { opacity: 0; } to { opacity: 1; } }
+  @media (max-width: 768px) { .lightbox { padding: 16px; } }
+
   /* === Mobile === */
   @media (max-width: 768px) {
     body { font-size: 16px; }
@@ -439,7 +486,7 @@
     <div class="space-rule"></div>
     <div class="space-subtitle">這不是室內設計圖，是空間的氣味。</div>
     <p class="space-intro">
-      下面 <strong>7 個鏡頭、3 張海報</strong>，是這家店的下午與夜晚。<br>
+      下面 <strong>7 個鏡頭、2 張海報</strong>，是這家店的下午與夜晚。<br>
       光線在牆上滑過、玻璃裡的酒慢慢淡掉、紙菜單、舊收音機、一面酒櫃——<br>
       這就是「<strong>日常但不一般</strong>」要長的樣子。
     </p>
@@ -447,17 +494,17 @@
 </header>
 
 
-<!-- =========== POSTER 01 — Showa × Modern =========== -->
+<!-- =========== POSTER 01 — Tradition Remixed (open) =========== -->
 <section class="poster-spread">
   <div class="container-narrow">
-    <div class="poster-spread-num">★ POSTER · 01 / 3</div>
-    <img src="Images/海報/oolonghai_5.png" alt="台灣第一家烏龍嗨 · 日式昭和感 × 現代夜店感">
-    <div class="poster-spread-title">日式昭和 × 現代夜店</div>
-    <div class="poster-spread-en">Retro Pours Into Nightlife</div>
+    <div class="poster-spread-num">★ POSTER · 01 / 2</div>
+    <img src="Images/海報/oolonghai_2.png" alt="台灣第一家烏龍嗨 · Tradition Remixed">
+    <div class="poster-spread-title">傳統 × 都會</div>
+    <div class="poster-spread-en">Tradition Remixed</div>
     <p class="poster-spread-caption">
-      這家店的張力，從一個切半的杯子開始。<br>
-      左邊是昭和喫茶店、右邊是現代深夜——<br>
-      但喝下去是同一杯。
+      東方瓷碗 + 西式威士忌杯，撕開、拼回去。<br>
+      在進到空間之前先看一眼——<br>
+      <strong>我們是什麼？</strong> 答案就在這張海報。
     </p>
   </div>
 </section>
@@ -496,7 +543,7 @@
     </div>
 
     <div class="photo-full">
-      <img src="Images/Space/編輯攝影風/oo2.png" alt="整體空間 · 長木吧台 + 五張皮椅 + 後排燒酎瓶">
+      <img src="Images/Space/編輯攝影風/oo2-1.png" alt="整體空間 · 長木吧台 + 五張皮椅 + 牆上日本樂團黑膠">
     </div>
 
     <p class="chapter-caption">
@@ -518,7 +565,7 @@
     </div>
 
     <div class="photo-grid-2">
-      <img src="Images/Space/編輯攝影風/oo3.png" alt="店主倒酒 · 客人視角">
+      <img src="Images/Space/編輯攝影風/oo3-1.png" alt="店主倒酒 · 客人視角">
       <img src="Images/Space/編輯攝影風/oo10.png" alt="酒櫃 · 兩排燒酎 + 茶罐 + 唱機">
     </div>
 
@@ -556,7 +603,7 @@
 <!-- =========== POSTER 02 — Memory Re:Encoded =========== -->
 <section class="poster-spread">
   <div class="container-narrow">
-    <div class="poster-spread-num">★ POSTER · 02 / 3</div>
+    <div class="poster-spread-num">★ POSTER · 02 / 2</div>
     <img src="Images/海報/oolonghai_7.png" alt="台灣第一家烏龍嗨 · Memory Re:Encoded">
     <div class="poster-spread-title">記憶被重新編碼</div>
     <div class="poster-spread-en">Memory Re:Encoded</div>
@@ -620,34 +667,19 @@
   <div class="container">
     <div class="chapter-header">
       <div class="chapter-num">07 / DETAIL</div>
-      <h2 class="chapter-title">「清」字掛在那裡</h2>
-      <div class="chapter-meta">細節 · 試金石</div>
+      <h2 class="chapter-title">藏在廁所的「嗨」</h2>
+      <div class="chapter-meta">細節 · 試金石 · 品牌簽名</div>
     </div>
 
     <div class="photo-full">
-      <img src="Images/Space/編輯攝影風/oo7.png" alt="洗手間 · 圓鏡 + 白磁磚 + 木牆 + 「清」字書法">
+      <img src="Images/Space/編輯攝影風/oo7-1.png" alt="洗手間 · 圓鏡 + 白磁磚 + 木牆 + 「嗨」字小掛軸 + 花磚地板">
     </div>
 
     <p class="chapter-caption">
-      圓鏡、白磁磚、木牆、黃銅水龍頭、一張寫著「<strong>清</strong>」的小掛軸。<br>
-      不是大理石、不是設計師款 LED。<br>
-      <strong>廁所做得對，整家店的講究就立得住。</strong>
-    </p>
-  </div>
-</section>
-
-
-<!-- =========== POSTER 03 — Tradition Remixed =========== -->
-<section class="poster-spread">
-  <div class="container-narrow">
-    <div class="poster-spread-num">★ POSTER · 03 / 3</div>
-    <img src="Images/海報/oolonghai_2.png" alt="台灣第一家烏龍嗨 · Tradition Remixed">
-    <div class="poster-spread-title">傳統 × 都會</div>
-    <div class="poster-spread-en">Tradition Remixed</div>
-    <p class="poster-spread-caption">
-      東方瓷碗 + 西式威士忌杯，撕開、拼回去。<br>
-      看完整個空間，最後回到最開始的問題——<br>
-      <strong>我們是什麼？</strong> 答案就是這張海報。
+      圓鏡、磁磚、木牆、黃銅水龍頭、地上一塊花磚——<br>
+      和牆上一張寫著「<strong>嗨</strong>」的小掛軸。<br>
+      不是門口的招牌，是廁所裡的暗號。<br>
+      <strong>連這裡都簽了名，整家店的講究就立得住。</strong>
     </p>
   </div>
 </section>
@@ -684,6 +716,38 @@
 <footer>
   © 2026 · 台灣第一家烏龍嗨 · The Oolong Hai
 </footer>
+
+<script>
+  // Click image to enlarge (lightbox)
+  (function () {
+    const selector = '.chapter img, .poster-spread img';
+    document.querySelectorAll(selector).forEach(img => {
+      img.addEventListener('click', () => {
+        const lb = document.createElement('div');
+        lb.className = 'lightbox';
+        const big = document.createElement('img');
+        big.src = img.src;
+        big.alt = img.alt;
+        const hint = document.createElement('div');
+        hint.className = 'lightbox-hint';
+        hint.textContent = '點擊任一處關閉 · ESC';
+        lb.appendChild(big);
+        lb.appendChild(hint);
+        document.body.appendChild(lb);
+        document.body.style.overflow = 'hidden';
+
+        const close = () => {
+          lb.remove();
+          document.body.style.overflow = '';
+          document.removeEventListener('keydown', onKey);
+        };
+        const onKey = e => { if (e.key === 'Escape') close(); };
+        lb.addEventListener('click', close);
+        document.addEventListener('keydown', onKey);
+      });
+    });
+  })();
+</script>
 
 </body>
 </html>
