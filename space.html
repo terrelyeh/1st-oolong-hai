@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>台灣第一家烏龍嗨 · 空間筆記</title>
+<meta name="description" content="不是室內設計圖，是空間的氣味。從入口、吧台、酒櫃到洗手間——七個鏡頭、三張海報，這家店的下午與夜晚。">
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="台灣第一家烏龍嗨 · 空間筆記">
+<meta property="og:description" content="不是室內設計圖，是空間的氣味。">
+<meta property="og:image" content="https://1st-oolong-hai.vercel.app/og-image.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg-paper: #F5F0E6;
+    --bg-paper-2: #EDE5D3;
+    --ink: #2C3345;
+    --ink-soft: #5C5247;
+    --tea-brown: #8B6F47;
+    --barley: #C4A57B;
+    --hojicha: #D4836F;
+    --green: #6E8B5E;
+    --black-sugar: #4A3A2A;
+    --line: #D9CFB8;
+    --highlight: #E8D9B5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-paper);
+    color: var(--ink);
+    font-family: "Noto Sans TC", "Inter", system-ui, sans-serif;
+    line-height: 1.7;
+    font-size: 17px;
+    font-feature-settings: "tnum" on;
+  }
+
+  img { max-width: 100%; height: auto; display: block; }
+
+  .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  .container-narrow {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* === Top nav === */
+  .top-nav {
+    padding: 16px 32px;
+    background: var(--bg-paper-2);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+  .top-nav a { color: var(--tea-brown); text-decoration: none; transition: color 0.2s; }
+  .top-nav a:hover { color: var(--ink); }
+
+  /* === Hero === */
+  .space-hero {
+    padding: 160px 0 140px;
+    text-align: center;
+    background: linear-gradient(180deg, var(--bg-paper-2) 0%, var(--bg-paper) 100%);
+    border-bottom: 1px solid var(--line);
+  }
+  .space-mark {
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.5em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    margin-bottom: 56px;
+    font-weight: 700;
+  }
+  .space-h1 {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 120px;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    margin-bottom: 40px;
+    color: var(--ink);
+  }
+  .space-h1-en {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: 0.4em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    margin-bottom: 80px;
+  }
+  .space-rule {
+    width: 64px;
+    height: 1.5px;
+    background: var(--barley);
+    margin: 0 auto 56px;
+    opacity: 0.7;
+  }
+  .space-subtitle {
+    font-family: "Noto Serif TC", serif;
+    font-size: 26px;
+    color: var(--ink);
+    font-weight: 600;
+    margin-bottom: 32px;
+    letter-spacing: 0.04em;
+  }
+  .space-intro {
+    font-family: "Noto Serif TC", serif;
+    font-size: 19px;
+    line-height: 2;
+    color: var(--ink-soft);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .space-intro strong { color: var(--ink); font-weight: 600; }
+
+  /* === Poster spread === */
+  .poster-spread {
+    background: var(--bg-paper-2);
+    padding: 120px 0;
+    text-align: center;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .poster-spread-num {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.5em;
+    color: var(--hojicha);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    font-weight: 700;
+  }
+  .poster-spread img {
+    max-width: 440px;
+    width: 70%;
+    height: auto;
+    margin: 0 auto 48px;
+    border-radius: 4px;
+    box-shadow:
+      0 24px 64px rgba(44, 51, 69, 0.20),
+      0 6px 18px rgba(44, 51, 69, 0.10);
+  }
+  .poster-spread-title {
+    font-family: "Noto Serif TC", serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+  .poster-spread-en {
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.35em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    font-weight: 600;
+  }
+  .poster-spread-caption {
+    font-family: "Noto Serif TC", serif;
+    font-size: 18px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    font-style: italic;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* === Chapter === */
+  .chapter {
+    padding: 120px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .chapter-header {
+    text-align: center;
+    margin-bottom: 72px;
+  }
+  .chapter-num {
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.5em;
+    color: var(--hojicha);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    font-weight: 700;
+  }
+  .chapter-title {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 56px;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .chapter-meta {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .chapter-caption {
+    font-family: "Noto Serif TC", serif;
+    font-size: 21px;
+    line-height: 2;
+    color: var(--ink);
+    max-width: 720px;
+    margin: 56px auto 0;
+    text-align: center;
+  }
+  .chapter-caption strong { color: var(--hojicha); font-weight: 600; }
+
+  /* === Image layouts === */
+  .photo-full img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+    box-shadow:
+      0 20px 56px rgba(44, 51, 69, 0.15),
+      0 4px 14px rgba(44, 51, 69, 0.08);
+  }
+  .photo-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .photo-grid-2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow:
+      0 14px 36px rgba(44, 51, 69, 0.12),
+      0 3px 10px rgba(44, 51, 69, 0.06);
+  }
+  .photo-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .photo-grid-3 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow:
+      0 12px 28px rgba(44, 51, 69, 0.10),
+      0 3px 8px rgba(44, 51, 69, 0.06);
+  }
+  .photo-asymmetric {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+  }
+  .photo-asymmetric img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow:
+      0 14px 36px rgba(44, 51, 69, 0.12),
+      0 3px 10px rgba(44, 51, 69, 0.06);
+  }
+
+  /* === CTA === */
+  .space-cta {
+    padding: 120px 0 80px;
+    text-align: center;
+    background: var(--bg-paper-2);
+  }
+  .cta-h {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 600;
+    font-size: 32px;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .cta-sub {
+    color: var(--ink-soft);
+    margin-bottom: 56px;
+    font-family: "Noto Serif TC", serif;
+    font-size: 17px;
+  }
+  .cta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .cta-card {
+    background: var(--bg-paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 32px 28px;
+    text-decoration: none;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.25s;
+    position: relative;
+  }
+  .cta-card:hover {
+    background: var(--highlight);
+    transform: translateY(-2px);
+    border-color: var(--barley);
+  }
+  .cta-card::after {
+    content: "→";
+    position: absolute;
+    top: 32px;
+    right: 28px;
+    color: var(--hojicha);
+    font-family: "Inter", sans-serif;
+    transition: transform 0.25s;
+  }
+  .cta-card:hover::after { transform: translateX(4px); }
+  .cta-card-tag {
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--hojicha);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  .cta-card-title {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 600;
+    font-size: 21px;
+    margin-bottom: 8px;
+    padding-right: 32px;
+  }
+  .cta-card-desc {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+
+  /* === Footer === */
+  footer {
+    text-align: center;
+    padding: 48px 16px;
+    color: var(--ink-soft);
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    background: var(--bg-paper-2);
+  }
+
+  /* === Mobile === */
+  @media (max-width: 768px) {
+    body { font-size: 16px; }
+    .container, .container-narrow { padding: 0 20px; }
+    .top-nav { font-size: 11px; padding: 12px 16px; letter-spacing: 0.2em; }
+
+    /* Hero */
+    .space-hero { padding: 88px 0 72px; }
+    .space-mark { font-size: 11px; letter-spacing: 0.3em; margin-bottom: 36px; }
+    .space-h1 { font-size: 56px; letter-spacing: 0.04em; margin-bottom: 24px; }
+    .space-h1-en { font-size: 14px; letter-spacing: 0.25em; margin-bottom: 48px; }
+    .space-subtitle { font-size: 20px; margin-bottom: 24px; }
+    .space-intro { font-size: 16px; line-height: 1.85; }
+
+    /* Poster spreads */
+    .poster-spread { padding: 64px 0; }
+    .poster-spread img { max-width: 280px; width: 80%; margin-bottom: 32px; }
+    .poster-spread-title { font-size: 22px; }
+    .poster-spread-en { font-size: 11px; letter-spacing: 0.3em; }
+    .poster-spread-caption { font-size: 15px; padding: 0 24px; }
+
+    /* Chapters */
+    .chapter { padding: 64px 0; }
+    .chapter-header { margin-bottom: 40px; }
+    .chapter-num { font-size: 11px; letter-spacing: 0.4em; }
+    .chapter-title { font-size: 32px; }
+    .chapter-meta { font-size: 11px; letter-spacing: 0.3em; }
+    .chapter-caption { font-size: 16px; line-height: 1.85; margin-top: 32px; padding: 0 8px; }
+
+    /* Photo grids stack */
+    .photo-grid-2,
+    .photo-grid-3,
+    .photo-asymmetric {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    /* CTA */
+    .space-cta { padding: 64px 0 40px; }
+    .cta-h { font-size: 24px; }
+    .cta-sub { font-size: 14px; margin-bottom: 32px; }
+    .cta-grid { grid-template-columns: 1fr; gap: 12px; }
+    .cta-card { padding: 22px 24px; }
+    .cta-card-title { font-size: 18px; }
+    .cta-card-desc { font-size: 13px; }
+
+    footer { padding: 32px 16px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =========== TOP NAV =========== -->
+<nav class="top-nav">
+  <a href="index.html">← 回品牌中心</a>
+  <span style="color: var(--ink-soft);">SPACE · 空間筆記</span>
+</nav>
+
+
+<!-- =========== HERO =========== -->
+<header class="space-hero">
+  <div class="container">
+    <div class="space-mark">— SPACE NOTES · 空間筆記 —</div>
+    <h1 class="space-h1">走進來</h1>
+    <div class="space-h1-en">Step Inside</div>
+    <div class="space-rule"></div>
+    <div class="space-subtitle">這不是室內設計圖，是空間的氣味。</div>
+    <p class="space-intro">
+      下面 <strong>7 個鏡頭、3 張海報</strong>，是這家店的下午與夜晚。<br>
+      光線在牆上滑過、玻璃裡的酒慢慢淡掉、紙菜單、舊收音機、一面酒櫃——<br>
+      這就是「<strong>日常但不一般</strong>」要長的樣子。
+    </p>
+  </div>
+</header>
+
+
+<!-- =========== POSTER 01 — Showa × Modern =========== -->
+<section class="poster-spread">
+  <div class="container-narrow">
+    <div class="poster-spread-num">★ POSTER · 01 / 3</div>
+    <img src="Images/海報/oolonghai_5.png" alt="台灣第一家烏龍嗨 · 日式昭和感 × 現代夜店感">
+    <div class="poster-spread-title">日式昭和 × 現代夜店</div>
+    <div class="poster-spread-en">Retro Pours Into Nightlife</div>
+    <p class="poster-spread-caption">
+      這家店的張力，從一個切半的杯子開始。<br>
+      左邊是昭和喫茶店、右邊是現代深夜——<br>
+      但喝下去是同一杯。
+    </p>
+  </div>
+</section>
+
+
+<!-- =========== CHAPTER 01 — 入口 =========== -->
+<section class="chapter">
+  <div class="container">
+    <div class="chapter-header">
+      <div class="chapter-num">01 / ENTRANCE</div>
+      <h2 class="chapter-title">推門那一秒</h2>
+      <div class="chapter-meta">下午 5:30 · 雨後 · 巷口</div>
+    </div>
+
+    <div class="photo-full">
+      <img src="Images/Space/編輯攝影風/oo11.png" alt="入口立面 · 木門、磨砂玻璃、嗨字布簾">
+    </div>
+
+    <p class="chapter-caption">
+      不是 speakeasy 的隱密入口、不是 hotel bar 的鏡面玻璃。<br>
+      就是一塊木頭、一塊「<strong>嗨</strong>」字布簾、一棵橄欖樹、<br>
+      和地上一道剛被雨打濕的反光。<br>
+      巷子裡看到、推門就能進來。
+    </p>
+  </div>
+</section>
+
+
+<!-- =========== CHAPTER 02 — 整體空間 =========== -->
+<section class="chapter">
+  <div class="container">
+    <div class="chapter-header">
+      <div class="chapter-num">02 / WHOLE SPACE</div>
+      <h2 class="chapter-title">12 個座位的下午</h2>
+      <div class="chapter-meta">傍晚 6 點 · 還沒滿</div>
+    </div>
+
+    <div class="photo-full">
+      <img src="Images/Space/編輯攝影風/oo2.png" alt="整體空間 · 長木吧台 + 五張皮椅 + 後排燒酎瓶">
+    </div>
+
+    <p class="chapter-caption">
+      不是百人居酒屋連鎖、不是 30 人精釀啤酒吧。<br>
+      <strong>12 個座位</strong>，剛好夠把朋友的朋友帶進來、<br>
+      又不會覺得需要管秩序的地方。
+    </p>
+  </div>
+</section>
+
+
+<!-- =========== CHAPTER 03 — 吧台 + 酒櫃 =========== -->
+<section class="chapter">
+  <div class="container">
+    <div class="chapter-header">
+      <div class="chapter-num">03 / BAR &amp; SHELVES</div>
+      <h2 class="chapter-title">從 bar stool 望過去</h2>
+      <div class="chapter-meta">下午 4 點 · 客人視角</div>
+    </div>
+
+    <div class="photo-grid-2">
+      <img src="Images/Space/編輯攝影風/oo3.png" alt="店主倒酒 · 客人視角">
+      <img src="Images/Space/編輯攝影風/oo10.png" alt="酒櫃 · 兩排燒酎 + 茶罐 + 唱機">
+    </div>
+
+    <p class="chapter-caption">
+      左邊：店主低頭倒酒，背後是「<strong>臺北燒酎倶樂部</strong>」的茶罐木櫃。<br>
+      右邊：兩排燒酎，中間留一格給唱機。<br>
+      <strong>我們不堆酒牆</strong>——每瓶都認識、每瓶都有理由。
+    </p>
+  </div>
+</section>
+
+
+<!-- =========== CHAPTER 04 — 主理人 =========== -->
+<section class="chapter">
+  <div class="container">
+    <div class="chapter-header">
+      <div class="chapter-num">04 / OWNER</div>
+      <h2 class="chapter-title">朋友來我家</h2>
+      <div class="chapter-meta">傍晚 7 點 · 工作中</div>
+    </div>
+
+    <div class="photo-full">
+      <img src="Images/Space/編輯攝影風/oo9.png" alt="店主背影 · 米色亞麻圍裙">
+    </div>
+
+    <p class="chapter-caption">
+      你看不到他的臉，只看到背影、肩膀、和正在做事的手。<br>
+      不是 bartender 在表演——<br>
+      是<strong>一個朋友在做東西給你</strong>。
+    </p>
+  </div>
+</section>
+
+
+<!-- =========== POSTER 02 — Memory Re:Encoded =========== -->
+<section class="poster-spread">
+  <div class="container-narrow">
+    <div class="poster-spread-num">★ POSTER · 02 / 3</div>
+    <img src="Images/海報/oolonghai_7.png" alt="台灣第一家烏龍嗨 · Memory Re:Encoded">
+    <div class="poster-spread-title">記憶被重新編碼</div>
+    <div class="poster-spread-en">Memory Re:Encoded</div>
+    <p class="poster-spread-caption">
+      浮世繪正在拆解、像 90 年代電視訊號雜訊。<br>
+      老的東西不消失——<br>
+      只是用今天的方式重新出現。
+    </p>
+  </div>
+</section>
+
+
+<!-- =========== CHAPTER 05 — 角落 =========== -->
+<section class="chapter">
+  <div class="container">
+    <div class="chapter-header">
+      <div class="chapter-num">05 / CORNER</div>
+      <h2 class="chapter-title">紙燈籠下面的兩個人</h2>
+      <div class="chapter-meta">下午 4 點 · 慢飲</div>
+    </div>
+
+    <div class="photo-full">
+      <img src="Images/Space/編輯攝影風/oo1.png" alt="角落二人座 · 紙燈籠、玻璃磚窗、舊收音機">
+    </div>
+
+    <p class="chapter-caption">
+      一張紙燈籠、兩杯涼掉一半的茶割、一個老收音機在後面低聲講廣播。<br>
+      玻璃磚窗外的光被打散成霧。<br>
+      <strong>兩個人不說話也不尷尬</strong>的那種位子。
+    </p>
+  </div>
+</section>
+
+
+<!-- =========== CHAPTER 06 — 桌上 =========== -->
+<section class="chapter">
+  <div class="container">
+    <div class="chapter-header">
+      <div class="chapter-num">06 / TABLETOP</div>
+      <h2 class="chapter-title">一杯一面</h2>
+      <div class="chapter-meta">桌上的物件 · 手寫菜單 · 燒酎 · 小食</div>
+    </div>
+
+    <div class="photo-grid-3">
+      <img src="Images/Space/編輯攝影風/oo5.png" alt="桌面 still life · 切子杯 + 手寫菜單 + 茶罐">
+      <img src="Images/Space/編輯攝影風/oo6.png" alt="燒酎瓶特寫 · 麥 / 芋 / 黑糖">
+      <img src="Images/Space/編輯攝影風/oo8.png" alt="食物擺盤 · 醃蘿蔔 + 半切煮蛋 + 毛豆">
+    </div>
+
+    <p class="chapter-caption">
+      手寫菜單、銅冰夾、三瓶燒酎（<strong>麥</strong> / <strong>芋</strong> / <strong>黑糖</strong>）、<br>
+      醃蘿蔔、半切味玉、毛豆——<br>
+      桌上四五樣東西，<strong>不嫌多、不嫌少</strong>。
+    </p>
+  </div>
+</section>
+
+
+<!-- =========== CHAPTER 07 — 洗手間 =========== -->
+<section class="chapter">
+  <div class="container">
+    <div class="chapter-header">
+      <div class="chapter-num">07 / DETAIL</div>
+      <h2 class="chapter-title">「清」字掛在那裡</h2>
+      <div class="chapter-meta">細節 · 試金石</div>
+    </div>
+
+    <div class="photo-full">
+      <img src="Images/Space/編輯攝影風/oo7.png" alt="洗手間 · 圓鏡 + 白磁磚 + 木牆 + 「清」字書法">
+    </div>
+
+    <p class="chapter-caption">
+      圓鏡、白磁磚、木牆、黃銅水龍頭、一張寫著「<strong>清</strong>」的小掛軸。<br>
+      不是大理石、不是設計師款 LED。<br>
+      <strong>廁所做得對，整家店的講究就立得住。</strong>
+    </p>
+  </div>
+</section>
+
+
+<!-- =========== POSTER 03 — Tradition Remixed =========== -->
+<section class="poster-spread">
+  <div class="container-narrow">
+    <div class="poster-spread-num">★ POSTER · 03 / 3</div>
+    <img src="Images/海報/oolonghai_2.png" alt="台灣第一家烏龍嗨 · Tradition Remixed">
+    <div class="poster-spread-title">傳統 × 都會</div>
+    <div class="poster-spread-en">Tradition Remixed</div>
+    <p class="poster-spread-caption">
+      東方瓷碗 + 西式威士忌杯，撕開、拼回去。<br>
+      看完整個空間，最後回到最開始的問題——<br>
+      <strong>我們是什麼？</strong> 答案就是這張海報。
+    </p>
+  </div>
+</section>
+
+
+<!-- =========== CTA =========== -->
+<section class="space-cta">
+  <div class="container">
+    <h2 class="cta-h">想再往下走？</h2>
+    <p class="cta-sub">看完空間，這幾份文件帶你進入更深的層次</p>
+
+    <div class="cta-grid">
+      <a href="index.html" class="cta-card">
+        <div class="cta-card-tag">BRAND HUB · 品牌中心</div>
+        <div class="cta-card-title">🏠 品牌介紹</div>
+        <div class="cta-card-desc">4 張力 / 7 DNA / 5 圈系統概覽 / 5 款代表性商品</div>
+      </a>
+      <a href="universe.html" class="cta-card">
+        <div class="cta-card-tag">VISION MAP · 願景地圖</div>
+        <div class="cta-card-title">🌌 燒酎宇宙地圖</div>
+        <div class="cta-card-desc">10 張互動式風味地圖。看「我們的世界有多大、能往哪走」</div>
+      </a>
+      <a href="system.html" class="cta-card">
+        <div class="cta-card-tag">SYSTEM · 系統詳解</div>
+        <div class="cta-card-title">⚙️ 5 圈系統</div>
+        <div class="cta-card-desc">酒單設計系統的完整教學。每圈含 what / why / 範例 / 陷阱 / SOP</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========== FOOTER =========== -->
+<footer>
+  © 2026 · 台灣第一家烏龍嗨 · The Oolong Hai
+</footer>
+
+</body>
+</html>
