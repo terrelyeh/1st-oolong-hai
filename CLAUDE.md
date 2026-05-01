@@ -1,6 +1,6 @@
 # CLAUDE.md — Project Context
 
-> Last updated: 2026-04-28
+> Last updated: 2026-05-01
 
 ## Project Overview
 
@@ -31,9 +31,11 @@
 ├── README.md               對人的產品介紹
 ├── favicon.svg / og-image.svg
 └── Images/
-    ├── 海報/               7 張品牌海報（oolonghai_1.png ~ oolonghai_7.png）
-    ├── Space/編輯攝影風/   13 張空間照（oo1.png ~ oo11.png + oo2-1, oo3-1, oo7-1）
-    └── city-pop-test-*.png AI 生圖測試 archive（待清理，見 Next Steps）
+    ├── 海報/                7 張品牌海報（oolonghai_1.png ~ oolonghai_7.png）
+    └── Space/
+        ├── clean/            ⭐ space.html 在用：s01-entrance ~ s08-bathroom（共 13 張，web-safe 命名）
+        ├── 乾淨昭和風/       原始 ChatGPT 生圖檔名（含中文/空格/冒號），當 backup
+        └── 編輯攝影風/       早期一版（oo1-oo11），已被 clean/ 取代，可考慮清理
 ```
 
 ## Architecture & Conventions
@@ -84,10 +86,11 @@
 
 ### 🔜 Next Steps
 
-- **space.html 換照片** — 還想替換部分空間照（user 標註）
-- **清理 city-pop-test-* 測試圖** — 已 commit 到 repo 的 AI 生圖 archive 共 ~30 個檔案 / ~30MB，要清掉或移到 archive 子資料夾
-- **食物章節** — 之前提過要寫，還沒做。可從 oo8 食物擺盤延伸
-- **海報部分** — 整理一份單獨頁面或 archive 介紹 7 張海報的概念
+- **食物策展企劃** ⭐ — 不只是食物照片本身（已在 space.html CH 08 完成），
+  user 想討論「在這個空間如何做食物策展、食物 collab 專案企劃」。
+  可能要新做 `food.html` 或在 space.html 擴章節。內容方向：策展型菜單、
+  跨界合作（職人 / 餐廳 / 季節限定）、客座主廚、食物 × 燒酎配對。
+- **海報部分** — 整理一份單獨頁面或 archive 介紹 7 張海報（oolonghai_1 ~ 7）的概念
 
 ## Deployment
 
@@ -96,6 +99,27 @@
 - 沒有 staging / preview 流程，直接 push 到 main
 
 ## Common Pitfalls
+
+### 🔴 品牌文案規則：不假掰、簡單、沒有 AI 感（最重要）
+
+「不假掰」是品牌 4 張力之一，文案守不住、整個品牌就垮。
+寫任何 caption / 標題 / 描述前，先記住這幾條：
+
+- **不要用「不是 X 是 Y」對比結構** — 這是最明顯的 AI 文案 tell
+  （❌「不是 speakeasy 的隱密入口、不是 hotel bar 的鏡面玻璃。就是一塊木頭⋯」）
+- **不要寫文青 punch line** — 像「你只要推。」「老的東西不消失。」「像進去過一次。」這類
+- **META 寫 1–3 字** — 不要「步驟 N · 動作 · 細節」三段式
+- **像朋友講話、不像品牌宣言** — 短句、直接、不繞圈
+- **寫完自問**：會不會太假掰？太文青？太 AI？三個都中就重寫
+- **能用的 pattern**：物件清單 + 一句直白 takeaway。不要鋪陳、不要押韻、不要排比
+- **Brand DNA 對照**：不假掰 / 庶民 / 日常 / 自在 / 在地 / 有趣 / 不繁複
+
+### ChatGPT / AI 生圖檔名處理
+
+- ChatGPT 直接下載的圖檔名長這樣：`ChatGPT Image 2026年4月28日 下午05_19_44.png`
+  含**中文 + 空格 + 冒號**，HTML 引用會踩雷
+- 規則：丟進專案前**先 rename** 成 web-safe 格式（如 `s01-xxx.png`）
+- 原檔保留當 backup（不要 mv、用 cp）
 
 ### 寫程式碼
 
