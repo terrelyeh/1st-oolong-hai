@@ -50,7 +50,7 @@ architectural visualization, HDR, oversaturated.
 
 ---
 
-## 20 個鏡頭
+## 27 個鏡頭
 
 ### 01 · 吧台主視覺（Hero shot — 進門第一眼）
 
@@ -519,6 +519,180 @@ phone, no aestheticized "behind the scenes" framing.
 
 ---
 
+### 21 · 多人聚會的桌面
+
+**意圖**：朋友 3–4 人聚會、玻璃杯堆疊、**聊到笑出來那秒**。比 #03 角落二人座更熱鬧，但仍然不喧嘩。
+
+```
+Editorial photograph of a corner table at a small Taipei shochu
+bar during a quiet weekend afternoon, three close friends in their
+late 20s to mid-30s gathered around a worn warm-oak round table
+mid-conversation. Three or four faceted Edo Kiriko glasses stacked
+or clustered together, two with amber highball still in them, one
+empty with melted ice. A small ceramic dish of shared pickled
+radish in the center, a wooden plate with one half-eaten ajitsuke
+tamago. Modern minimalist styling — cream knit sweater, beige
+overshirt, linen shirt — no period-accurate or period-perm hair.
+One person mid-laugh, head tilted slightly back, a hand near the
+mouth; the other two leaning in, listening, half-smile. Natural
+unposed moment, not staged for camera. Candid, soft, late
+afternoon warm light from a half-frosted window beside them. The
+vibe is "old friends catching up", not "dinner party social media
+post".
+[+ 通用樣式後綴]
+```
+
+---
+
+### 22 · 清晨打掃 / restock（沒開店的店）
+
+**意圖**：早上 10 點還沒開店、店主一個人擦杯子、整理庫存。最能呈現「well-maintained patina」**怎麼來的**——這家店的乾淨是這樣維持的。
+
+```
+Documentary editorial photograph of a small Taipei shochu bar
+during morning prep around 10 AM, no customers, doors not yet
+open. The owner (mid-30s, beige linen apron over a clean white
+tee, hair slightly combed but informal) stands behind the long
+warm-oak bar counter slowly polishing one Edo Kiriko glass with
+a clean linen cloth. A dozen more freshly-cleaned glasses stand
+upturned on a wooden tray beside him. On the counter: a small
+bowl of warm soapy water, a folded fresh cloth, a clipboard with
+today's shochu inventory list. Behind, on the shelves, slightly
+out of focus: shochu bottles being refilled and rearranged. Soft
+cool morning sunlight from a frosted window casts long quiet
+shadows. This is how that well-maintained patina actually gets
+maintained. No glamor shot, no styling, just the daily ritual.
+[+ 通用樣式後綴]
+```
+
+---
+
+### 23 · 食物從廚房端出來的中途
+
+**意圖**：店主端著小食托盤、**剛從吧台後方廚房走出**、走向客人那一秒。手 + 托盤 + 表情中間態，是動作感與質感同時呈現的鏡頭。
+
+```
+Documentary editorial photograph of a moment in motion — the bar
+owner in a beige linen apron, sleeves rolled up, mid-stride
+between the kitchen-prep area behind the bar and the front
+counter, holding a small wooden tray with both hands. On the
+tray: a ceramic dish of straw-burned bonito tataki garnished
+with grated ginger and scallions, a small dish of pickled white
+cabbage, a folded linen napkin tied with hemp twine. His face
+is relaxed, slight focus, not performing for camera. Soft motion
+blur on his shoulders and hair suggesting natural movement.
+Behind him, slightly out of focus: the prep counter with knives,
+a wooden cutting board, a small bowl of citrus zest. Warm
+tungsten amber light catching the glaze of the ceramic dishes.
+Real food, real moment, no plated-for-IG framing.
+[+ 通用樣式後綴]
+```
+
+---
+
+### 24 · 櫥窗反射（從外面隔玻璃看進去）
+
+**意圖**：站在巷子裡、隔著磨砂玻璃看店裡。玻璃同時反射街景 + 透出店內燈光，是「**外面的人想推門進去**」的視角。
+
+```
+Editorial photograph from outside a small Taipei shochu bar at
+late afternoon around 17:00, taken from across the alley looking
+toward the storefront window. Through the half-frosted glass:
+the warm tungsten interior glow, the silhouette of one or two
+customers already seated at the bar counter, the bartender's
+beige linen apron passing by, blurred. On the glass surface
+itself: a soft reflection of the alley — brick walls opposite,
+a parked black mamachari bicycle, the photographer-as-passerby
+implied as a faint silhouette at the edge. The reflection and
+the interior view layer over each other, not separated. Magic-
+hour amber light catching the glass. The composition feels like
+"passing by, slowing down, peeking in". Not staged, not
+promotional.
+[+ 通用樣式後綴]
+```
+
+---
+
+### 25 · 雜誌 / 書架小角落
+
+**意圖**：店裡某個小角落 — 低書架堆著音樂雜誌、city pop 唱片、燒酎案內、小說。**是「主理人選物品味」的細節展示**。
+
+```
+Close-up editorial photograph of a small wooden shelf corner
+inside a Taipei shochu bar at hand height. The shelf holds a
+casual stack of well-thumbed reading material: a few Japanese
+music magazines (Music Magazine and BRUTUS-style covers, no
+readable English text), several vinyl record sleeves leaning
+against the wall (gentle pastel city-pop palette, no specific
+artist names visible), a hardcover shochu reference book "焼酎
+案內" with a paper bookmark sticking out, a small art
+photography monograph, a Haruki Murakami novel in Japanese
+paperback edition. On top of the stack: a pair of round reading
+glasses, a wooden pencil. Beside the shelf, a small ceramic mug
+clearly being used as a pen holder. Soft warm side light. Cared-
+for clutter, not random pile. Suggests the owner actually reads
+these.
+[+ 通用樣式後綴]
+```
+
+---
+
+### 26 · 植物日常照顧
+
+**意圖**：橄欖樹被修剪、擦葉子的瞬間。**最日常、最隱性的照顧**——連植物都在被照顧，整家店的乾淨昭和感才立得住。
+
+```
+Documentary editorial photograph of the bar owner in a beige
+linen apron taking a quiet moment to care for the small olive
+tree by the entrance during late morning around 11 AM, no
+customers yet. He is gently wiping a leaf with a clean cloth,
+or trimming one yellowed branch with small pruning scissors.
+The tree itself is in a worn ceramic pot, well-grown but not
+perfect, a few dropped leaves on the cream-tiled floor next to
+it. A small watering can beside the pot. Soft warm morning
+light through the doorway. His focus is entirely on the plant
+— this is the kind of small act that makes the rest of the bar
+feel cared-for. Not a styled shot, not a "behind-the-scenes"
+promotional frame — just the daily practice. Quiet, mundane,
+sincere.
+[+ 通用樣式後綴]
+```
+
+---
+
+### 27 · 剛調完的三杯（不同杯型 × 不同冰塊）
+
+**意圖**：bartender 剛調完三杯**不同杯型 / 不同冰塊**的燒酎嗨、整齊排在吧台上、等客人取走。是「商品變化的視覺索引」+「製作完成的瞬間美學」。
+
+```
+Editorial photograph of a long warm-oak bar counter just after
+three shochu highballs have been freshly made, lined up clean
+and ready to be served. Three different glassware shapes, each
+with a different ice form, all holding amber oolong-shochu
+highball:
+
+【01】A tall thin highball glass with a long clear ice spear,
+strong soda fizz still rising — Classic High style.
+
+【02】A faceted Edo Kiriko crystal tumbler with a single large
+clear ice cube, gentle micro-bubbles — Craft Wari style.
+
+【03】A low wide rocks glass with a perfect clear ice ball,
+no fizz, mostly still amber liquid — Slow Sip style.
+
+The three glasses are placed in a clean line on a folded cream
+linen mat, each on a small wooden coaster. Slight condensation
+on each, picking up the warm amber tungsten light. Behind,
+slightly out of focus: the bartender's hands wiping a glass on
+a fresh cloth, a small ceramic vessel of garnish, the cassette
+deck with green VU meter glowing. The visual reads "same drink,
+three textures." No people in foreground; the glassware trio
+is the subject.
+[+ 通用樣式後綴]
+```
+
+---
+
 ## 用法建議
 
 ### 工具差異
@@ -552,14 +726,14 @@ phone, no aestheticized "behind the scenes" framing.
 
 ## 想試其他鏡頭？
 
-20 個鏡頭已涵蓋空間 / 物件 / 人物 / 時段 / 季節 / POV 大致面向。
-如果還想延伸，可能的方向：
+27 個鏡頭已涵蓋空間 / 物件 / 人物 / 時段 / 季節 / POV / 動作 / 細節。
+還想延伸的話，可能的方向：
 
-- **多人聚會的桌面**（朋友 3-4 人的桌子、玻璃疊起來、聊到笑出來那秒）
-- **清晨打掃 / restock**（沒開店的店、店主一個人擦杯子整理庫存）
-- **食物從廚房端出來的中途**（手端著托盤、走出吧台後方的瞬間）
-- **櫥窗反射**（從外面隔玻璃看進去、玻璃同時反射街景）
-- **雜誌 / 書架的小角落**（店裡的書、唱片、雜誌堆放細節）
-- **植物日常照顧**（橄欖樹被修剪、灑水的瞬間）
+- **食物特寫俯拍 series**（單一道菜的近拍、不放杯子，純食物質感）
+- **店主和老客打招呼**（沒對話、只有點頭，店主和兩個熟面孔的瞬間）
+- **店外側面建築剖面**（從旁邊看店面、招牌側面的線條感）
+- **吧台金屬器具特寫**（量杯、攪拌棒、銅冰夾、刨冰刀的工具排列）
+- **唱片正在轉**（黑膠 + 唱針 + 動態聲音的視覺化）
+- **打烊後一個人**（最後一個客人走了、店主收拾的瞬間）
 
 跟我說想要哪個，我用同樣的格式（中文意圖 + 英文 prompt + 通用後綴）幫你寫。
