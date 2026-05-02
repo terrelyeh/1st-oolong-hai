@@ -415,6 +415,43 @@
     font-weight: 600;
   }
 
+  /* === Seasonal trio (CH 08) — 3 並列、有 figcaption === */
+  .season-trio {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .season-trio figure { margin: 0; }
+  .season-trio img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    display: block;
+    border-radius: 4px;
+    box-shadow:
+      0 12px 28px rgba(44, 51, 69, 0.10),
+      0 3px 8px rgba(44, 51, 69, 0.06);
+  }
+  .season-trio figcaption {
+    margin-top: 12px;
+    font-family: "Noto Serif TC", serif;
+    font-size: 18px;
+    color: var(--ink);
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .season-trio figcaption small {
+    display: block;
+    margin-top: 4px;
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
   /* === Food spread (CH 07) === */
   .food-spread {
     display: grid;
@@ -542,6 +579,14 @@
       letter-spacing: 0.25em;
       margin-top: 8px;
     }
+    /* Seasonal trio - mobile stack */
+    .season-trio {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .season-trio img { aspect-ratio: 4 / 3; }
+    .season-trio figcaption { font-size: 16px; margin-top: 8px; }
+    .season-trio figcaption small { font-size: 10px; letter-spacing: 0.25em; }
 
     /* CTA */
     .space-cta { padding: 64px 0 40px; }
@@ -574,7 +619,7 @@
     <div class="space-rule"></div>
     <div class="space-subtitle">這家店長什麼樣子。</div>
     <p class="space-intro">
-      <strong>10 張照片、1 張海報。</strong><br>
+      <strong>11 個鏡頭、1 張海報。</strong><br>
       從巷口進來、坐到吧台、看老闆做事、<br>
       喝一杯、配幾道小食、中途去洗手間。<br>
       大概半小時。
@@ -773,11 +818,44 @@
 </section>
 
 
-<!-- =========== CHAPTER 07 — 食物（新章節） =========== -->
+<!-- =========== CHAPTER 08 — 季節限定 =========== -->
 <section class="chapter">
   <div class="container">
     <div class="chapter-header">
-      <div class="chapter-num">08 / FOOD</div>
+      <div class="chapter-num">08 / SEASONAL</div>
+      <h2 class="chapter-title">不同季節來</h2>
+      <div class="chapter-meta">這一杯 · 會換</div>
+    </div>
+
+    <div class="season-trio">
+      <figure>
+        <img src="Images/Space/clean/season-spring.png" alt="春 · 櫻花綠茶嗨 · 角落小桌 + 玻璃磚窗">
+        <figcaption>春<small>SAKURA · 櫻花綠茶嗨</small></figcaption>
+      </figure>
+      <figure>
+        <img src="Images/Space/clean/season-summer.png" alt="夏 · 抹茶嗨 + 毛豆 · 開窗綠葉">
+        <figcaption>夏<small>MATCHA · 抹茶嗨</small></figcaption>
+      </figure>
+      <figure>
+        <img src="Images/Space/clean/season-winter.png" alt="冬 · 黑糖大冰球 + 茶壺冒煙 + 餃子">
+        <figcaption>冬<small>KOKUTO · 黑糖大冰球</small></figcaption>
+      </figure>
+    </div>
+
+    <p class="chapter-caption">
+      不只今天這一杯——<br>
+      春天有櫻花綠茶嗨、夏天抹茶冰、冬天黑糖配大冰球。<br>
+      <strong>秋天再來、補一張焙茶。</strong>
+    </p>
+  </div>
+</section>
+
+
+<!-- =========== CHAPTER 09 — 食物 =========== -->
+<section class="chapter">
+  <div class="container">
+    <div class="chapter-header">
+      <div class="chapter-num">09 / FOOD</div>
       <h2 class="chapter-title">小食上桌</h2>
       <div class="chapter-meta">配酒</div>
     </div>
@@ -806,7 +884,7 @@
 <section class="chapter">
   <div class="container">
     <div class="chapter-header">
-      <div class="chapter-num">09 / BOOKSHELF</div>
+      <div class="chapter-num">10 / BOOKSHELF</div>
       <h2 class="chapter-title">他都在看什麼</h2>
       <div class="chapter-meta">角落書架</div>
     </div>
@@ -828,7 +906,7 @@
 <section class="chapter">
   <div class="container">
     <div class="chapter-header">
-      <div class="chapter-num">10 / DETAIL</div>
+      <div class="chapter-num">11 / DETAIL</div>
       <h2 class="chapter-title">中途去個洗手間</h2>
       <div class="chapter-meta">中場</div>
     </div>
