@@ -114,12 +114,14 @@
 - **能用的 pattern**：物件清單 + 一句直白 takeaway。不要鋪陳、不要押韻、不要排比
 - **Brand DNA 對照**：不假掰 / 庶民 / 日常 / 自在 / 在地 / 有趣 / 不繁複
 
-### ChatGPT / AI 生圖檔名處理
+### ChatGPT Image-2 生圖（主要工具）
 
-- ChatGPT 直接下載的圖檔名長這樣：`ChatGPT Image 2026年4月28日 下午05_19_44.png`
+- 這個專案**主要用 ChatGPT Image-2 (gpt-image-1)** 產 AI 圖片
+- 下載的檔名長這樣：`ChatGPT Image 2026年4月28日 下午05_19_44.png`
   含**中文 + 空格 + 冒號**，HTML 引用會踩雷
 - 規則：丟進專案前**先 rename** 成 web-safe 格式（如 `s01-xxx.png`）
-- 原檔保留當 backup（不要 mv、用 cp）
+- 原檔保留當 backup（用 `cp` 不要用 `mv`，原資料夾命名建議含原 prompt 主題）
+- prompt 模板都在 `space-prompts.md`，直接複製貼上就能跑
 
 ### 寫程式碼
 

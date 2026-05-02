@@ -325,8 +325,11 @@ No clutter, no distress, no antique-shop dustiness.
 
 ### 工具差異
 
+> ⭐ 這個專案**主要用 ChatGPT Image-2 (gpt-image-1)** 生圖。
+
 | 工具 | 建議 |
 |---|---|
+| ⭐ **ChatGPT Image-2** | 主要工具。整段貼可以、不需要縮短。負面詞用自然語言描述（「avoid: ...」）效果最好。每次生 4 張選 1。檔名會自動產出含中文+空格+冒號 → **下載後先 rename 成 web-safe**（如 `s01-xxx.png`）再用 |
 | **Midjourney v6+** | 直接貼整段 prompt + `--ar 3:2 --style raw`，先 V4 一輪挑構圖再 upscale |
 | **Flux / Nano Banana** | 整段貼，可以再加「`composition: editorial photo, rule of thirds`」 |
 | **DALL-E 3 / Sora** | 把 prompt 縮短到 200 字內，移除過多形容詞，留下關鍵物件 + 風格 |
