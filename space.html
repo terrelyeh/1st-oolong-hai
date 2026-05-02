@@ -371,6 +371,50 @@
     background: var(--bg-paper-2);
   }
 
+  /* === Entrance spread (CH 01) — 1 hero + 3 trio for time-lapse feel === */
+  .entrance-spread {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .entrance-spread .entrance-hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+    box-shadow:
+      0 20px 56px rgba(44, 51, 69, 0.15),
+      0 4px 14px rgba(44, 51, 69, 0.08);
+  }
+  .entrance-spread .entrance-trio {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .entrance-spread .entrance-trio figure {
+    margin: 0;
+  }
+  .entrance-spread .entrance-trio img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    display: block;
+    border-radius: 4px;
+    box-shadow:
+      0 12px 28px rgba(44, 51, 69, 0.10),
+      0 3px 8px rgba(44, 51, 69, 0.06);
+  }
+  .entrance-spread .entrance-trio figcaption {
+    margin-top: 10px;
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--tea-brown);
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 600;
+  }
+
   /* === Food spread (CH 07) === */
   .food-spread {
     display: grid;
@@ -489,6 +533,15 @@
       grid-template-columns: 1fr;
       gap: 10px;
     }
+    .entrance-spread .entrance-trio {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .entrance-spread .entrance-trio figcaption {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      margin-top: 8px;
+    }
 
     /* CTA */
     .space-cta { padding: 64px 0 40px; }
@@ -535,18 +588,34 @@
   <div class="container">
     <div class="chapter-header">
       <div class="chapter-num">01 / ENTRANCE</div>
-      <h2 class="chapter-title">推門</h2>
-      <div class="chapter-meta">巷口 · 雨剛停</div>
+      <h2 class="chapter-title">這扇門</h2>
+      <div class="chapter-meta">從中午到深夜</div>
     </div>
 
-    <div class="photo-full">
-      <img src="Images/Space/clean/s01-entrance.png" alt="入口立面 · 木門、玻璃櫥窗、嗨字布簾、直書招牌">
+    <div class="entrance-spread">
+      <div class="entrance-hero">
+        <img src="Images/Space/clean/s01-entrance-dusk.png" alt="入口 · 黃昏 magic hour · 雨剛停、巷口反光、暖光透出">
+      </div>
+      <div class="entrance-trio">
+        <figure>
+          <img src="Images/Space/clean/s01-entrance-day.png" alt="入口 · 中午 · 晴朗、植物清楚">
+          <figcaption>12:00 · 中午</figcaption>
+        </figure>
+        <figure>
+          <img src="Images/Space/clean/s01-entrance-evening.png" alt="入口 · 傍晚剛開店 · 燈點亮、A-frame chalkboard">
+          <figcaption>19:30 · 開店</figcaption>
+        </figure>
+        <figure>
+          <img src="Images/Space/clean/s01-entrance-night.png" alt="入口 · 雨夜 · 紙燈籠、最深暖光">
+          <figcaption>22:00 · 雨夜</figcaption>
+        </figure>
+      </div>
     </div>
 
     <p class="chapter-caption">
-      地上有水。布簾上寫著「<strong>嗨</strong>」。<br>
-      右邊一塊木牌：「<strong>台灣第一家烏龍嗨</strong>」。<br>
-      沒密碼、沒會員。直接推開。
+      大的這張是<strong>黃昏、雨剛停</strong>。<br>
+      但這扇門從中午就在那裡，到深夜都還亮著。<br>
+      布簾上寫著「<strong>嗨</strong>」。沒密碼、沒會員。直接推開。
     </p>
   </div>
 </section>
