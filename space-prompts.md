@@ -50,7 +50,7 @@ architectural visualization, HDR, oversaturated.
 
 ---
 
-## 12 個鏡頭
+## 20 個鏡頭
 
 ### 01 · 吧台主視覺（Hero shot — 進門第一眼）
 
@@ -321,6 +321,204 @@ No clutter, no distress, no antique-shop dustiness.
 
 ---
 
+### 13 · 下班時段的窗外（黃昏 18:30）
+
+**意圖**：店裡剛點燈、窗外巷子下班族經過、**窗內外冷暖光對撞**。是「下午酒場過渡到傍晚」的瞬間。
+
+```
+Editorial photograph from inside a small Taipei afternoon shochu
+bar looking out through a half-frosted side window at dusk around
+18:30. Inside foreground: a corner of the warm-oak bar counter, a
+faceted Edo Kiriko glass with amber highball already half-finished,
+a small ceramic bowl with pickled radish. The interior glow is
+warm tungsten amber. Outside through the frosted-clear glass:
+deep blue-purple dusk sky, the silhouette of two pedestrians
+walking past in the alley with soft motion blur (commuters heading
+home, simple modern outerwear), distant warm window lights from
+low-rise buildings. Cold blue dusk outside meeting warm amber
+inside — the temperature contrast is the point. No headlights,
+no LED signs, no neon.
+[+ 通用樣式後綴]
+```
+
+---
+
+### 14 · 菜單被翻開的瞬間
+
+**意圖**：客人剛坐下、手寫紙菜單被翻開的特寫。連結品牌的「手寫、有溫度」精神。是 #06 物件 still life 的「動作版」。
+
+```
+Close-up editorial photograph of a hand-written paper menu being
+opened on a worn warm-oak bar counter, three-quarter overhead angle.
+The menu is folded cream washi paper, pages slightly creased from
+daily use, opening to reveal hand-drawn brush calligraphy listing
+shochu names (麦 / 芋 / 黒糖 / 米) and small ink illustrations of
+glassware. A pencil rests beside the page. In the background
+slightly out of focus: a faceted Edo Kiriko glass, a folded linen
+napkin, the bartender's hands placing a small ceramic dish. The
+paper has subtle tea-stain marks at one corner — not dirty, just
+used. Soft amber afternoon light from the side. Real hands, real
+paper, no graphic-design polish, no printed text.
+[+ 通用樣式後綴]
+```
+
+---
+
+### 15 · 雨天的店面 / 從店內看出去
+
+**意圖**：和 #04 入口立面互補——這次是**雨天視角、從店內向外看**。玻璃上有水珠、街道濕亮、店內暖光。
+
+```
+Editorial photograph from inside a small Taipei shochu bar during
+soft afternoon rain around 15:00, looking out toward the entrance.
+Foreground: the inside of the frosted-glass door and a small
+wooden window frame, water droplets running down the glass, slight
+condensation. Through the glass: the dim outline of the alley,
+wet pavement reflecting cream and amber light, a single black
+mamachari bicycle parked outside. Inside frame edge: a corner of
+the warm-oak bar counter, a folded linen cloth, half a faceted
+Edo Kiriko glass with amber highball — implying someone is sitting
+where the camera is. Soft warm tungsten interior, cool gray-blue
+rain outside. Quiet, slow afternoon, not stormy.
+[+ 通用樣式後綴]
+```
+
+---
+
+### 16 · 季節限定（4 季同杯同桌）
+
+**意圖**：同一張桌子、同一個切子杯、同一個窗景，**季節元素換掉**。給品牌「季節限定」企劃用，4 張一組。
+
+```
+Editorial seasonal photograph series — same warm-oak corner table
+in a Taipei shochu bar, same faceted Edo Kiriko glass, same
+half-frosted window framing. Each frame swaps seasonal elements
+only; camera angle, lens, table position stay identical.
+
+【春 · Spring】One ceramic vase with a single branch of cherry
+blossom on the table, green tea-shochu highball with one sakura
+petal floating, a small dish of pickled cherry blossoms. Soft
+warm spring afternoon light with faint pink cast on the wood.
+
+【夏 · Summer 抹茶】Matcha-shochu highball with a bright green
+matcha-infused ice cube, a wooden bowl of cold edamame, a folded
+indigo linen napkin. Bright summer afternoon, slate coaster
+catching a single melting ice droplet.
+
+【秋 · Autumn 焙茶】Deep-amber hojicha-shochu highball, a ceramic
+dish of roasted chestnuts, one dried persimmon on a side plate.
+Warm late-afternoon golden hour, autumn-tinted distant trees
+through the window.
+
+【冬 · Winter 黑糖】Kokuto-shochu highball over a single large
+clear ice ball, steam rising from a small ceramic teapot, a dish
+of warm pickled root vegetables. Cold blue winter afternoon light,
+condensation on the window edge.
+[+ 通用樣式後綴]
+```
+
+---
+
+### 17 · 一杯酒從滿到空（4-5 張序列）
+
+**意圖**：同杯、同座位、不同時間點——從剛上桌到喝光、冰塊融化、水珠 ring 累積。**是品牌「慢慢喝」哲學的視覺化**。
+
+```
+Editorial photograph series — the slow life of one drink, same
+faceted Edo Kiriko glass on the same warm-oak bar counter, four
+to five progressive frames. Same camera angle, same lighting,
+same composition. The only changes: liquid level, ice state,
+condensation, water rings.
+
+【01 · 剛上桌】Glass full of amber oolong-shochu highball, large
+clear ice spear intact, glass exterior dry, folded clean linen
+napkin beside it. Bright clear amber.
+
+【02 · 第一口之後】Glass slightly less full, condensation just
+starting to bead on the lower half, ice spear unchanged.
+
+【03 · 喝到一半】Half empty, condensation has formed a small water
+ring on the wood, ice spear visibly slimmer.
+
+【04 · 快空了】One sip left at the bottom, ice melted to a small
+fragment, water ring more pronounced, droplets running down glass.
+
+【05 · 喝完】Empty glass, melted ice water at the bottom, two
+overlapping water rings on the wood, napkin slightly damp.
+
+Time visualized as patina accumulation. No people, no hands.
+[+ 通用樣式後綴]
+```
+
+---
+
+### 18 · 客人視角看桌上（第一人稱 POV）
+
+**意圖**：不是攝影師俯拍、不是側拍——是「**我自己坐在這裡、低頭看自己面前的桌子**」的視角。最沉浸感的鏡頭。
+
+```
+First-person POV editorial photograph from a customer's seated
+viewpoint at the bar, looking down at the warm-oak counter directly
+in front of them. The bottom of the frame shows the customer's
+hands at rest — one hand wrapped loosely around a faceted Edo
+Kiriko glass of amber highball, the other holding the edge of a
+folded paper menu. The forearm of a beige linen long-sleeve shirt
+visible on the right. On the counter: a small ceramic dish with
+two pickled radish slices, a folded cream linen napkin, a brass
+coaster. Slightly out of focus in the background: the inside of
+the bar shelves, a corner of the bartender's apron passing by.
+The angle should feel like the customer just looked down — not
+staged. Hands relaxed, no phone, no rings, no manicure styling.
+Soft warm afternoon light from the side.
+[+ 通用樣式後綴]
+```
+
+---
+
+### 19 · 結帳細節 / 黃銅零錢盤 + 手寫帳本
+
+**意圖**：櫃檯收銀的小角落——黃銅零錢盤、手寫帳本、紙收據。**是「不刷卡、現金支付」的庶民日常感**。
+
+```
+Close-up editorial still-life photograph of the corner of a small
+shochu bar's countertop where customers pay. A brass coin tray
+with handles, well-polished from daily use with a quietly
+maintained patina, holding a few NT dollar coins. A small spiral-
+bound hand-written ledger book with brush-pen entries in Chinese-
+Japanese mix, opened to a page showing today's date. A single
+Pilot pen resting across the page. A folded paper receipt with
+handwritten amounts. Behind slightly out of focus: a small wooden
+cash box, a folded clean cloth. No POS terminal, no QR code, no
+LED display, no card reader. Soft amber afternoon light catches
+a quiet highlight on the brass tray. Cared-for, used, not antique.
+[+ 通用樣式後綴]
+```
+
+---
+
+### 20 · 後巷 / 整理回收的瞬間
+
+**意圖**：**刻意反 IG 的 mood**——店主在巷子裡整理紙箱、回收酒瓶。最日常、最不擺拍的瞬間，反而證明這家店是「真的開」的。
+
+```
+Documentary editorial photograph of the back alley behind a small
+Taipei shochu bar, late afternoon around 17:00 before opening.
+The bar's owner (mid-30s, beige linen apron, sleeves rolled up)
+is crouched flattening a few cardboard boxes against the brick
+wall, beside a small stack of empty shochu bottles in a wooden
+crate ready for return. A single black plastic bin nearby, not
+overflowing. The alley is narrow, brick walls, an air-conditioner
+unit on the wall above, a small potted plant by someone else's
+back door. The owner is not posing — face turned slightly down,
+focused on the task. Soft late-afternoon light angled into the
+alley. This is what running a small bar actually looks like.
+Quietly clean, not photogenic in the IG sense. No selfie, no
+phone, no aestheticized "behind the scenes" framing.
+[+ 通用樣式後綴]
+```
+
+---
+
 ## 用法建議
 
 ### 工具差異
@@ -354,14 +552,14 @@ No clutter, no distress, no antique-shop dustiness.
 
 ## 想試其他鏡頭？
 
-延伸方向（還沒寫的）：
-- **下班時段的窗外**（玻璃內外光線對撞、可放在「下午酒場」概念上）
-- **菜單被翻開的瞬間**（連結 #6 海報但是現實版）
-- **雨天的店面 / 內部**（換天氣換氣味、不一樣的午後）
-- **季節限定 / 4 季 4 張**（春櫻 / 夏抹茶 / 秋焙茶 / 冬黑糖）
-- **一杯酒從滿到空**（同個座位、同個杯、4–6 張，講「慢慢喝」）
-- **客人視角看桌上**（不是俯拍、不是側拍，是「我自己在喝」的眼睛角度）
-- **吧台前的硬幣 / 收銀機 / 結帳細節**（有歲月的零錢盤、手寫帳本）
-- **後巷 / 倒垃圾的瞬間**（最反 IG 的 mood 反而會讓人覺得是真的店）
+20 個鏡頭已涵蓋空間 / 物件 / 人物 / 時段 / 季節 / POV 大致面向。
+如果還想延伸，可能的方向：
 
-跟我說想要哪個，我用同樣的格式幫你寫。
+- **多人聚會的桌面**（朋友 3-4 人的桌子、玻璃疊起來、聊到笑出來那秒）
+- **清晨打掃 / restock**（沒開店的店、店主一個人擦杯子整理庫存）
+- **食物從廚房端出來的中途**（手端著托盤、走出吧台後方的瞬間）
+- **櫥窗反射**（從外面隔玻璃看進去、玻璃同時反射街景）
+- **雜誌 / 書架的小角落**（店裡的書、唱片、雜誌堆放細節）
+- **植物日常照顧**（橄欖樹被修剪、灑水的瞬間）
+
+跟我說想要哪個，我用同樣的格式（中文意圖 + 英文 prompt + 通用後綴）幫你寫。
